@@ -4,16 +4,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.CapabilityType;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -65,31 +60,29 @@ public class LoginPage {
 
 	public File launchBrowser() throws IOException {
 		String browserName = prop.getProperty("browser");
-		// String browserName="chrome";
 		if (browserName.equals("chrome")) {
 			System.setProperty("webdriver.chrome.driver",
 					System.getProperty("user.dir") + "//drivers//chromedriver.exe");
 
 			// folder = new File(UUID.randomUUID().toString());
-			// older.mkdir();
-			ChromeOptions options = new ChromeOptions();
+			// folder.mkdir();
+			// ChromeOptions options = new ChromeOptions();
 			// options.addArguments("--always-authorize-plugins");
 
-			Map<String, Object> prefs = new HashMap<String, Object>();
-			prefs.put("profile.default_content_settings.popups", 0);
-			prefs.put("download.default_directory", folder.getAbsolutePath());
+			// Map<String, Object> prefs = new HashMap<String, Object>();
+			// prefs.put("profile.default_content_settings.popups", 0);
+			// prefs.put("download.default_directory", folder.getAbsolutePath());
 
-			options.setExperimentalOption("prefs", prefs);
-			System.out.println(options.getExperimentalOption("prefs"));
+			// options.setExperimentalOption("prefs", prefs);
+			// System.out.println(options.getExperimentalOption("prefs"));
+			// options.addArguments("--disable-notifications");
 			// DesiredCapabilities cap = DesiredCapabilities.chrome();
+			// cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
 			// cap.setCapability(ChromeOptions.CAPABILITY, options);
-			options.addArguments("--disable-notifications");
-			DesiredCapabilities cap = DesiredCapabilities.chrome();
-			cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-			cap.setCapability(ChromeOptions.CAPABILITY, options);
 			System.setProperty("webdriver.chrome.driver",
 					System.getProperty("user.dir") + "//drivers//chromedriver.exe");
-			driver = new ChromeDriver(cap);
+			// driver = new ChromeDriver(cap);
+			driver = new ChromeDriver();
 			driver.manage().window().maximize();
 			// driver.manage().deleteAllCookies();
 			// driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);

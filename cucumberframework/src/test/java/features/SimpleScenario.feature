@@ -118,3 +118,9 @@ Scenario: Reports functionality testing
 	Then user clicks on login button
 	And user navigates to Reports and loads data for Sales Detail report
 	
+	Scenario: Procurment Dashboard data load for 180 days
+	Given Open Chrome browser and url
+	Given user enters username and password
+	Then user clicks on login button
+	Then user lands on Procurment dashboard
+	
