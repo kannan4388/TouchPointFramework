@@ -26,6 +26,7 @@ public class LoginPage {
 		prop = new Properties();
 		FileReader fis = new FileReader(
 				new File(".").getCanonicalPath() + "\\src\\test\\java\\config\\config.properties");
+
 		prop.load(fis);
 	}
 

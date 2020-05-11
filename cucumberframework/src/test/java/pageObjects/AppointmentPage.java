@@ -212,6 +212,13 @@ public class AppointmentPage {
 			long d = divtimingFinal.getTime() - intial.getTime();
 			if (d < 0) {
 				divcount++;
+			}
+			if (rowInc == 1 && !startTime.equals("12:00 AM")) {
+				clickOnTimeCalendar.click();
+				Thread.sleep(4000);
+				if (appType.isDisplayed() == true) {
+					break;
+				}
 			} else if (!startTime.equals(intialTime[appRow1])) {
 				if (divHourInteger > intialHourInteger == true) {
 					// divcount++;
