@@ -9,7 +9,9 @@ import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Properties;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -21,7 +23,9 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -331,5 +335,37 @@ public class CommonMethods {
 	public void dropDownSelectByIndex(WebElement drpDown) {
 		Select drpDownByIndex = new Select(drpDown);
 		drpDownByIndex.selectByIndex(2);
+	}
+
+	public void waitForAlert(WebDriver driver) throws InterruptedException {
+		int i = 0;
+		while (i++ < 15) {
+			try {
+				Alert alert = driver.switchTo().alert();
+				alert.accept();
+				break;
+			} catch (NoAlertPresentException e) {
+				Thread.sleep(1000);
+				continue;
+			}
+		}
+	}
+
+	public boolean isSorted(List<String> listOfString) {
+		if (listOfString.isEmpty() || listOfString.size() == 1) {
+			return true;
+		}
+		Iterator<String> iter = listOfString.iterator();
+		String current, previous = iter.next();
+		while (iter.hasNext()) {
+			current = iter.next();
+			previous = previous.toLowerCase();
+			current = current.toLowerCase();
+			if (previous.compareTo(current) > 0) {
+				return false;
+			}
+			previous = current;
+		}
+		return true;
 	}
 }

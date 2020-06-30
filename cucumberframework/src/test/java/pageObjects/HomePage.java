@@ -47,6 +47,9 @@ public class HomePage {
 	@FindBy(xpath = "//select[@ng-model='calendarModelObject.ReminderMinute']")
 	WebElement reminderDrpDown;
 
+	@FindAll(@FindBy(xpath = "//*[@id='MyAppointmentsGrid']/div[2]/table/tbody/tr"))
+	List<WebElement> trRowsInHomeGrid;
+
 	public HomePage() {
 		this.driver = LoginPage.getDriver();
 		PageFactory.initElements(driver, this);
@@ -70,23 +73,29 @@ public class HomePage {
 				pageNum++;
 				rowCount = 1;
 			}
-			WebElement buttonXpath = driver.findElement(By.xpath("//*[@id='MyAppointmentsGrid']/div[2]/"
-					+ "table/tbody/tr[" + rowCount + "]/td[7]/ul/li/div/button"));
-			WebElement editAppointmentClick = driver.findElement(By.xpath("//*[@id='MyAppointmentsGrid']/div[2]/"
-					+ "table/tbody/tr[" + rowCount + "]/td[7]/ul/li/div/ul/li[1]"));
+			int sizeOfRows = trRowsInHomeGrid.size();
+			if (rowCount <= sizeOfRows) {
+				WebElement buttonXpath = driver.findElement(By.xpath("//*[@id='MyAppointmentsGrid']/div[2]/"
+						+ "table/tbody/tr[" + rowCount + "]/td[7]/ul/li/div/button"));
+				WebElement editAppointmentClick = driver.findElement(By.xpath("//*[@id='MyAppointmentsGrid']/div[2]/"
+						+ "table/tbody/tr[" + rowCount + "]/td[7]/ul/li/div/ul/li[1]"));
 
-			WebElement actualRowTxt = driver.findElement(
-					By.xpath("//div[@id='MyAppointmentsGrid']/div[2]/table/tbody/tr[" + rowCount + "]/td[1]"));
-			String rowSubjectTxt = actualRowTxt.getText();
-			// rowCount++;
-			// waitForPageLoad.scrollBy();;
-			if (rowSubjectTxt.equals(existingAccount)) {
-				System.out.println("Created Account displayed in Home Page");
-				buttonXpath.click();
-				Thread.sleep(800);
-				editAppointmentClick.click();
-				waitForPageLoad.pageWait(waitForPageLoadAppointment);
-				Thread.sleep(2000);
+				WebElement actualRowTxt = driver.findElement(
+						By.xpath("//div[@id='MyAppointmentsGrid']/div[2]/table/tbody/tr[" + rowCount + "]/td[1]"));
+				String rowSubjectTxt = actualRowTxt.getText();
+				// rowCount++;
+				// waitForPageLoad.scrollBy();;
+				if (rowSubjectTxt.equals(existingAccount)) {
+					System.out.println("Created Account displayed in Home Page");
+					buttonXpath.click();
+					Thread.sleep(800);
+					editAppointmentClick.click();
+					waitForPageLoad.pageWait(waitForPageLoadAppointment);
+					Thread.sleep(2000);
+					break;
+				}
+			}
+			if (rowCount > sizeOfRows) {
 				break;
 			}
 		}

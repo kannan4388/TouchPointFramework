@@ -13,6 +13,7 @@ import java.util.regex.Pattern;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.internal.Coordinates;
@@ -85,7 +86,7 @@ public class AppointmentPage {
 	@FindBy(xpath = "//input[@id='recurringEndDate']")
 	WebElement endByTxtBox;
 
-	@FindBy(css = ".day_event:nth-child(4) > .option-input")
+	@FindBy(xpath = "//input[@ng-model='calendarModelObject.allDay']")
 	WebElement allDayEventChkBox;
 
 	@FindBy(xpath = "//button[@class='btn btn-primary tery_sm1 ng-binding ng-scope']")
@@ -148,6 +149,9 @@ public class AppointmentPage {
 	@FindBy(xpath = "//button[@class='tooltip-bottom task_tpbut' and @data-tooltip='Add Task']")
 	WebElement addTaskIcon;
 
+	@FindBy(xpath = "//button[@class='close popup_close' and @data-dismiss='modal'][1]")
+	WebElement closeBtn;
+
 	public AppointmentPage() {
 		this.driver = LoginPage.getDriver();
 		PageFactory.initElements(driver, this);
@@ -165,101 +169,133 @@ public class AppointmentPage {
 	}
 
 	public void openApp() throws InterruptedException, AWTException, ParseException {
-		String[] intialTime = { "00:00 AM", "01:00 AM", "02:00 AM", "03:00 AM", "04:00 AM", "05:00 AM", "06:00 AM",
-				"07:00 AM", "08:00 AM", "09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "01:00 PM", "02:00 PM",
+		String[] intialTime = { "08:00 AM", "09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "01:00 PM", "02:00 PM",
 				"03:00 PM", "04:00 PM", "05:00 PM", "06:00 PM", "07:00 PM", "08:00 PM", "09:00 PM", "10:00 PM",
-				"11:00 PM" };
+				"11:00 PM", "00:00 AM", "01:00 AM", "02:00 AM", "03:00 AM", "04:00 AM", "05:00 AM", "06:00 AM",
+				"07:00 AM" };
 		// for(appRow+=4+appRow;appRow<=96;appRow++) {
 		int divcount = 2;
 		int rowInc = 1;
 		int appRow1 = 0;
 		Thread.sleep(3000);
 		for (int appRow = 0; appRow < 24; appRow++) {
-			WebElement div = driver.findElement(
-					By.xpath("//div[@id='scheduler']/table/tbody/tr[2]/td[2]/div/div[" + divcount + "]/div[1]"));
-			// WebElement
-			// divStartTime=driver.findElement(By.xpath("//div[@class='tile-title-wrapper']/span[2]"));
-			String txt = div.getText();
-			// System.out.println(txt);
-			String[] start = txt.split("Start Time:");
-			// String finalStart = start[0].trim();
-			String finalStart = start[1].trim();
-			String startTime = finalStart.substring(0, 8).trim();
-			// String con = start[5].substring(0, 5).trim();
-			// String finalTime = startTime.trim() + ":" + con.trim();
-			// System.out.println(finalTime);
-			// DateTimeFormatter formatter = DateTimeFormatter
-			SimpleDateFormat divtiming = new SimpleDateFormat("HH:mm a");
-			SimpleDateFormat mintiming = new SimpleDateFormat("HH:mm");
-			SimpleDateFormat hourtiming = new SimpleDateFormat("HH");
-			Date divMin = mintiming.parse(startTime);
-			String minOfDiv = mintiming.format(divMin);
-			String[] splitMinOfDiv = minOfDiv.split(":");
-			Date divHour = hourtiming.parse(startTime);
-			int divMinInteger = Integer.valueOf(splitMinOfDiv[1]);
-			String hourOfDiv = hourtiming.format(divHour);
-			int divHourInteger = Integer.valueOf(hourOfDiv);
+			try {
+				WebElement eventApp = driver.findElement(
+						By.xpath("//*[@id='scheduler']/table/tbody/tr[2]/td[2]/div/div[" + rowInc + "]/div[1]"));
+				if (eventApp.isDisplayed() == true) {
+					Coordinates coordinateTxtBox = ((Locatable) eventApp).getCoordinates();
+					coordinateTxtBox.inViewPort();
+					load.scrollView(eventApp);
+					eventApp.click();
+					WebElement star = driver.findElement(
+							By.xpath("//*[@id='_calendarModal_']/div[2]/div/form/div[1]/div[5]/div/label[1]"));
+					load.pageWait(star);
+					// WebElement
+					// divStartTime=driver.findElement(By.xpath("//div[@class='tile-title-wrapper']/span[2]"));
+					String txt = star.getText();
+					// System.out.println(txt);
+					String[] start = txt.split(" ", 2);
+					// String finalStart = start[0].trim();
+					String finalStart = start[1];
+					// String am = start[2];
+					// String finalStart = time.concat(am);
+					// String startTime = finalStart.substring(0, 8).trim();
+					// String con = start[5].substring(0, 5).trim();
+					// String finalTime = startTime.trim() + ":" + con.trim();
+					// System.out.println(finalTime);
+					// DateTimeFormatter formatter = DateTimeFormatter
+					SimpleDateFormat divtiming = new SimpleDateFormat("HH:mm a");
+					SimpleDateFormat mintiming = new SimpleDateFormat("HH:mm");
+					SimpleDateFormat hourtiming = new SimpleDateFormat("HH");
+					Date divMin = mintiming.parse(finalStart);
+					String minOfDiv = mintiming.format(divMin);
+					String[] splitMinOfDiv = minOfDiv.split(":");
+					Date divHour = hourtiming.parse(finalStart);
+					int divMinInteger = Integer.valueOf(splitMinOfDiv[1]);
+					String hourOfDiv = hourtiming.format(divHour);
+					int divHourInteger = Integer.valueOf(hourOfDiv);
 
-			Date intialMin = mintiming.parse(intialTime[appRow1]);
-			Date intialHour = hourtiming.parse(intialTime[appRow1]);
-			String hour = hourtiming.format(intialHour);
-			String min = mintiming.format(intialMin);
-			String[] intialMinSplit = min.split(":");
-			int intialHourInteger = Integer.valueOf(hour);
-			int intialMinInterger = Integer.valueOf(intialMinSplit[1]);
-			Date divtimingFinal = divtiming.parse(startTime);
-			Date intial = divtiming.parse(intialTime[appRow1]);
-			long d = divtimingFinal.getTime() - intial.getTime();
-			if (d < 0) {
-				divcount++;
-			}
-			if (rowInc == 1 && !startTime.equals("12:00 AM")) {
+					Date intialMin = mintiming.parse(intialTime[appRow1]);
+					Date intialHour = hourtiming.parse(intialTime[appRow1]);
+					String hour = hourtiming.format(intialHour);
+					String min = mintiming.format(intialMin);
+					String[] intialMinSplit = min.split(":");
+					int intialHourInteger = Integer.valueOf(hour);
+					int intialMinInterger = Integer.valueOf(intialMinSplit[1]);
+					Date divtimingFinal = divtiming.parse(finalStart);
+					Date intial = divtiming.parse(intialTime[appRow1]);
+
+					long d = divtimingFinal.getTime() - intial.getTime();
+					if (d < 0) {
+						divcount++;
+					}
+					if (rowInc == 1 && !finalStart.equalsIgnoreCase("08:00 AM")) {
+						closeBtn.click();
+						load.elementToBeClickable(clickOnTimeCalendar);
+						clickOnTimeCalendar.click();
+						Thread.sleep(4000);
+						if (appType.isDisplayed() == true) {
+							break;
+						}
+					} else if (!finalStart.equals(intialTime[appRow1])) {
+						if (divHourInteger > intialHourInteger == true) {
+							// divcount++;
+							closeBtn.click();
+							load.elementToBeClickable(clickOnTimeCalendar);
+							rowInc = rowInc + 4;
+							clickOnTimeCalendar = driver.findElement(By.xpath("//div[@id='scheduler']/table/tbody/tr[2]"
+									+ "/td[2]/div/table/tbody/tr[" + rowInc + "]/td"));
+							load.scrollView(clickOnTimeCalendar);
+							appRow1++;
+						}
+
+						else if (divHourInteger == intialHourInteger && !(divMinInteger > intialMinInterger) == true) {
+							closeBtn.click();
+							load.elementToBeClickable(clickOnTimeCalendar);
+							divcount++;
+							rowInc = rowInc + 4;
+							clickOnTimeCalendar = driver.findElement(By.xpath("//div[@id='scheduler']/table/tbody/tr[2]"
+									+ "/td[2]/div/table/tbody/tr[" + rowInc + "]/td"));
+							load.scrollView(clickOnTimeCalendar);
+							appRow1++;
+						} else {
+							closeBtn.click();
+							load.elementToBeClickable(clickOnTimeCalendar);
+							Thread.sleep(600);
+							clickOnTimeCalendar.click();
+							Thread.sleep(4000);
+							if (appType.isDisplayed() == true) {
+								break;
+							}
+						}
+					}
+
+					else if (finalStart.equals(intialTime[appRow1])) {
+						closeBtn.click();
+						load.elementToBeClickable(clickOnTimeCalendar);
+						divcount++;
+						rowInc = rowInc + 4;
+						clickOnTimeCalendar = driver.findElement(By.xpath("//div[@id='scheduler']/table/tbody/tr[2]"
+								+ "/td[2]/div/table/tbody/tr[" + rowInc + "]/td"));
+						// Actions actions = new Actions(driver);
+						// actions.moveToElement(clickOnTimeCalendar).perform();
+						load.scrollView(clickOnTimeCalendar);
+						appRow1++;
+						// intialTime="1:00 AM";
+					}
+					closeBtn.click();
+				}
+			} catch (NoSuchElementException e) {
+				load.elementToBeClickable(clickOnTimeCalendar);
 				clickOnTimeCalendar.click();
 				Thread.sleep(4000);
 				if (appType.isDisplayed() == true) {
 					break;
 				}
-			} else if (!startTime.equals(intialTime[appRow1])) {
-				if (divHourInteger > intialHourInteger == true) {
-					// divcount++;
-					rowInc = rowInc + 4;
-					clickOnTimeCalendar = driver.findElement(By.xpath("//div[@id='scheduler']/table/tbody/tr[2]"
-							+ "/td[2]/div/table/tbody/tr[" + rowInc + "]/td"));
-					load.scrollView(clickOnTimeCalendar);
-					appRow1++;
-				}
-
-				else if (divHourInteger == intialHourInteger && !(divMinInteger > intialMinInterger) == true) {
-					divcount++;
-					rowInc = rowInc + 4;
-					clickOnTimeCalendar = driver.findElement(By.xpath("//div[@id='scheduler']/table/tbody/tr[2]"
-							+ "/td[2]/div/table/tbody/tr[" + rowInc + "]/td"));
-					load.scrollView(clickOnTimeCalendar);
-					appRow1++;
-				} else {
-					Thread.sleep(600);
-					clickOnTimeCalendar.click();
-					Thread.sleep(4000);
-					if (appType.isDisplayed() == true) {
-						break;
-					}
-				}
-			}
-
-			else if (startTime.equals(intialTime[appRow1])) {
-				divcount++;
-				rowInc = rowInc + 4;
-				clickOnTimeCalendar = driver.findElement(By.xpath(
-						"//div[@id='scheduler']/table/tbody/tr[2]" + "/td[2]/div/table/tbody/tr[" + rowInc + "]/td"));
-				// Actions actions = new Actions(driver);
-				// actions.moveToElement(clickOnTimeCalendar).perform();
-				load.scrollView(clickOnTimeCalendar);
-				appRow1++;
-				// intialTime="1:00 AM";
+				load.pageWait(opp);
+				Thread.sleep(2000);
 			}
 		}
-		load.pageWait(opp);
-		Thread.sleep(2000);
 	}
 
 	public void fillAppData() throws InterruptedException, InvalidFormatException, IOException {
@@ -454,7 +490,7 @@ public class AppointmentPage {
 		Thread.sleep(8000);
 		int sizeOfAppointmentDiv = divAppointment.size();
 		System.out.println(sizeOfAppointmentDiv);
-		for (int divAppCount = 2; divAppCount < sizeOfAppointmentDiv; divAppCount++) {
+		for (int divAppCount = 2; divAppCount <= sizeOfAppointmentDiv; divAppCount++) {
 			WebElement div = driver.findElement(
 					By.xpath("//div[@id='scheduler']/table/tbody/tr[2]/td[2]/div/div[" + divAppCount + "]/div[1]"));
 			String txtOfDiv = div.getText();
@@ -486,7 +522,7 @@ public class AppointmentPage {
 		WebElement div = null;
 		for (int dayCount = 1; dayCount <= 6; dayCount++) {
 			int sizeOfAppointmentDiv = divAppointment.size();
-			for (int divAppCount = divApp; divAppCount < sizeOfAppointmentDiv; divAppCount++) {
+			for (int divAppCount = divApp; divAppCount <= sizeOfAppointmentDiv; divAppCount++) {
 				div = driver.findElement(
 						By.xpath("//div[@id='scheduler']/table/tbody/tr[2]/td[2]/div/div[" + divAppCount + "]/div[1]"));
 				String txtOfDiv = div.getText();

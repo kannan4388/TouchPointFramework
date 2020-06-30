@@ -14,7 +14,7 @@ import pageObjects.QuotesPage;
 public class QuotesStepDef extends ExtentReportListener {
 
 	private WebDriver driver;
-	QuotesPage savingQuote;
+	QuotesPage savingQuote = new QuotesPage();
 
 	@Given("^user lands on Quotes page$")
 	public void user_lands_on_Quotes_page() throws Throwable {
@@ -23,7 +23,6 @@ public class QuotesStepDef extends ExtentReportListener {
 		try {
 			logInfo = test.createNode(new GherkinKeyword("Given"), " user lands on Quotes page");// creating node for
 																									// extent report
-			savingQuote = new QuotesPage();
 			savingQuote.openQuotes();
 			logInfo.pass("Browser navigated to Quote page");// Passing pass log value to extent report
 		} catch (AssertionError | Exception e) {
@@ -39,7 +38,6 @@ public class QuotesStepDef extends ExtentReportListener {
 		try {
 			logInfo = test.createNode(new GherkinKeyword("Then"), " user save Quote page");// creating node for extent
 																							// report
-			savingQuote = new QuotesPage();
 			savingQuote.configureCoreProduct();
 			savingQuote.returnToQuote();
 			logInfo.pass("Quote page saved successfully");// Passing pass log value to extent report
@@ -56,7 +54,6 @@ public class QuotesStepDef extends ExtentReportListener {
 		try {
 			logInfo = test.createNode(new GherkinKeyword("Given"), "user edit the quotes");// creating node for extent
 																							// report
-			savingQuote = new QuotesPage();
 			savingQuote.editQuote();
 			logInfo.pass("Edit Quote page displayed");// Passing pass log value to extent report
 		} catch (AssertionError | Exception e) {
@@ -75,7 +72,6 @@ public class QuotesStepDef extends ExtentReportListener {
 																												// for
 																												// extent
 																												// report
-			savingQuote = new QuotesPage();
 			savingQuote.updateQuoteStatus();
 			logInfo.pass("Updated Quote Status as Accepted");// Passing pass log value to extent report
 		} catch (AssertionError | Exception e) {
@@ -91,7 +87,6 @@ public class QuotesStepDef extends ExtentReportListener {
 		try {
 			logInfo = test.createNode(new GherkinKeyword("And"), "user update the quote page");// creating node for
 																								// extent report
-			savingQuote = new QuotesPage();
 			savingQuote.saveQuote();
 			logInfo.pass("Quote has been updated successfully...");// Passing pass log value to extent report
 		} catch (AssertionError | Exception e) {

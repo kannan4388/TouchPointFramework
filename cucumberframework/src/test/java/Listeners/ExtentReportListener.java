@@ -50,35 +50,35 @@ public class ExtentReportListener {
 	}
 
 	public static void testStepHandle(String testStatus, WebDriver driver, ExtentTest extentTest, Throwable throwable) {
-		driver=LoginPage.getDriver();
+		driver = LoginPage.getDriver();
 		switch (testStatus) {
 		case "FAIL":
 			extentTest.fail(MarkupHelper.createLabel("Test Case is Failed: ", ExtentColor.RED));
 			extentTest.error(throwable.fillInStackTrace());
 			try {
 				extentTest.addScreenCaptureFromPath(captureScreenShot(driver));
-			}catch(IOException e) {
+			} catch (IOException e) {
 				e.printStackTrace();
 			}
 			if (driver != null) {
 				driver.quit();
 			}
 			break;
-			
+
 		case "PASS":
 			extentTest.pass(MarkupHelper.createLabel("Test Case is Passed: ", ExtentColor.GREEN));
-			driver=LoginPage.getDriver();
+			driver = LoginPage.getDriver();
 			driver.quit();
 			break;
-			
+
 		case "SKIP":
-				extentTest.skip(MarkupHelper.createLabel("Test Case is Skipped: ", ExtentColor.BLUE));
-				break;
-				
+			extentTest.skip(MarkupHelper.createLabel("Test Case is Skipped: ", ExtentColor.BLUE));
+			break;
+
 		case "FATAL":
 			extentTest.fatal(MarkupHelper.createLabel("Test Case is Fatal: ", ExtentColor.BROWN));
 			break;
-			
+
 		case "WARNING":
 			extentTest.fatal(MarkupHelper.createLabel("Test Case is Warning: ", ExtentColor.ORANGE));
 
@@ -88,7 +88,7 @@ public class ExtentReportListener {
 	}
 
 	public static String captureScreenShot(WebDriver driver) throws IOException {
-		//driver = LoginPage.getDriver();
+		// driver = LoginPage.getDriver();
 		File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 		// String screenShotName=scenario.getName().replaceAll(" ", "_");
 		String dest = System.getProperty("user.dir") + "\\ScreenShot\\" + getCurrentDateAndTime() + ".png";
@@ -102,9 +102,9 @@ public class ExtentReportListener {
 			DateFormat dateFormat = new SimpleDateFormat("yyyy/MMM/dd hh:mm a");
 			Date date = new Date();
 			str = dateFormat.format(date);
-			//str = str.replace(" ", "").replaceAll("/", "").replaceAll(":", "");
+			// str = str.replace(" ", "").replaceAll("/", "").replaceAll(":", "");
 			str = str.replaceAll("/", "").replaceAll(":", "").replace(" ", "_");
-			//String date=DateTime.
+			// String date=DateTime.
 		} catch (Exception e) {
 
 		}

@@ -1,5 +1,5 @@
-@web
 Feature: HFC Smoke Testing
+	
 Scenario: HFC Valid Login Test Scenario
 	Given Open Chrome browser and url
 	Given user enters username and password
@@ -32,3 +32,4 @@ Scenario: HFC Valid Login Test Scenario
 	Given lands on create Sales Order page
 	Then user convert Sales Order into Mpo Order
 	Given user save the MPO order page
+	And close the browser at the end

@@ -4,11 +4,17 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
+import java.util.UUID;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -19,6 +25,7 @@ public class LoginPage {
 	private static WebDriver driver;
 	private static Properties prop;
 	public static File folder;
+	public static String un = null;
 
 	public LoginPage() throws FileNotFoundException, IOException {
 		this.driver = getDriver();
@@ -42,15 +49,16 @@ public class LoginPage {
 	@FindBy(xpath = "//i[@class='fas fa-calendar-alt']")
 	WebElement pageLoad;
 
-	public void login() throws InterruptedException {
+	public String login() throws InterruptedException {
 		// this.driver = Hook.getDriver();
 		// System.out.println(un);
-		String un = prop.getProperty("username");
+		un = prop.getProperty("username");
 		String pw = prop.getProperty("password");
 		username.sendKeys(un);
 		Thread.sleep(500);
 		password.sendKeys(pw);
 		Thread.sleep(1000);
+		return un;
 	}
 
 	public void clickLoginBtn() throws InterruptedException {
@@ -59,31 +67,35 @@ public class LoginPage {
 		waitForPageLoad.pageWait(pageLoad);
 	}
 
+	public void closeBrowser() {
+		driver.quit();
+	}
+
 	public File launchBrowser() throws IOException {
 		String browserName = prop.getProperty("browser");
 		if (browserName.equals("chrome")) {
 			System.setProperty("webdriver.chrome.driver",
 					System.getProperty("user.dir") + "//drivers//chromedriver.exe");
 
-			// folder = new File(UUID.randomUUID().toString());
-			// folder.mkdir();
-			// ChromeOptions options = new ChromeOptions();
-			// options.addArguments("--always-authorize-plugins");
+			folder = new File(UUID.randomUUID().toString());
+			folder.mkdir();
+			ChromeOptions options = new ChromeOptions();
+			options.addArguments("--always-authorize-plugins");
 
-			// Map<String, Object> prefs = new HashMap<String, Object>();
-			// prefs.put("profile.default_content_settings.popups", 0);
-			// prefs.put("download.default_directory", folder.getAbsolutePath());
+			Map<String, Object> prefs = new HashMap<String, Object>();
+			prefs.put("profile.default_content_settings.popups", 0);
+			prefs.put("download.default_directory", folder.getAbsolutePath());
 
-			// options.setExperimentalOption("prefs", prefs);
+			options.setExperimentalOption("prefs", prefs);
 			// System.out.println(options.getExperimentalOption("prefs"));
-			// options.addArguments("--disable-notifications");
-			// DesiredCapabilities cap = DesiredCapabilities.chrome();
-			// cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-			// cap.setCapability(ChromeOptions.CAPABILITY, options);
+			options.addArguments("--disable-notifications");
+			DesiredCapabilities cap = DesiredCapabilities.chrome();
+			cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+			cap.setCapability(ChromeOptions.CAPABILITY, options);
 			System.setProperty("webdriver.chrome.driver",
 					System.getProperty("user.dir") + "//drivers//chromedriver.exe");
-			// driver = new ChromeDriver(cap);
-			driver = new ChromeDriver();
+			driver = new ChromeDriver(cap);
+			// driver = new ChromeDriver();
 			driver.manage().window().maximize();
 			// driver.manage().deleteAllCookies();
 			// driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);

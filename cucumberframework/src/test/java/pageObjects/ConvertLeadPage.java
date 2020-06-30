@@ -17,6 +17,7 @@ public class ConvertLeadPage {
 	public static String filePath = System.getProperty("user.dir") + "\\InputExcelData\\";
 	public static String fileName = "ConvertLead.xlsx";
 	public static String salesText = null;
+	public static String user = LoginPage.un;
 	public static String accountName;
 	private WebDriver driver;
 	utility.CommonMethods pageRefresh = new utility.CommonMethods();
@@ -69,9 +70,17 @@ public class ConvertLeadPage {
 			String textSales = driver
 					.findElement(By.xpath("//ul[@id='salesAgent_listbox']/li[@class='k-item ng-scope'][" + i + "]"))
 					.getText();
-			System.out.println(textSales);
+			// System.out.println(textSales);
 			utility.CommonMethods drpDownSales = new utility.CommonMethods();
-			salesText = drpDownSales.getExcelData(filePath, fileName).get("Sales");
+			if (user.equalsIgnoreCase("bbtestus")) {
+				salesText = drpDownSales.getExcelData(filePath, fileName).get("BbSalesAgent");
+			}
+			if (user.equalsIgnoreCase("tltestus")) {
+				salesText = drpDownSales.getExcelData(filePath, fileName).get("TlSalesAgent");
+			}
+			if (user.equalsIgnoreCase("cctestus")) {
+				salesText = drpDownSales.getExcelData(filePath, fileName).get("CcSalesAgent");
+			}
 			if (textSales.equalsIgnoreCase(salesText)) {
 				driver.findElement(By.xpath("//ul[@id='salesAgent_listbox']/li[@class='k-item ng-scope'][" + i + "]"))
 						.click();
@@ -87,10 +96,6 @@ public class ConvertLeadPage {
 		utility.CommonMethods waitCM = new utility.CommonMethods();
 		waitCM.pageWait(pageLoad);
 		Thread.sleep(3000);
-		// Utilities.CommonMethods pageRefresh=new Utilities.CommonMethods();
-		//// pageRefresh.refreshPage();
-		//// waitCM.pageWait(pageLoad);
-		// Thread.sleep(6000);
 	}
 
 	public String getAccountName() {

@@ -14,15 +14,15 @@ import pageObjects.OpportunitiesPage;
 public class OpportunitiesStepDef extends ExtentReportListener {
 
 	private WebDriver driver;
-	OpportunitiesPage opp;
+	OpportunitiesPage opp = new OpportunitiesPage();
 
 	@Given("^user opens Opportunity page$")
 	public void user_opens_opportunity_page() throws Throwable {
 
 		ExtentTest logInfo = null;// Intializing variable for extent test report log
 		try {
-			logInfo = test.createNode(new GherkinKeyword("Given"), " user opens Opportunity page");// creating node for extent report
-			opp = new OpportunitiesPage();
+			logInfo = test.createNode(new GherkinKeyword("Given"), " user opens Opportunity page");// creating node for
+																									// extent report
 			opp.openOpp();
 			logInfo.pass("Opportunity page opened");// Passing pass log value to extent report
 		} catch (AssertionError | Exception e) {
@@ -36,8 +36,9 @@ public class OpportunitiesStepDef extends ExtentReportListener {
 
 		ExtentTest logInfo = null;// Intializing variable for extent test report log
 		try {
-			logInfo = test.createNode(new GherkinKeyword("When"), " user fills Opportunity page data");// creating node for extent report
-			opp = new OpportunitiesPage();
+			logInfo = test.createNode(new GherkinKeyword("When"), " user fills Opportunity page data");// creating node
+																										// for extent
+																										// report
 			opp.createNewOpp();
 			opp.fillMandatoryFields();
 			logInfo.pass("Mandatory fields data filled in Opportunity page");// Passing pass log value to extent report
@@ -52,8 +53,9 @@ public class OpportunitiesStepDef extends ExtentReportListener {
 
 		ExtentTest logInfo = null;// Intializing variable for extent test report log
 		try {
-			logInfo = test.createNode(new GherkinKeyword("Then"), " user saves the Opportunity screen");// creating node for extent report
-			opp = new OpportunitiesPage();
+			logInfo = test.createNode(new GherkinKeyword("Then"), " user saves the Opportunity screen");// creating node
+																										// for extent
+																										// report
 			opp.saveOpp();
 			logInfo.pass("Opportunity page saved successfully");// Passing pass log value to extent report
 		} catch (AssertionError | Exception e) {

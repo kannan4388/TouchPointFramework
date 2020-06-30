@@ -5,11 +5,12 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import cucumber.api.CucumberOptions;
+import cucumber.api.Scenario;
 import cucumber.api.testng.CucumberFeatureWrapper;
 import cucumber.api.testng.TestNGCucumberRunner;
 
 /**
- * @author CHIRAG
+ * @author Kannan
  *
  */
 
@@ -21,15 +22,22 @@ import cucumber.api.testng.TestNGCucumberRunner;
 //@Test
 public class RunTest {
 	private TestNGCucumberRunner testNGCucumberRunner;
+	public Scenario scenario;
 
 	@BeforeClass(alwaysRun = true)
 	public void setUpClass() throws Exception {
 		testNGCucumberRunner = new TestNGCucumberRunner(this.getClass());
+		// String featureName = scenario.getId().split(":")[0];
+		// String scenarioName = scenario.getName();
 	}
 
 	@Test(dataProvider = "features")
 	public void feature(CucumberFeatureWrapper cucumberFeature) {
+		// cucumberFeature.getCucumberFeature();
+		// String featureName = scenario.getId().split(":")[0];
+		// String scenarioName = scenario.getName();
 		testNGCucumberRunner.runCucumber(cucumberFeature.getCucumberFeature());
+
 	}
 
 	@DataProvider

@@ -78,6 +78,7 @@ public class LeadPage {
 			throws InterruptedException, AWTException, IOException, InvalidFormatException {
 
 		// objMethods = new utility.CommonMethods();
+		String Address = waitForPageLoad.getExcelData(filePath, fileName).get("Address");
 		firstName.sendKeys(waitForPageLoad.getExcelData(filePath, fileName).get("FirstName"));
 		Thread.sleep(500);
 		String Name = waitForPageLoad.getExcelData(filePath, fileName).get("LastName");
@@ -94,10 +95,19 @@ public class LeadPage {
 		// zipCode.sendKeys(Keys.TAB);
 		// Thread.sleep(1000);
 		address.click();
-		address.sendKeys(waitForPageLoad.getExcelData(filePath, fileName).get("Address"));
+		String emailAddress = waitForPageLoad.getExcelData(filePath, fileName).get("Email");
+		address.sendKeys(Address);
 		Thread.sleep(1000);
-		email.sendKeys(waitForPageLoad.getExcelData(filePath, fileName).get("Email"));
-		Thread.sleep(4000);
+		email.click();
+		Thread.sleep(8000);
+		if (popUp.isDisplayed() == true) {
+			popUp.click();
+			Thread.sleep(2000);
+		}
+		email.sendKeys(emailAddress);
+		Thread.sleep(500);
+		zipCode.click();
+		Thread.sleep(6000);
 		// driver.switchTo().defaultContent();
 		if (popUp.isDisplayed() == true) {
 			popUp.click();
@@ -120,11 +130,12 @@ public class LeadPage {
 			Thread.sleep(2000);
 
 		}
-		Thread.sleep(1000);
+
 		/*
 		 * JavascriptExecutor js=(JavascriptExecutor)driver;
 		 * js.executeScript("arguments[0].click();",ele);
 		 */
+		Thread.sleep(5000);
 	}
 
 	/* Method for saving Lead page */
@@ -136,7 +147,8 @@ public class LeadPage {
 			// popUp.click();
 
 			Alert alert = driver.switchTo().alert();
-			alert.accept();
+			waitForPageLoad.waitForAlert(driver);
+			// alert.accept();
 			Thread.sleep(1000);
 			alert.accept();
 		} catch (Exception e) {

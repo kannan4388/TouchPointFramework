@@ -56,7 +56,7 @@ public class OpportunitiesPage {
 	@FindBy(xpath = "//button[@class='tooltip-bottom hfc_bgbut' and @data-tooltip='Save']")
 	WebElement saveIcon;
 
-	@FindBy(xpath = "//li[@rel='tab7' and @ng-show='BrandId!=3']")
+	@FindBy(xpath = "//button[@ng-show='Permission.EditOpportunity']")
 	WebElement savePageLoad;
 
 	public OpportunitiesPage() {
@@ -133,6 +133,7 @@ public class OpportunitiesPage {
 
 	public void saveOpp() throws InterruptedException {
 		saveIcon.click();
-		pageLoad.pageWait(savePageLoad);
+		pageLoad.elementToBeClickable(savePageLoad);
+		Thread.sleep(3000);
 	}
 }
