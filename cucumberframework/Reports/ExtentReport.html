@@ -35,7 +35,8 @@
 		<!-- slideout menu -->
 		<ul id='slide-out' class='side-nav fixed hide-on-med-and-down'>
 			<li class='waves-effect active'><a href='#!' view='test-view' onclick="configureView(0);chartsView('test');"><i class='material-icons'>dashboard</i></a></li>
-						<li class='waves-effect'><a href='#!' onclick="configureView(-1);chartsView('dashboard');" view='dashboard-view'><i class='material-icons'>track_changes</i></a></li>
+						<li class='waves-effect'><a href='#!' view='exception-view' onclick="configureView(2)"><i class='material-icons'>bug_report</i></a></li>
+			<li class='waves-effect'><a href='#!' onclick="configureView(-1);chartsView('dashboard');" view='dashboard-view'><i class='material-icons'>track_changes</i></a></li>
 		</ul>
 		<!-- report name -->
 		<span class='report-name'>Smoke Test</span>
@@ -44,7 +45,7 @@
 		<!-- nav-right -->
 		<ul id='nav-mobile' class='right hide-on-med-and-down nav-right'>
 			<a href='#!'>
-			<span class='label blue darken-3 suite-start-time'>Jun 26, 2020 12:09:05 PM</span>
+			<span class='label blue darken-3 suite-start-time'>Jul 13, 2020 04:18:55 PM</span>
 			</a>
 		</ul>
 	</div>
@@ -60,6 +61,7 @@
 				</a>
 				<ul id='tests-toggle' class='dropdown-content'>
 										<li status='pass'><a href='#!'>Pass <i class='material-icons green-text'>check_circle</i></a></li>
+					<li status='fail'><a href='#!'>Fail <i class='material-icons red-text'>cancel</i></a></li>
 					<li class='divider'></li>
 					<li status='clear' clear='true'><a href='#!'>Clear Filters <i class='material-icons'>clear</i></a></li>
 				</ul>
@@ -102,10 +104,10 @@
                     <canvas id='parent-analysis' width='90' height='70'></canvas>
                 </div>
                 <div class='block text-small'>
-                    <span class='tooltipped' data-position='top' data-tooltip='100%'><span class='strong'>8</span> test(s) passed</span>
+                    <span class='tooltipped' data-position='top' data-tooltip='0%'><span class='strong'>0</span> test(s) passed</span>
                 </div>
                 <div class='block text-small'>
-                    <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> test(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
+                    <span class='strong tooltipped' data-position='top' data-tooltip='100%'>1</span> test(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
                 </div>
             </div>
         </div>
@@ -116,10 +118,10 @@
                     <canvas id='grandchild-analysis' width='90' height='70'></canvas>
                 </div>
                 <div class='block text-small'>
-                    <span class='tooltipped' data-position='top' data-tooltip='100%'><span class='strong'>95</span>  passed</span>
+                    <span class='tooltipped' data-position='top' data-tooltip='75%'><span class='strong'>3</span>  passed</span>
                 </div>
                 <div class='block text-small'>
-                    <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span>  failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
+                    <span class='strong tooltipped' data-position='top' data-tooltip='25%'>1</span>  failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
                 </div>
             </div>
         </div>
@@ -137,32 +139,32 @@
 </div>	<div class='subview-left left'>
 		<div class='view-summary'>
 			<ul id='test-collection' class='test-collection'>
-				<li class='test displayed active has-leaf pass' status='pass' bdd='false' test-id='1'>
+				<li class='test displayed active has-leaf fail' status='fail' bdd='false' test-id='1'>
 					<div class='test-heading'>
-						<span class='test-name'>Test smoke</span>
-						<span class='test-time'>Jun 26, 2020 12:09:06 PM</span>
-						<span class='test-status right pass'>pass</span>
+						<span class='test-name'>Verify Sales Tax report works fine:Load data,Download excel file,Sorting,Pagination and Filter by Territory Name</span>
+						<span class='test-time'>Jul 13, 2020 04:18:56 PM</span>
+						<span class='test-status right fail'>fail</span>
 					</div>
 					<div class='test-content hide'>
 <div class='test-time-info'>
-	<span class='label start-time'>Jun 26, 2020 12:09:06 PM</span>
-	<span class='label end-time'>Jun 26, 2020 12:16:12 PM</span>
-	<span class='label time-taken grey lighten-1 white-text'>0h 7m 6s+627ms</span>
+	<span class='label start-time'>Jul 13, 2020 04:18:56 PM</span>
+	<span class='label end-time'>Jul 13, 2020 04:20:42 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 1m 45s+725ms</span>
 </div>
 <ul class='collapsible node-list' data-collapsible='accordion'>
-	<li class='node level-1  pass' status='pass' test-id='2'>
+	<li class='node level-1  fail' status='fail' test-id='2'>
 		<div class='collapsible-header'>
-			<div class='node-name'>Test</div>
-			<span class='node-time'>Jun 26, 2020 12:09:06 PM</span>
-			&middot; <span class='node-duration'>0h 7m 6s+627ms</span>
-			<span class='test-status right pass'>pass</span>
+			<div class='node-name'>hfc-smoke-testing</div>
+			<span class='node-time'>Jul 13, 2020 04:18:56 PM</span>
+			&middot; <span class='node-duration'>0h 1m 45s+725ms</span>
+			<span class='test-status right fail'>fail</span>
 		</div>
 		<ul class='collapsible node-list' data-collapsible='accordion'>
 	<li class='node level-2 leaf pass' status='pass' test-id='3'>
 		<div class='collapsible-header'>
 			<div class='node-name'>Open Chrome browser and url</div>
-			<span class='node-time'>Jun 26, 2020 12:09:06 PM</span>
-			&middot; <span class='node-duration'>0h 0m 40s+524ms</span>
+			<span class='node-time'>Jul 13, 2020 04:18:56 PM</span>
+			&middot; <span class='node-duration'>0h 0m 13s+372ms</span>
 			<span class='test-status right pass'>pass</span>
 		</div>
 		<div class='collapsible-body'>
@@ -178,7 +180,7 @@
 					<tbody>
 						<tr class='log' status='pass'>
 							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:09:46 PM</td>
+							<td class='timestamp'>4:19:10 PM</td>
 							<td class='step-details'>
 									Browser opened with URL
 								
@@ -192,8 +194,8 @@
 	<li class='node level-2 leaf pass' status='pass' test-id='4'>
 		<div class='collapsible-header'>
 			<div class='node-name'>user enters username and password</div>
-			<span class='node-time'>Jun 26, 2020 12:09:46 PM</span>
-			&middot; <span class='node-duration'>0h 0m 1s+879ms</span>
+			<span class='node-time'>Jul 13, 2020 04:19:10 PM</span>
+			&middot; <span class='node-duration'>0h 0m 2s+63ms</span>
 			<span class='test-status right pass'>pass</span>
 		</div>
 		<div class='collapsible-body'>
@@ -209,7 +211,7 @@
 					<tbody>
 						<tr class='log' status='pass'>
 							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:09:48 PM</td>
+							<td class='timestamp'>4:19:12 PM</td>
 							<td class='step-details'>
 									Entered URL with username and password
 								
@@ -223,8 +225,8 @@
 	<li class='node level-2 leaf pass' status='pass' test-id='5'>
 		<div class='collapsible-header'>
 			<div class='node-name'>user clicks on login button</div>
-			<span class='node-time'>Jun 26, 2020 12:09:48 PM</span>
-			&middot; <span class='node-duration'>0h 0m 39s+623ms</span>
+			<span class='node-time'>Jul 13, 2020 04:19:12 PM</span>
+			&middot; <span class='node-duration'>0h 0m 23s+109ms</span>
 			<span class='test-status right pass'>pass</span>
 		</div>
 		<div class='collapsible-body'>
@@ -240,7 +242,7 @@
 					<tbody>
 						<tr class='log' status='pass'>
 							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:10:28 PM</td>
+							<td class='timestamp'>4:19:35 PM</td>
 							<td class='step-details'>
 									Web page lands on Home Page
 								
@@ -251,12 +253,12 @@
 			</div>
 		</div>
 	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='6'>
+	<li class='node level-2 leaf fail' status='fail' test-id='6'>
 		<div class='collapsible-header'>
-			<div class='node-name'>user lands on Lead page</div>
-			<span class='node-time'>Jun 26, 2020 12:10:36 PM</span>
-			&middot; <span class='node-duration'>0h 0m 5s+355ms</span>
-			<span class='test-status right pass'>pass</span>
+			<div class='node-name'>user navigates to Reports and loads data for Sales Tax report</div>
+			<span class='node-time'>Jul 13, 2020 04:19:35 PM</span>
+			&middot; <span class='node-duration'>0h 1m 7s+137ms</span>
+			<span class='test-status right fail'>fail</span>
 		</div>
 		<div class='collapsible-body'>
 			<div class='node-steps'>
@@ -269,3019 +271,74 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:10:41 PM</td>
+						<tr class='log' status='fail'>
+							<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+							<td class='timestamp'>4:20:42 PM</td>
 							<td class='step-details'>
-									Web Page moved to Lead Page
+									<span class='badge white-text red'>Test Case is Failed: </span>
 								
 							</td>
 						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='7'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user enters all mandatory fields data</div>
-			<span class='node-time'>Jun 26, 2020 12:10:41 PM</span>
-			&middot; <span class='node-duration'>0h 0m 34s+355ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:11:15 PM</td>
-							<td class='step-details'>
-									Filled All Mandatory fields value
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='8'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user saves the lead page</div>
-			<span class='node-time'>Jun 26, 2020 12:11:15 PM</span>
-			&middot; <span class='node-duration'>0h 0m 11s+341ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:11:27 PM</td>
-							<td class='step-details'>
-									Lead Page Saved Successfully
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='9'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user lands on qualify page</div>
-			<span class='node-time'>Jun 26, 2020 12:11:27 PM</span>
-			&middot; <span class='node-duration'>0h 0m 4s+842ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:11:31 PM</td>
-							<td class='step-details'>
-									Web page landed on Qualify page
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='10'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user edits the qualify page</div>
-			<span class='node-time'>Jun 26, 2020 12:11:31 PM</span>
-			&middot; <span class='node-duration'>0h 0m 4s+490ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:11:36 PM</td>
-							<td class='step-details'>
-									Web page lands on Edit Qualify page
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='11'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user enters data to some fields</div>
-			<span class='node-time'>Jun 26, 2020 12:11:36 PM</span>
-			&middot; <span class='node-duration'>0h 0m 2s+237ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:11:38 PM</td>
-							<td class='step-details'>
-									Filled data upto Budget field
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='12'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user saves the qualify page</div>
-			<span class='node-time'>Jun 26, 2020 12:11:38 PM</span>
-			&middot; <span class='node-duration'>0h 0m 14s+82ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:11:52 PM</td>
-							<td class='step-details'>
-									Qualify page saved Successfully
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='13'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user lands on convert Account page</div>
-			<span class='node-time'>Jun 26, 2020 12:11:52 PM</span>
-			&middot; <span class='node-duration'>0h 0m 7s+16ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:11:59 PM</td>
-							<td class='step-details'>
-									Web page moved to Convert Account page
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='14'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user fills Convert Lead page data</div>
-			<span class='node-time'>Jun 26, 2020 12:11:59 PM</span>
-			&middot; <span class='node-duration'>0h 0m 17s+262ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:12:17 PM</td>
-							<td class='step-details'>
-									Data filled in Convert Lead page
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='15'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user convert it as Account</div>
-			<span class='node-time'>Jun 26, 2020 12:12:17 PM</span>
-			&middot; <span class='node-duration'>0h 0m 11s+428ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:12:28 PM</td>
-							<td class='step-details'>
-									Lead successfully converted into Account
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='16'>
-		<div class='collapsible-header'>
-			<div class='node-name'>open Add Appointment page</div>
-			<span class='node-time'>Jun 26, 2020 12:12:28 PM</span>
-			&middot; <span class='node-duration'>0h 0m 24s+387ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:12:52 PM</td>
-							<td class='step-details'>
-									Web page landed on Appointment page
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='17'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user fill data in Appointment page</div>
-			<span class='node-time'>Jun 26, 2020 12:12:52 PM</span>
-			&middot; <span class='node-duration'>0h 0m 16s+497ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:13:09 PM</td>
-							<td class='step-details'>
-									Data Filled in Appointment page
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='18'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user saves the Appointment</div>
-			<span class='node-time'>Jun 26, 2020 12:13:09 PM</span>
-			&middot; <span class='node-duration'>0h 0m 7s+81ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:13:16 PM</td>
-							<td class='step-details'>
-									Appointment created successfully
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='19'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user opens Opportunity page</div>
-			<span class='node-time'>Jun 26, 2020 12:13:16 PM</span>
-			&middot; <span class='node-duration'>0h 0m 4s+13ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:13:20 PM</td>
-							<td class='step-details'>
-									Opportunity page opened
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='20'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user fills Opportunity page data</div>
-			<span class='node-time'>Jun 26, 2020 12:13:20 PM</span>
-			&middot; <span class='node-duration'>0h 0m 13s+603ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:13:34 PM</td>
-							<td class='step-details'>
-									Mandatory fields data filled in Opportunity page
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='21'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user saves the Opportunity screen</div>
-			<span class='node-time'>Jun 26, 2020 12:13:34 PM</span>
-			&middot; <span class='node-duration'>0h 0m 20s+522ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:13:54 PM</td>
-							<td class='step-details'>
-									Opportunity page saved successfully
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='22'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user opens Measurement page</div>
-			<span class='node-time'>Jun 26, 2020 12:13:54 PM</span>
-			&middot; <span class='node-duration'>0h 0m 0s+107ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:13:54 PM</td>
-							<td class='step-details'>
-									Measurement page displayed
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='23'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user fills the data to measurement page</div>
-			<span class='node-time'>Jun 26, 2020 12:13:54 PM</span>
-			&middot; <span class='node-duration'>0h 0m 0s+479ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:13:55 PM</td>
-							<td class='step-details'>
-									Measurement page data filled
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='24'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user saves the measurement page</div>
-			<span class='node-time'>Jun 26, 2020 12:13:55 PM</span>
-			&middot; <span class='node-duration'>0h 0m 0s+0ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:13:55 PM</td>
-							<td class='step-details'>
-									Measurement page saved successfully
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='25'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user lands on Quotes page</div>
-			<span class='node-time'>Jun 26, 2020 12:13:55 PM</span>
-			&middot; <span class='node-duration'>0h 0m 58s+433ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:14:53 PM</td>
-							<td class='step-details'>
-									Browser navigated to Quote page
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='26'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user save Quote page</div>
-			<span class='node-time'>Jun 26, 2020 12:14:53 PM</span>
-			&middot; <span class='node-duration'>0h 0m 23s+150ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:15:16 PM</td>
-							<td class='step-details'>
-									Quote page saved successfully
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='27'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user edit the quotes</div>
-			<span class='node-time'>Jun 26, 2020 12:15:16 PM</span>
-			&middot; <span class='node-duration'>0h 0m 5s+402ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:15:22 PM</td>
-							<td class='step-details'>
-									Edit Quote page displayed
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='28'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user change the quote status as Accepted</div>
-			<span class='node-time'>Jun 26, 2020 12:15:22 PM</span>
-			&middot; <span class='node-duration'>0h 0m 2s+860ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:15:25 PM</td>
-							<td class='step-details'>
-									Updated Quote Status as Accepted
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='29'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user update the quote page</div>
-			<span class='node-time'>Jun 26, 2020 12:15:25 PM</span>
-			&middot; <span class='node-duration'>0h 0m 11s+498ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:15:36 PM</td>
-							<td class='step-details'>
-									Quote has been updated successfully...
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='30'>
-		<div class='collapsible-header'>
-			<div class='node-name'>lands on create Sales Order page</div>
-			<span class='node-time'>Jun 26, 2020 12:15:36 PM</span>
-			&middot; <span class='node-duration'>0h 0m 19s+116ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:15:55 PM</td>
-							<td class='step-details'>
-									Browser landed on  Create Sales Order page
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='31'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user convert Sales Order into Mpo Order</div>
-			<span class='node-time'>Jun 26, 2020 12:15:55 PM</span>
-			&middot; <span class='node-duration'>0h 0m 9s+544ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:16:05 PM</td>
-							<td class='step-details'>
-									Sales Order converted into Mpo Order successfully
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='32'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user converting MPO order into Purchase Order</div>
-			<span class='node-time'>Jun 26, 2020 12:16:05 PM</span>
-			&middot; <span class='node-duration'>0h 0m 7s+625ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:16:12 PM</td>
-							<td class='step-details'>
-									Sucessfully MPO order converted into Purchase Order
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-		</ul>
-	</li>
-</ul>
-					</div>
-				</li>
-				<li class='test displayed active has-leaf pass' status='pass' bdd='false' test-id='33'>
-					<div class='test-heading'>
-						<span class='test-name'>Test smoke</span>
-						<span class='test-time'>Jun 26, 2020 12:16:51 PM</span>
-						<span class='test-status right pass'>pass</span>
-					</div>
-					<div class='test-content hide'>
-<div class='test-time-info'>
-	<span class='label start-time'>Jun 26, 2020 12:16:51 PM</span>
-	<span class='label end-time'>Jun 26, 2020 12:18:27 PM</span>
-	<span class='label time-taken grey lighten-1 white-text'>0h 1m 36s+379ms</span>
-</div>
-<ul class='collapsible node-list' data-collapsible='accordion'>
-	<li class='node level-1  pass' status='pass' test-id='34'>
-		<div class='collapsible-header'>
-			<div class='node-name'>Test</div>
-			<span class='node-time'>Jun 26, 2020 12:16:51 PM</span>
-			&middot; <span class='node-duration'>0h 1m 36s+379ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<ul class='collapsible node-list' data-collapsible='accordion'>
-	<li class='node level-2 leaf pass' status='pass' test-id='35'>
-		<div class='collapsible-header'>
-			<div class='node-name'>Open Chrome browser and url</div>
-			<span class='node-time'>Jun 26, 2020 12:16:51 PM</span>
-			&middot; <span class='node-duration'>0h 0m 41s+12ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:17:32 PM</td>
-							<td class='step-details'>
-									Browser opened with URL
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='36'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user enters username and password</div>
-			<span class='node-time'>Jun 26, 2020 12:17:32 PM</span>
-			&middot; <span class='node-duration'>0h 0m 1s+855ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:17:34 PM</td>
-							<td class='step-details'>
-									Entered URL with username and password
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='37'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user clicks on login button</div>
-			<span class='node-time'>Jun 26, 2020 12:17:34 PM</span>
-			&middot; <span class='node-duration'>0h 0m 34s+259ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:18:08 PM</td>
-							<td class='step-details'>
-									Web page lands on Home Page
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='38'>
-		<div class='collapsible-header'>
-			<div class='node-name'>lands on Procurement Dashboard page</div>
-			<span class='node-time'>Jun 26, 2020 12:18:08 PM</span>
-			&middot; <span class='node-duration'>0h 0m 9s+146ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:18:17 PM</td>
-							<td class='step-details'>
-									Web page landed on Procurement Dashboard page
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='39'>
-		<div class='collapsible-header'>
-			<div class='node-name'>Individual cancel Vendor PO</div>
-			<span class='node-time'>Jun 26, 2020 12:18:17 PM</span>
-			&middot; <span class='node-duration'>0h 0m 9s+973ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:18:27 PM</td>
-							<td class='step-details'>
-									Able to Cancel Vendor PO by individual line item successfully
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='40'>
-		<div class='collapsible-header'>
-			<div class='node-name'>convert cancel mpo order into open order</div>
-			<span class='node-time'>Jun 26, 2020 12:18:27 PM</span>
-			&middot; <span class='node-duration'>0h 0m 0s+43ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:18:27 PM</td>
-							<td class='step-details'>
-									Converted Cancel order into Open order again successfully
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-		</ul>
-	</li>
-</ul>
-					</div>
-				</li>
-				<li class='test displayed active has-leaf pass' status='pass' bdd='false' test-id='41'>
-					<div class='test-heading'>
-						<span class='test-name'>Test smoke</span>
-						<span class='test-time'>Jun 26, 2020 12:18:28 PM</span>
-						<span class='test-status right pass'>pass</span>
-					</div>
-					<div class='test-content hide'>
-<div class='test-time-info'>
-	<span class='label start-time'>Jun 26, 2020 12:18:28 PM</span>
-	<span class='label end-time'>Jun 26, 2020 12:19:55 PM</span>
-	<span class='label time-taken grey lighten-1 white-text'>0h 1m 26s+733ms</span>
-</div>
-<ul class='collapsible node-list' data-collapsible='accordion'>
-	<li class='node level-1  pass' status='pass' test-id='42'>
-		<div class='collapsible-header'>
-			<div class='node-name'>Test</div>
-			<span class='node-time'>Jun 26, 2020 12:18:28 PM</span>
-			&middot; <span class='node-duration'>0h 1m 26s+733ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<ul class='collapsible node-list' data-collapsible='accordion'>
-	<li class='node level-2 leaf pass' status='pass' test-id='43'>
-		<div class='collapsible-header'>
-			<div class='node-name'>Open Chrome browser and url</div>
-			<span class='node-time'>Jun 26, 2020 12:18:28 PM</span>
-			&middot; <span class='node-duration'>0h 0m 15s+434ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:18:44 PM</td>
-							<td class='step-details'>
-									Browser opened with URL
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='44'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user enters username and password</div>
-			<span class='node-time'>Jun 26, 2020 12:18:44 PM</span>
-			&middot; <span class='node-duration'>0h 0m 1s+880ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:18:46 PM</td>
-							<td class='step-details'>
-									Entered URL with username and password
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='45'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user clicks on login button</div>
-			<span class='node-time'>Jun 26, 2020 12:18:46 PM</span>
-			&middot; <span class='node-duration'>0h 0m 24s+685ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:19:10 PM</td>
-							<td class='step-details'>
-									Web page lands on Home Page
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='46'>
-		<div class='collapsible-header'>
-			<div class='node-name'>lands on Procurement Dashboard page</div>
-			<span class='node-time'>Jun 26, 2020 12:19:10 PM</span>
-			&middot; <span class='node-duration'>0h 0m 8s+845ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:19:19 PM</td>
-							<td class='step-details'>
-									Web page landed on Procurement Dashboard page
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='47'>
-		<div class='collapsible-header'>
-			<div class='node-name'>Whole Cancel MPO order</div>
-			<span class='node-time'>Jun 26, 2020 12:19:19 PM</span>
-			&middot; <span class='node-duration'>0h 0m 20s+279ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:19:40 PM</td>
-							<td class='step-details'>
-									Order updated as Cancelled and confirmed status changed to cancel
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='48'>
-		<div class='collapsible-header'>
-			<div class='node-name'>convert cancel mpo order into open order</div>
-			<span class='node-time'>Jun 26, 2020 12:19:40 PM</span>
-			&middot; <span class='node-duration'>0h 0m 15s+605ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:19:55 PM</td>
-							<td class='step-details'>
-									Converted Cancel order into Open order again successfully
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-		</ul>
-	</li>
-</ul>
-					</div>
-				</li>
-				<li class='test displayed active has-leaf pass' status='pass' bdd='false' test-id='49'>
-					<div class='test-heading'>
-						<span class='test-name'>Test smoke</span>
-						<span class='test-time'>Jun 26, 2020 12:19:56 PM</span>
-						<span class='test-status right pass'>pass</span>
-					</div>
-					<div class='test-content hide'>
-<div class='test-time-info'>
-	<span class='label start-time'>Jun 26, 2020 12:19:56 PM</span>
-	<span class='label end-time'>Jun 26, 2020 12:23:11 PM</span>
-	<span class='label time-taken grey lighten-1 white-text'>0h 3m 14s+201ms</span>
-</div>
-<ul class='collapsible node-list' data-collapsible='accordion'>
-	<li class='node level-1  pass' status='pass' test-id='50'>
-		<div class='collapsible-header'>
-			<div class='node-name'>Test</div>
-			<span class='node-time'>Jun 26, 2020 12:19:56 PM</span>
-			&middot; <span class='node-duration'>0h 3m 14s+201ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<ul class='collapsible node-list' data-collapsible='accordion'>
-	<li class='node level-2 leaf pass' status='pass' test-id='51'>
-		<div class='collapsible-header'>
-			<div class='node-name'>Open Chrome browser and url</div>
-			<span class='node-time'>Jun 26, 2020 12:19:56 PM</span>
-			&middot; <span class='node-duration'>0h 0m 15s+176ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:20:12 PM</td>
-							<td class='step-details'>
-									Browser opened with URL
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='52'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user enters username and password</div>
-			<span class='node-time'>Jun 26, 2020 12:20:12 PM</span>
-			&middot; <span class='node-duration'>0h 0m 1s+874ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:20:13 PM</td>
-							<td class='step-details'>
-									Entered URL with username and password
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='53'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user clicks on login button</div>
-			<span class='node-time'>Jun 26, 2020 12:20:13 PM</span>
-			&middot; <span class='node-duration'>0h 0m 23s+27ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:20:36 PM</td>
-							<td class='step-details'>
-									Web page lands on Home Page
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='54'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user lands on Lead page</div>
-			<span class='node-time'>Jun 26, 2020 12:20:43 PM</span>
-			&middot; <span class='node-duration'>0h 0m 4s+419ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:20:48 PM</td>
-							<td class='step-details'>
-									Web Page moved to Lead Page
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='55'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user enters all mandatory fields data</div>
-			<span class='node-time'>Jun 26, 2020 12:20:48 PM</span>
-			&middot; <span class='node-duration'>0h 0m 32s+874ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:21:21 PM</td>
-							<td class='step-details'>
-									Filled All Mandatory fields value
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='56'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user saves the lead page</div>
-			<span class='node-time'>Jun 26, 2020 12:21:21 PM</span>
-			&middot; <span class='node-duration'>0h 0m 11s+8ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:21:32 PM</td>
-							<td class='step-details'>
-									Lead Page Saved Successfully
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='57'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user lands on convert Account page</div>
-			<span class='node-time'>Jun 26, 2020 12:21:32 PM</span>
-			&middot; <span class='node-duration'>0h 0m 6s+933ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:21:39 PM</td>
-							<td class='step-details'>
-									Web page moved to Convert Account page
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='58'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user fills Convert Lead page data</div>
-			<span class='node-time'>Jun 26, 2020 12:21:39 PM</span>
-			&middot; <span class='node-duration'>0h 0m 16s+951ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:21:55 PM</td>
-							<td class='step-details'>
-									Data filled in Convert Lead page
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='59'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user convert it as Account</div>
-			<span class='node-time'>Jun 26, 2020 12:21:55 PM</span>
-			&middot; <span class='node-duration'>0h 0m 9s+267ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:22:05 PM</td>
-							<td class='step-details'>
-									Lead successfully converted into Account
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='60'>
-		<div class='collapsible-header'>
-			<div class='node-name'>Open Add appointment from Home page</div>
-			<span class='node-time'>Jun 26, 2020 12:22:05 PM</span>
-			&middot; <span class='node-duration'>0h 0m 20s+755ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:22:25 PM</td>
-							<td class='step-details'>
-									Add Appointment page opened
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='61'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user fill data in Appointment page</div>
-			<span class='node-time'>Jun 26, 2020 12:22:25 PM</span>
-			&middot; <span class='node-duration'>0h 0m 16s+36ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:22:42 PM</td>
-							<td class='step-details'>
-									Data Filled in Appointment page
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='62'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user saves the Appointment and return to Account</div>
-			<span class='node-time'>Jun 26, 2020 12:22:42 PM</span>
-			&middot; <span class='node-duration'>0h 0m 8s+969ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:22:50 PM</td>
-							<td class='step-details'>
-									Appointment created with successfully
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='63'>
-		<div class='collapsible-header'>
-			<div class='node-name'>lands on Home page</div>
-			<span class='node-time'>Jun 26, 2020 12:22:51 PM</span>
-			&middot; <span class='node-duration'>0h 0m 4s+66ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:22:55 PM</td>
-							<td class='step-details'>
-									Web page landed on Home page
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='64'>
-		<div class='collapsible-header'>
-			<div class='node-name'>verify created account in Home page</div>
-			<span class='node-time'>Jun 26, 2020 12:22:55 PM</span>
-			&middot; <span class='node-duration'>0h 0m 15s+750ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:23:11 PM</td>
-							<td class='step-details'>
-									Edit and Updated the appointment successfully
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-		</ul>
-	</li>
-</ul>
-					</div>
-				</li>
-				<li class='test displayed active has-leaf pass' status='pass' bdd='false' test-id='65'>
-					<div class='test-heading'>
-						<span class='test-name'>Test smoke</span>
-						<span class='test-time'>Jun 26, 2020 12:23:12 PM</span>
-						<span class='test-status right pass'>pass</span>
-					</div>
-					<div class='test-content hide'>
-<div class='test-time-info'>
-	<span class='label start-time'>Jun 26, 2020 12:23:12 PM</span>
-	<span class='label end-time'>Jun 26, 2020 12:28:34 PM</span>
-	<span class='label time-taken grey lighten-1 white-text'>0h 5m 21s+608ms</span>
-</div>
-<ul class='collapsible node-list' data-collapsible='accordion'>
-	<li class='node level-1  pass' status='pass' test-id='66'>
-		<div class='collapsible-header'>
-			<div class='node-name'>Test</div>
-			<span class='node-time'>Jun 26, 2020 12:23:12 PM</span>
-			&middot; <span class='node-duration'>0h 5m 21s+608ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<ul class='collapsible node-list' data-collapsible='accordion'>
-	<li class='node level-2 leaf pass' status='pass' test-id='67'>
-		<div class='collapsible-header'>
-			<div class='node-name'>Open Chrome browser and url</div>
-			<span class='node-time'>Jun 26, 2020 12:23:12 PM</span>
-			&middot; <span class='node-duration'>0h 0m 14s+992ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:23:27 PM</td>
-							<td class='step-details'>
-									Browser opened with URL
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='68'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user enters username and password</div>
-			<span class='node-time'>Jun 26, 2020 12:23:27 PM</span>
-			&middot; <span class='node-duration'>0h 0m 1s+923ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:23:29 PM</td>
-							<td class='step-details'>
-									Entered URL with username and password
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='69'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user clicks on login button</div>
-			<span class='node-time'>Jun 26, 2020 12:23:29 PM</span>
-			&middot; <span class='node-duration'>0h 0m 22s+61ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:23:51 PM</td>
-							<td class='step-details'>
-									Web page lands on Home Page
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='70'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user lands on Lead page</div>
-			<span class='node-time'>Jun 26, 2020 12:23:58 PM</span>
-			&middot; <span class='node-duration'>0h 0m 4s+388ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:24:02 PM</td>
-							<td class='step-details'>
-									Web Page moved to Lead Page
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='71'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user enters all mandatory fields data</div>
-			<span class='node-time'>Jun 26, 2020 12:24:02 PM</span>
-			&middot; <span class='node-duration'>0h 0m 32s+725ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:24:35 PM</td>
-							<td class='step-details'>
-									Filled All Mandatory fields value
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='72'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user saves the lead page</div>
-			<span class='node-time'>Jun 26, 2020 12:24:35 PM</span>
-			&middot; <span class='node-duration'>0h 0m 10s+470ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:24:45 PM</td>
-							<td class='step-details'>
-									Lead Page Saved Successfully
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='73'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user lands on convert Account page</div>
-			<span class='node-time'>Jun 26, 2020 12:24:45 PM</span>
-			&middot; <span class='node-duration'>0h 0m 6s+887ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:24:52 PM</td>
-							<td class='step-details'>
-									Web page moved to Convert Account page
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='74'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user fills Convert Lead page data</div>
-			<span class='node-time'>Jun 26, 2020 12:24:52 PM</span>
-			&middot; <span class='node-duration'>0h 0m 17s+320ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:25:10 PM</td>
-							<td class='step-details'>
-									Data filled in Convert Lead page
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='75'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user convert it as Account</div>
-			<span class='node-time'>Jun 26, 2020 12:25:10 PM</span>
-			&middot; <span class='node-duration'>0h 0m 9s+101ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:25:19 PM</td>
-							<td class='step-details'>
-									Lead successfully converted into Account
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='76'>
-		<div class='collapsible-header'>
-			<div class='node-name'>Open Add appointment from Home page</div>
-			<span class='node-time'>Jun 26, 2020 12:25:19 PM</span>
-			&middot; <span class='node-duration'>0h 0m 20s+649ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:25:39 PM</td>
-							<td class='step-details'>
-									Add Appointment page opened
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='77'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user fill data in Appointment page</div>
-			<span class='node-time'>Jun 26, 2020 12:25:39 PM</span>
-			&middot; <span class='node-duration'>0h 0m 16s+171ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:25:56 PM</td>
-							<td class='step-details'>
-									Data Filled in Appointment page
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='78'>
-		<div class='collapsible-header'>
-			<div class='node-name'>check the created appointment present in calendar page and edit it</div>
-			<span class='node-time'>Jun 26, 2020 12:25:56 PM</span>
-			&middot; <span class='node-duration'>0h 1m 7s+875ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:27:03 PM</td>
-							<td class='step-details'>
-									Appointment exist in Calender page and Updated as Recurrence
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='79'>
-		<div class='collapsible-header'>
-			<div class='node-name'>Fill Recurrence data</div>
-			<span class='node-time'>Jun 26, 2020 12:27:03 PM</span>
-			&middot; <span class='node-duration'>0h 0m 3s+608ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:27:07 PM</td>
-							<td class='step-details'>
-									Recurrence data filled
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='80'>
-		<div class='collapsible-header'>
-			<div class='node-name'>View the Appointment by Next Day and Confirm all recurrence present</div>
-			<span class='node-time'>Jun 26, 2020 12:27:07 PM</span>
-			&middot; <span class='node-duration'>0h 1m 26s+614ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:28:34 PM</td>
-							<td class='step-details'>
-									Successfully created Recurrence Appointment for one week
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-		</ul>
-	</li>
-</ul>
-					</div>
-				</li>
-				<li class='test displayed active has-leaf pass' status='pass' bdd='false' test-id='81'>
-					<div class='test-heading'>
-						<span class='test-name'>Test smoke</span>
-						<span class='test-time'>Jun 26, 2020 12:28:35 PM</span>
-						<span class='test-status right pass'>pass</span>
-					</div>
-					<div class='test-content hide'>
-<div class='test-time-info'>
-	<span class='label start-time'>Jun 26, 2020 12:28:35 PM</span>
-	<span class='label end-time'>Jun 26, 2020 12:31:21 PM</span>
-	<span class='label time-taken grey lighten-1 white-text'>0h 2m 46s+177ms</span>
-</div>
-<ul class='collapsible node-list' data-collapsible='accordion'>
-	<li class='node level-1  pass' status='pass' test-id='82'>
-		<div class='collapsible-header'>
-			<div class='node-name'>Test</div>
-			<span class='node-time'>Jun 26, 2020 12:28:35 PM</span>
-			&middot; <span class='node-duration'>0h 2m 46s+177ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<ul class='collapsible node-list' data-collapsible='accordion'>
-	<li class='node level-2 leaf pass' status='pass' test-id='83'>
-		<div class='collapsible-header'>
-			<div class='node-name'>Open Chrome browser and url</div>
-			<span class='node-time'>Jun 26, 2020 12:28:35 PM</span>
-			&middot; <span class='node-duration'>0h 0m 16s+660ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:28:52 PM</td>
-							<td class='step-details'>
-									Browser opened with URL
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='84'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user enters username and password</div>
-			<span class='node-time'>Jun 26, 2020 12:28:52 PM</span>
-			&middot; <span class='node-duration'>0h 0m 1s+834ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:28:54 PM</td>
-							<td class='step-details'>
-									Entered URL with username and password
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='85'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user clicks on login button</div>
-			<span class='node-time'>Jun 26, 2020 12:28:54 PM</span>
-			&middot; <span class='node-duration'>0h 0m 31s+16ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:29:25 PM</td>
-							<td class='step-details'>
-									Web page lands on Home Page
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='86'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user lands on Lead page</div>
-			<span class='node-time'>Jun 26, 2020 12:29:31 PM</span>
-			&middot; <span class='node-duration'>0h 0m 4s+13ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:29:35 PM</td>
-							<td class='step-details'>
-									Web Page moved to Lead Page
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='87'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user enters all mandatory fields data</div>
-			<span class='node-time'>Jun 26, 2020 12:29:35 PM</span>
-			&middot; <span class='node-duration'>0h 0m 32s+546ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:30:08 PM</td>
-							<td class='step-details'>
-									Filled All Mandatory fields value
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='88'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user saves the lead page</div>
-			<span class='node-time'>Jun 26, 2020 12:30:08 PM</span>
-			&middot; <span class='node-duration'>0h 0m 10s+933ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:30:19 PM</td>
-							<td class='step-details'>
-									Lead Page Saved Successfully
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='89'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user lands on convert Account page</div>
-			<span class='node-time'>Jun 26, 2020 12:30:19 PM</span>
-			&middot; <span class='node-duration'>0h 0m 6s+800ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:30:26 PM</td>
-							<td class='step-details'>
-									Web page moved to Convert Account page
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='90'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user fills Convert Lead page data</div>
-			<span class='node-time'>Jun 26, 2020 12:30:26 PM</span>
-			&middot; <span class='node-duration'>0h 0m 16s+623ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:30:42 PM</td>
-							<td class='step-details'>
-									Data filled in Convert Lead page
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='91'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user convert it as Account</div>
-			<span class='node-time'>Jun 26, 2020 12:30:42 PM</span>
-			&middot; <span class='node-duration'>0h 0m 8s+987ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:30:51 PM</td>
-							<td class='step-details'>
-									Lead successfully converted into Account
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='92'>
-		<div class='collapsible-header'>
-			<div class='node-name'>Create new Add Calendar</div>
-			<span class='node-time'>Jun 26, 2020 12:30:51 PM</span>
-			&middot; <span class='node-duration'>0h 0m 22s+877ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:31:14 PM</td>
-							<td class='step-details'>
-									Add Calendar created Successfully
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='93'>
-		<div class='collapsible-header'>
-			<div class='node-name'>then Verify the added new calendar</div>
-			<span class='node-time'>Jun 26, 2020 12:31:14 PM</span>
-			&middot; <span class='node-duration'>0h 0m 7s+72ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:31:21 PM</td>
-							<td class='step-details'>
-									Verified presence of created Calendar and Removed the same in Manage Calendar
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-		</ul>
-	</li>
-</ul>
-					</div>
-				</li>
-				<li class='test displayed active has-leaf pass' status='pass' bdd='false' test-id='94'>
-					<div class='test-heading'>
-						<span class='test-name'>Test smoke</span>
-						<span class='test-time'>Jun 26, 2020 12:31:22 PM</span>
-						<span class='test-status right pass'>pass</span>
-					</div>
-					<div class='test-content hide'>
-<div class='test-time-info'>
-	<span class='label start-time'>Jun 26, 2020 12:31:22 PM</span>
-	<span class='label end-time'>Jun 26, 2020 12:33:58 PM</span>
-	<span class='label time-taken grey lighten-1 white-text'>0h 2m 35s+25ms</span>
-</div>
-<ul class='collapsible node-list' data-collapsible='accordion'>
-	<li class='node level-1  pass' status='pass' test-id='95'>
-		<div class='collapsible-header'>
-			<div class='node-name'>Test</div>
-			<span class='node-time'>Jun 26, 2020 12:31:22 PM</span>
-			&middot; <span class='node-duration'>0h 2m 35s+25ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<ul class='collapsible node-list' data-collapsible='accordion'>
-	<li class='node level-2 leaf pass' status='pass' test-id='96'>
-		<div class='collapsible-header'>
-			<div class='node-name'>Open Chrome browser and url</div>
-			<span class='node-time'>Jun 26, 2020 12:31:22 PM</span>
-			&middot; <span class='node-duration'>0h 0m 19s+863ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:31:42 PM</td>
-							<td class='step-details'>
-									Browser opened with URL
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='97'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user enters username and password</div>
-			<span class='node-time'>Jun 26, 2020 12:31:42 PM</span>
-			&middot; <span class='node-duration'>0h 0m 1s+809ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:31:44 PM</td>
-							<td class='step-details'>
-									Entered URL with username and password
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='98'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user clicks on login button</div>
-			<span class='node-time'>Jun 26, 2020 12:31:44 PM</span>
-			&middot; <span class='node-duration'>0h 0m 27s+338ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:32:11 PM</td>
-							<td class='step-details'>
-									Web page lands on Home Page
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='99'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user lands on Lead page</div>
-			<span class='node-time'>Jun 26, 2020 12:32:18 PM</span>
-			&middot; <span class='node-duration'>0h 0m 4s+320ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:32:23 PM</td>
-							<td class='step-details'>
-									Web Page moved to Lead Page
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='100'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user enters all mandatory fields data</div>
-			<span class='node-time'>Jun 26, 2020 12:32:23 PM</span>
-			&middot; <span class='node-duration'>0h 0m 32s+4ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:32:55 PM</td>
-							<td class='step-details'>
-									Filled All Mandatory fields value
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='101'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user saves the lead page</div>
-			<span class='node-time'>Jun 26, 2020 12:32:55 PM</span>
-			&middot; <span class='node-duration'>0h 0m 10s+423ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:33:05 PM</td>
-							<td class='step-details'>
-									Lead Page Saved Successfully
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='102'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user lands on convert Account page</div>
-			<span class='node-time'>Jun 26, 2020 12:33:05 PM</span>
-			&middot; <span class='node-duration'>0h 0m 6s+962ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:33:12 PM</td>
-							<td class='step-details'>
-									Web page moved to Convert Account page
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='103'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user fills Convert Lead page data</div>
-			<span class='node-time'>Jun 26, 2020 12:33:12 PM</span>
-			&middot; <span class='node-duration'>0h 0m 16s+852ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:33:29 PM</td>
-							<td class='step-details'>
-									Data filled in Convert Lead page
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='104'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user convert it as Account</div>
-			<span class='node-time'>Jun 26, 2020 12:33:29 PM</span>
-			&middot; <span class='node-duration'>0h 0m 9s+845ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:33:39 PM</td>
-							<td class='step-details'>
-									Lead successfully converted into Account
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='105'>
-		<div class='collapsible-header'>
-			<div class='node-name'>lands on Home page</div>
-			<span class='node-time'>Jun 26, 2020 12:33:53 PM</span>
-			&middot; <span class='node-duration'>0h 0m 4s+527ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:33:58 PM</td>
-							<td class='step-details'>
-									Web page landed on Home page
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-		</ul>
-	</li>
-</ul>
-					</div>
-				</li>
-				<li class='test displayed active has-leaf pass' status='pass' bdd='false' test-id='106'>
-					<div class='test-heading'>
-						<span class='test-name'>Test smoke</span>
-						<span class='test-time'>Jun 26, 2020 12:34:13 PM</span>
-						<span class='test-status right pass'>pass</span>
-					</div>
-					<div class='test-content hide'>
-<div class='test-time-info'>
-	<span class='label start-time'>Jun 26, 2020 12:34:13 PM</span>
-	<span class='label end-time'>Jun 26, 2020 12:35:32 PM</span>
-	<span class='label time-taken grey lighten-1 white-text'>0h 1m 18s+858ms</span>
-</div>
-<ul class='collapsible node-list' data-collapsible='accordion'>
-	<li class='node level-1  pass' status='pass' test-id='107'>
-		<div class='collapsible-header'>
-			<div class='node-name'>Test</div>
-			<span class='node-time'>Jun 26, 2020 12:34:13 PM</span>
-			&middot; <span class='node-duration'>0h 1m 18s+858ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<ul class='collapsible node-list' data-collapsible='accordion'>
-	<li class='node level-2 leaf pass' status='pass' test-id='108'>
-		<div class='collapsible-header'>
-			<div class='node-name'>Open Chrome browser and url</div>
-			<span class='node-time'>Jun 26, 2020 12:34:13 PM</span>
-			&middot; <span class='node-duration'>0h 0m 16s+412ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:34:29 PM</td>
-							<td class='step-details'>
-									Browser opened with URL
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='109'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user enters username and password</div>
-			<span class='node-time'>Jun 26, 2020 12:34:29 PM</span>
-			&middot; <span class='node-duration'>0h 0m 1s+935ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:34:31 PM</td>
-							<td class='step-details'>
-									Entered URL with username and password
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='110'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user clicks on login button</div>
-			<span class='node-time'>Jun 26, 2020 12:34:31 PM</span>
-			&middot; <span class='node-duration'>0h 0m 27s+534ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:34:59 PM</td>
-							<td class='step-details'>
-									Web page lands on Home Page
-								
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</li>
-	<li class='node level-2 leaf pass' status='pass' test-id='111'>
-		<div class='collapsible-header'>
-			<div class='node-name'>user navigates to Reports and loads data for Sales Detail report</div>
-			<span class='node-time'>Jun 26, 2020 12:34:59 PM</span>
-			&middot; <span class='node-duration'>0h 0m 32s+835ms</span>
-			<span class='test-status right pass'>pass</span>
-		</div>
-		<div class='collapsible-body'>
-			<div class='node-steps'>
-				<table class='bordered table-results'>
-					<thead>
-						<tr>
-							<th>Status</th>
-							<th>Timestamp</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='log' status='pass'>
-							<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-							<td class='timestamp'>12:35:32 PM</td>
+						<tr class='log' status='error'>
+							<td class='status error' title='error' alt='error'><i class='material-icons'>error</i></td>
+							<td class='timestamp'>4:20:42 PM</td>
 							<td class='step-details'>
-									Load data,Download excel,Sorting,Filter and Pagination works fine
+									<textarea disabled class="code-block">java.lang.NumberFormatException: For input string: "15239.0"
+	at Listeners.ExtentReportListener.testStepHandle(ExtentReportListener.java:57)
+	at stepdefinitions.SalesTaxStepDef.user_navigates_to_reports_and_loads_data_for_sales_tax_report(SalesTaxStepDef.java:32)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+	at cucumber.runtime.Utils$1.call(Utils.java:40)
+	at cucumber.runtime.Timeout.timeout(Timeout.java:16)
+	at cucumber.runtime.Utils.invoke(Utils.java:34)
+	at cucumber.runtime.java.JavaStepDefinition.execute(JavaStepDefinition.java:38)
+	at cucumber.runtime.StepDefinitionMatch.runStep(StepDefinitionMatch.java:37)
+	at cucumber.runtime.Runtime.runStep(Runtime.java:300)
+	at cucumber.runtime.model.StepContainer.runStep(StepContainer.java:44)
+	at cucumber.runtime.model.StepContainer.runSteps(StepContainer.java:39)
+	at cucumber.runtime.model.CucumberScenario.run(CucumberScenario.java:44)
+	at cucumber.runtime.model.CucumberFeature.run(CucumberFeature.java:165)
+	at cucumber.api.testng.TestNGCucumberRunner.runCucumber(TestNGCucumberRunner.java:63)
+	at runner.RunTest.feature(RunTest.java:39)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
+	at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:584)
+	at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:172)
+	at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+	at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:804)
+	at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:145)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1507)
+	at org.testng.TestRunner.privateRun(TestRunner.java:770)
+	at org.testng.TestRunner.run(TestRunner.java:591)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:402)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:396)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:355)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:304)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1180)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1102)
+	at org.testng.TestNG.runSuites(TestNG.java:1032)
+	at org.testng.TestNG.run(TestNG.java:1000)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+</textarea>
 								
 							</td>
 						</tr>
 					</tbody>
 				</table>
+				<ul class='screenshots'>
+					<li><img class='r-img' onerror='this.style.display="none"' data-featherlight='C:\Users\user\git\TouchPointFramework\TouchPointFramework\cucumberframework\ScreenShot\2020Jul13_0420_PM.png' src='C:\Users\user\git\TouchPointFramework\TouchPointFramework\cucumberframework\ScreenShot\2020Jul13_0420_PM.png' data-src='C:\Users\user\git\TouchPointFramework\TouchPointFramework\cucumberframework\ScreenShot\2020Jul13_0420_PM.png'></li>
+				</ul>
 			</div>
 		</div>
 	</li>
@@ -3310,7 +367,109 @@
 	</div>
 	<!-- subview right -->
 </div>
-<!-- test view --><!-- category view --><!-- exception view --><div id='dashboard-view' class='view hide'>
+<!-- test view --><!-- category view --><div id='exception-view' class='view hide'>
+	<section id='controls'>
+		<div class='controls grey lighten-4'>
+			<!-- search -->
+			<div class='chip transparent' alt='Search Tests' title='Search Tests'>
+				<a href="#" class='search-div'>
+				<i class='material-icons'>search</i> Search
+				</a>
+				<div class='input-field left hide'>
+					<input id='search-tests' type='text' class='validate browser-default' placeholder='Search Tests...'>
+				</div>
+			</div>
+			<!-- search -->
+		</div>
+	</section>
+	<div class='subview-left left'>
+		<div class='view-summary'>
+			<ul id='exception-collection' class='exception-collection'>
+				<li class='exception displayed active'>
+					<div class='exception-heading'>
+						<span class='exception-name'>java.lang.NumberFormatException</span>
+						<span class='exception-count right'><span class='label red lighten-1 white-text'>1</span></span>
+					</div>
+					<div class='exception-content hide'>
+						<div class='exception-tests'>
+							<table class='bordered table-results'>
+								<thead>
+									<tr>
+										<th>Timestamp</th>
+										<th>TestName</th>
+										<th>Status</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>Jul 13, 2020 04:19:35 PM</td>
+										<td class='linked' test-id='6'>Verify Sales Tax report works fine:Load data,Download excel file,Sorting,Pagination and Filter by Territory Name.hfc-smoke-testing.user navigates to Reports and loads data for Sales Tax report</td>
+										<td>
+											<textarea disabled class="code-block">java.lang.NumberFormatException: For input string: "15239.0"
+	at Listeners.ExtentReportListener.testStepHandle(ExtentReportListener.java:57)
+	at stepdefinitions.SalesTaxStepDef.user_navigates_to_reports_and_loads_data_for_sales_tax_report(SalesTaxStepDef.java:32)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+	at cucumber.runtime.Utils$1.call(Utils.java:40)
+	at cucumber.runtime.Timeout.timeout(Timeout.java:16)
+	at cucumber.runtime.Utils.invoke(Utils.java:34)
+	at cucumber.runtime.java.JavaStepDefinition.execute(JavaStepDefinition.java:38)
+	at cucumber.runtime.StepDefinitionMatch.runStep(StepDefinitionMatch.java:37)
+	at cucumber.runtime.Runtime.runStep(Runtime.java:300)
+	at cucumber.runtime.model.StepContainer.runStep(StepContainer.java:44)
+	at cucumber.runtime.model.StepContainer.runSteps(StepContainer.java:39)
+	at cucumber.runtime.model.CucumberScenario.run(CucumberScenario.java:44)
+	at cucumber.runtime.model.CucumberFeature.run(CucumberFeature.java:165)
+	at cucumber.api.testng.TestNGCucumberRunner.runCucumber(TestNGCucumberRunner.java:63)
+	at runner.RunTest.feature(RunTest.java:39)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
+	at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:584)
+	at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:172)
+	at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+	at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:804)
+	at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:145)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1507)
+	at org.testng.TestRunner.privateRun(TestRunner.java:770)
+	at org.testng.TestRunner.run(TestRunner.java:591)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:402)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:396)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:355)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:304)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1180)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1102)
+	at org.testng.TestNG.runSuites(TestNG.java:1032)
+	at org.testng.TestNG.run(TestNG.java:1000)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+</textarea>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class='subview-right left'>
+		<div class='view-summary'>
+			<h5 class='exception-name'></h5>
+		</div>
+	</div>
+</div>
+<!-- exception view --><div id='dashboard-view' class='view hide'>
 	<div class='card-panel transparent np-v'>
 		<h5>Dashboard</h5>
 
@@ -3318,7 +477,7 @@
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Tests
-					<div class='panel-lead'>8</div>
+					<div class='panel-lead'>1</div>
 				</div>
 			</div>
 			<div class='col s2'>
@@ -3330,19 +489,19 @@
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Start
-					<div class='panel-lead'>Jun 26, 2020 12:09:05 PM</div>
+					<div class='panel-lead'>Jul 13, 2020 04:18:55 PM</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 			 		End
-			 		<div class='panel-lead'>Jun 26, 2020 12:35:34 PM</div>
+			 		<div class='panel-lead'>Jul 13, 2020 04:20:46 PM</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Time Taken
-					<div class='panel-lead'>0h 26m 28s+737ms</div>
+					<div class='panel-lead'>0h 1m 50s+849ms</div>
 				</div>
 			</div>
 			<div class='col s4'>
@@ -3377,14 +536,14 @@
 		<!-- container -->
 		<script>
 			var statusGroup = {
-                parentCount: 8,
-				passParent: 8,
-				failParent: 0,
+                parentCount: 1,
+				passParent: 0,
+				failParent: 1,
 				fatalParent: 0,
 				errorParent: 0,
 				warningParent: 0,
 				skipParent: 0,
-				exceptionsParent: 0,
+				exceptionsParent: 1,
 				childCount: 0,
 				passChild: 0,
 				failChild: 0,
@@ -3395,21 +554,21 @@
 				infoChild: 0,
 				debugChild: 0,
 				exceptionsChild: 0,
-				grandChildCount: 95,
-				passGrandChild: 95,
-				failGrandChild: 0,
+				grandChildCount: 4,
+				passGrandChild: 3,
+				failGrandChild: 1,
 				fatalGrandChild: 0,
 				errorGrandChild: 0,
 				warningGrandChild: 0,
 				skipGrandChild: 0,
 				infoGrandChild: 0,
 				debugGrandChild: 0,
-				exceptionsGrandChild: 0,
+				exceptionsGrandChild: 1,
 			};
 		</script>
 		<script>
 			var timeline = {
-			        "Test smoke":426.627,"Test smoke":96.379,"Test smoke":86.733,"Test smoke":194.201,"Test smoke":321.608,"Test smoke":166.177,"Test smoke":155.025,"Test smoke":78.858
+			        "Verify Sales Tax report works fine:Load data,Download excel file,Sorting,Pagination and Filter by Territory Name":105.725
 			};
 		</script>
 		<script src='https://cdn.rawgit.com/extent-framework/extent-github-cdn/b65cd69/v3html/js/extent.js' type='text/javascript'></script>

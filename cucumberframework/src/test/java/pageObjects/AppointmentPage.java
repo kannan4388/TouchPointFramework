@@ -175,13 +175,13 @@ public class AppointmentPage {
 				"07:00 AM" };
 		// for(appRow+=4+appRow;appRow<=96;appRow++) {
 		int divcount = 2;
-		int rowInc = 1;
+		int rowInc = 2;
 		int appRow1 = 0;
 		Thread.sleep(3000);
 		for (int appRow = 0; appRow < 24; appRow++) {
 			try {
 				WebElement eventApp = driver.findElement(
-						By.xpath("//*[@id='scheduler']/table/tbody/tr[2]/td[2]/div/div[" + rowInc + "]/div[1]"));
+						By.xpath("//*[@id='scheduler']/table/tbody/tr[2]/td[2]/div/div[" + divcount + "]/div[1]"));
 				if (eventApp.isDisplayed() == true) {
 					Coordinates coordinateTxtBox = ((Locatable) eventApp).getCoordinates();
 					coordinateTxtBox.inViewPort();
@@ -262,6 +262,8 @@ public class AppointmentPage {
 							closeBtn.click();
 							load.elementToBeClickable(clickOnTimeCalendar);
 							Thread.sleep(600);
+							Coordinates coordinate = ((Locatable) clickOnTimeCalendar).getCoordinates();
+							coordinate.inViewPort();
 							clickOnTimeCalendar.click();
 							Thread.sleep(4000);
 							if (appType.isDisplayed() == true) {
@@ -283,9 +285,13 @@ public class AppointmentPage {
 						appRow1++;
 						// intialTime="1:00 AM";
 					}
-					closeBtn.click();
+					if (closeBtn.isDisplayed() == true) {
+						closeBtn.click();
+					}
 				}
 			} catch (NoSuchElementException e) {
+				load.scrollView(clickOnTimeCalendar);
+				Thread.sleep(2000);
 				load.elementToBeClickable(clickOnTimeCalendar);
 				clickOnTimeCalendar.click();
 				Thread.sleep(4000);

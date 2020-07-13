@@ -13,7 +13,6 @@ import com.aventstack.extentreports.GherkinKeyword;
 import com.aventstack.extentreports.gherkin.model.Feature;
 
 import Listeners.ExtentReportListener;
-import cucumber.api.Scenario;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import pageObjects.LoginPage;
@@ -23,7 +22,6 @@ public class LoginStepDef extends ExtentReportListener {
 	utility.CommonMethods file;
 	static Properties prop;
 	private static WebDriver driver;
-	public static Scenario scenario;
 
 	// public static String username=null;
 	/// public static String password=null;
@@ -33,7 +31,6 @@ public class LoginStepDef extends ExtentReportListener {
 				new File(".").getCanonicalPath() + "\\src\\test\\java\\config\\config.properties");// getting Properties
 																									// file location
 		prop.load(fis);// Reading properties file values
-
 	}
 
 	@Given("^Open Chrome browser and url$")
@@ -41,10 +38,12 @@ public class LoginStepDef extends ExtentReportListener {
 
 		ExtentTest logInfo = null;// Intializing variable for extent test report log
 		try {
+			// featureName = Hooks.featureName;
+			// scenarioName = Hooks.scenarioName;
 			// String scenario=scen.getScenario();
-			test = extent.createTest(Feature.class, "Test smoke");// creating test for
+			test = extent.createTest(Feature.class, Hooks.scenarioName);// creating test for
 			// extent report
-			test = test.createNode("Test");// creating node for extent report
+			test = test.createNode(Hooks.featureName);// creating node for extent report
 			logInfo = test.createNode(new GherkinKeyword("Given"), "Open Chrome browser and url");// Storing value into
 			// Extent report
 			// variable

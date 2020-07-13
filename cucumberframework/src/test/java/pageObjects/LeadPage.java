@@ -35,7 +35,7 @@ public class LeadPage {
 	@FindBy(xpath = "//input[@name='zipCode']")
 	WebElement zipCode;
 
-	@FindBy(xpath = "//input[@class='frm_controllead1 form-control ng-empty ng-valid-maxlength'][1]")
+	@FindBy(xpath = "//input[@id='autocomp__value'][1]")
 	WebElement address;
 
 	@FindBy(xpath = "//input[@name='user_email']")
@@ -98,6 +98,16 @@ public class LeadPage {
 		String emailAddress = waitForPageLoad.getExcelData(filePath, fileName).get("Email");
 		address.sendKeys(Address);
 		Thread.sleep(1000);
+		try {
+			zipCode.click();
+			Thread.sleep(8000);
+			if (popUp.isDisplayed() == true) {
+				popUp.click();
+				Thread.sleep(2000);
+			}
+		} catch (Exception e) {
+
+		}
 		email.click();
 		Thread.sleep(8000);
 		if (popUp.isDisplayed() == true) {

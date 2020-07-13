@@ -13,7 +13,7 @@ public class ReportsPage {
 	@FindBy(xpath = "//li[@ng-class='NavbarService.ReportsSelected']")
 	WebElement reportMenu;
 
-	@FindBy(xpath = "//ul[@class='reporst_lists']/li[1]/a")
+	@FindBy(xpath = "//ul[@class='reporst_lists']/li[2]/a")
 	WebElement reportNames;
 
 	@FindBy(xpath = "//ul[@class='reporst_lists']/li[5]")
@@ -33,7 +33,6 @@ public class ReportsPage {
 	}
 
 	public void individualReportOpen() {
-
 		reportNames.click();
 	}
 }

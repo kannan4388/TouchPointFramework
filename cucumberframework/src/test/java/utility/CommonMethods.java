@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -23,7 +24,9 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.junit.Assert;
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
@@ -367,5 +370,196 @@ public class CommonMethods {
 			previous = current;
 		}
 		return true;
+	}
+
+	public void downloadReport(WebElement downloadIcon) throws InterruptedException {
+		File folder = LoginPage.folder;
+		File listOfFiles[] = folder.listFiles();
+		int SizeOfFile1 = 0;
+		for (File file : listOfFiles) {
+			// make sure that downloaded file is not empty
+			SizeOfFile1 = SizeOfFile1 + 1;
+		}
+		downloadIcon.click();
+		// long filesize1;
+		int SizeOfFile2 = 0;
+		do {
+			Thread.sleep(5000); // wait for 5 seconds
+			File listOfFiles2[] = folder.listFiles();
+			for (File file : listOfFiles2) {
+				// make sure that downloaded file is not empty
+				SizeOfFile2 = SizeOfFile2 + 1;
+			}
+		} while (SizeOfFile1 > SizeOfFile2);
+		Thread.sleep(1000);
+		File listOfFiles3[] = folder.listFiles();
+		for (File file : listOfFiles3) {
+			// make sure that downloaded file is not empty
+			Assert.assertTrue(file.length() > 0);
+		}
+		for (File file : folder.listFiles()) {
+			file.delete();
+		}
+		folder.delete();
+	}
+
+	public String reportSortByFirstName(WebElement firstNameHeader, WebElement totalItems, List<WebElement> tableRows,
+			WebElement moveToNextPage, int columnNumber) {
+		firstNameHeader.click();
+		int rowIncre = 1;
+		ArrayList<String> arrStringFN = new ArrayList<String>();
+		String txtNoOfRecords = totalItems.getText();
+		if (!txtNoOfRecords.equalsIgnoreCase("No items to display")) {
+			String[] arrayOfTxtCount = txtNoOfRecords.split("of");
+			String numberOfItemsTxt = arrayOfTxtCount[1];
+			String[] txtArrayItemsOf = numberOfItemsTxt.split("items");
+			String sizeOfTable = txtArrayItemsOf[0].toString().trim();
+			int sizeOfTableCnt = 0;
+			sizeOfTableCnt = Integer.parseInt(sizeOfTable);
+			int tableCount = 1;
+			int table = 1;
+			for (table = tableCount; tableCount <= sizeOfTableCnt;) {
+				for (WebElement rowIdentity : tableRows) {
+					WebElement individualFirstName = driver.findElement(
+							By.xpath("//table[@role='grid']/tbody/tr[" + rowIncre + "]/td[" + columnNumber + "]/span"));
+					String firstNameTxt = individualFirstName.getText();
+					// System.out.println(firstNameTxt);
+					arrStringFN.add(firstNameTxt);
+					if (rowIncre >= 25) {
+						if (moveToNextPage.isEnabled() == true) {
+							moveToNextPage.click();
+							rowIncre = 0;
+						}
+					}
+					rowIncre++;
+					tableCount++;
+				}
+			}
+		}
+		isSorted(arrStringFN);
+		if (isSorted(arrStringFN) == true) {
+			System.out.println("First Name is in sort order");
+		} else {
+			System.out.println("First Name not in sort order");
+		}
+		return arrStringFN.toString();
+	}
+
+	public void reportFilterByFirstName(WebElement firstNameFilterIcon, WebElement containsDrpDwn,
+			List<WebElement> containsOption, WebElement containsTxtBox, String filePath, String fileName,
+			WebElement filterBtn, WebElement totalItems, List<WebElement> tableRows, WebElement moveToNextPage,
+			String filterByText) throws InvalidFormatException, IOException, InterruptedException {
+		firstNameFilterIcon.click();
+		Thread.sleep(1000);
+		containsDrpDwn.click();
+		Thread.sleep(1000);
+		for (WebElement containsOpt : containsOption) {
+			String txtOfContains = containsOpt.getText();
+			if (txtOfContains.equalsIgnoreCase("Is equal to")) {
+				containsOpt.click();
+				Thread.sleep(1000);
+				containsTxtBox.click();
+				Thread.sleep(1000);
+				containsTxtBox.sendKeys(filterByText);
+				Thread.sleep(1000);
+				filterBtn.click();
+				Thread.sleep(1000);
+				break;
+			}
+		}
+		int rowIncre = 1;
+		ArrayList<String> arrStringFN = new ArrayList<String>();
+		String txtNoOfRecords = totalItems.getText();
+		if (!txtNoOfRecords.equalsIgnoreCase("No items to display")) {
+			String[] arrayOfTxtCount = txtNoOfRecords.split("of");
+			String numberOfItemsTxt = arrayOfTxtCount[1];
+			String[] txtArrayItemsOf = numberOfItemsTxt.split("items");
+			String sizeOfTable = txtArrayItemsOf[0].toString().trim();
+			int sizeOfTableCnt = 0;
+			sizeOfTableCnt = Integer.parseInt(sizeOfTable);
+			int tableCount = 1;
+			int table = 1;
+			String actualFilterTableRows = "Filter works fine";
+			for (table = tableCount; tableCount <= sizeOfTableCnt;) {
+				for (WebElement rowIdentity : tableRows) {
+					WebElement individualFirstName = driver
+							.findElement(By.xpath("//table[@role='grid']/tbody/tr[" + rowIncre + "]/td/span"));
+					String firstNameTxt = individualFirstName.getText();
+					// System.out.println(firstNameTxt);
+					if (!firstNameTxt.equalsIgnoreCase(filterByText)) {
+						actualFilterTableRows = "Filter By First Name not working corrrectly";
+					}
+					arrStringFN.add(firstNameTxt);
+					if (rowIncre >= 25) {
+						if (moveToNextPage.isEnabled() == true) {
+							moveToNextPage.click();
+							rowIncre = 0;
+						}
+					}
+					rowIncre++;
+					tableCount++;
+				}
+			}
+			System.out.print(actualFilterTableRows);
+		}
+	}
+
+	public void reportFilterByFirstNameWithInteger(WebElement firstNameFilterIcon, WebElement containsDrpDwn,
+			List<WebElement> containsOption, WebElement containsTxtBox, String filePath, String fileName,
+			WebElement filterBtn, WebElement totalItems, List<WebElement> tableRows, WebElement moveToNextPage,
+			int filterByText) throws InvalidFormatException, IOException, InterruptedException {
+		firstNameFilterIcon.click();
+		Thread.sleep(1000);
+		containsDrpDwn.click();
+		Thread.sleep(1000);
+		for (WebElement containsOpt : containsOption) {
+			String txtOfContains = containsOpt.getText();
+			if (txtOfContains.equalsIgnoreCase("Is equal to")) {
+				containsOpt.click();
+				Thread.sleep(1000);
+				containsTxtBox.click();
+				Thread.sleep(1000);
+				containsTxtBox.sendKeys(String.valueOf(filterByText));
+				Thread.sleep(1000);
+				filterBtn.click();
+				Thread.sleep(1000);
+				break;
+			}
+		}
+		int rowIncre = 1;
+		ArrayList<Integer> arrStringFN = new ArrayList<Integer>();
+		String txtNoOfRecords = totalItems.getText();
+		if (!txtNoOfRecords.equalsIgnoreCase("No items to display")) {
+			String[] arrayOfTxtCount = txtNoOfRecords.split("of");
+			String numberOfItemsTxt = arrayOfTxtCount[1];
+			String[] txtArrayItemsOf = numberOfItemsTxt.split("items");
+			String sizeOfTable = txtArrayItemsOf[0].toString().trim();
+			int sizeOfTableCnt = 0;
+			sizeOfTableCnt = Integer.parseInt(sizeOfTable);
+			int tableCount = 1;
+			int table = 1;
+			String actualFilterTableRows = "Filter works fine";
+			for (table = tableCount; tableCount <= sizeOfTableCnt;) {
+				for (WebElement rowIdentity : tableRows) {
+					WebElement individualFirstName = driver
+							.findElement(By.xpath("//table[@role='grid']/tbody/tr[" + rowIncre + "]/td/span"));
+					int firstNameTxt = Integer.valueOf(individualFirstName.getText());
+					// System.out.println(firstNameTxt);
+					if ((firstNameTxt ^ filterByText) != 0) {
+						actualFilterTableRows = "Filter By First Name not working corrrectly";
+					}
+					arrStringFN.add(firstNameTxt);
+					if (rowIncre >= 25) {
+						if (moveToNextPage.isEnabled() == true) {
+							moveToNextPage.click();
+							rowIncre = 0;
+						}
+					}
+					rowIncre++;
+					tableCount++;
+				}
+			}
+			System.out.print(actualFilterTableRows);
+		}
 	}
 }
