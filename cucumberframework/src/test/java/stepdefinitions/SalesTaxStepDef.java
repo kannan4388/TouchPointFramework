@@ -26,12 +26,12 @@ public class SalesTaxStepDef extends ExtentReportListener {
 			openReportMenu.openReport();
 			salesTax.openSaleTax();
 			salesTax.loadData();
+			salesTax.downloadFile();
 			salesTax.sortByZipCode();
 			salesTax.filterByZipCode();
 		} catch (AssertionError | Exception e) {
 			testStepHandle("FAIL", driver, logInfo, e);// Passing fail log value to extent report
 			e.printStackTrace();
-
 		}
 	}
 }

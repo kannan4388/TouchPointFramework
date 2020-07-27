@@ -37,8 +37,8 @@ public class QuotesPage {
 	@FindBy(xpath = "//button[@class='plus_but tooltip-bottom']")
 	WebElement newQuoteIcon;
 
-	@FindBy(xpath = "//input[@name='Side_mark']")
-	WebElement sidemarkTxtBox;
+	@FindBy(xpath = "//input[@name='quote_name']")
+	WebElement quoteNameTxtBox;
 
 	@FindBy(xpath = "//button[@class='tooltip-bottom hfc_bgbut ng-scope' and @data-tooltip='Save']")
 	WebElement saveQuote;
@@ -114,6 +114,12 @@ public class QuotesPage {
 	@FindBy(xpath = "//h3[text()='Quotes']")
 	WebElement ccQuotesIcon;
 
+	@FindBy(xpath = "//input[@id='select_1']")
+	WebElement firstRowChkbox;
+
+	@FindBy(xpath = "//button[@data-tooltip='Delete Quote Lines']")
+	WebElement tableDeleteIcon;
+
 	public QuotesPage() {
 		this.driver = LoginPage.getDriver();
 		PageFactory.initElements(driver, this);
@@ -128,7 +134,7 @@ public class QuotesPage {
 			} catch (Exception e) {
 
 			}
-			wait.pageWait(sidemarkTxtBox);
+			wait.pageWait(quoteNameTxtBox);
 			Thread.sleep(2000);
 			saveQuote.click();
 			Thread.sleep(4000);
@@ -149,8 +155,18 @@ public class QuotesPage {
 			} catch (Exception e) {
 
 			}
-			wait.pageWait(sidemarkTxtBox);
+			wait.pageWait(quoteNameTxtBox);
 			Thread.sleep(2000);
+			try {
+				wait.scrollUptoBottom();
+				firstRowChkbox.click();
+				tableDeleteIcon.click();
+				Thread.sleep(500);
+				driver.switchTo().alert().accept();
+				wait.elementToBeClickable(quoteNameTxtBox);
+			} catch (Exception e) {
+
+			}
 			saveQuote.click();
 			Thread.sleep(4000);
 			wait.pageWait(waitForConfigure);
@@ -170,7 +186,7 @@ public class QuotesPage {
 			} catch (Exception e) {
 
 			}
-			wait.pageWait(sidemarkTxtBox);
+			wait.pageWait(quoteNameTxtBox);
 			Thread.sleep(2000);
 			saveQuote.click();
 			Thread.sleep(4000);

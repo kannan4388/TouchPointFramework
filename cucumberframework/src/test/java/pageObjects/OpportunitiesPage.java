@@ -79,7 +79,7 @@ public class OpportunitiesPage {
 		String oppName = pageLoad.getExcelData(filePath, fileName).get("OpportunityName");
 		String mergeName = pageLoad.dateFormat(date);
 		String oppFinal = oppName + mergeName;
-		oppNameTxtBox.sendKeys(oppFinal);
+		// oppNameTxtBox.sendKeys(oppFinal);
 		Thread.sleep(500);
 		// oppNameTxtBox.sendKeys(Keys.TAB);
 		Actions mouse = new Actions(driver);

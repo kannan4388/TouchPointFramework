@@ -76,11 +76,10 @@ public class AppointmentPage {
 	@FindBy(xpath = "//input[@ng-model='calendarModelObject.EventRecurring.endBy' and @ng-value='3']")
 	WebElement endByRdoBtn;
 
-	@FindBy(xpath = "//input[@class='calder frm_controllead1 ng-pristine ng-untouched ng-valid ng-not-empty ng-valid-pattern' and "
-			+ "@ng-model='calendarModelObject.EventRecurring.EndsAfterXOccurrences']")
+	@FindBy(xpath = "//input[@class='calder frm_controllead1 ng-pristine ng-untouched ng-valid ng-not-empty' and @ng-model='calendarModelObject.EventRecurring.EndsAfterXOccurrences']")
 	WebElement endAfterTxtBoxClear;
 
-	@FindBy(xpath = "//input[@class='calder frm_controllead1 ng-valid ng-valid-pattern ng-empty ng-dirty ng-valid-parse ng-touched']")
+	@FindBy(xpath = "//input[@class='calder frm_controllead1 ng-valid ng-empty ng-dirty ng-valid-number ng-touched']")
 	WebElement endAfterTxtBox;
 
 	@FindBy(xpath = "//input[@id='recurringEndDate']")
@@ -174,8 +173,8 @@ public class AppointmentPage {
 				"11:00 PM", "00:00 AM", "01:00 AM", "02:00 AM", "03:00 AM", "04:00 AM", "05:00 AM", "06:00 AM",
 				"07:00 AM" };
 		// for(appRow+=4+appRow;appRow<=96;appRow++) {
-		int divcount = 2;
-		int rowInc = 2;
+		int divcount = 1;
+		int rowInc = 1;
 		int appRow1 = 0;
 		Thread.sleep(3000);
 		for (int appRow = 0; appRow < 24; appRow++) {
@@ -242,11 +241,18 @@ public class AppointmentPage {
 							// divcount++;
 							closeBtn.click();
 							load.elementToBeClickable(clickOnTimeCalendar);
-							rowInc = rowInc + 4;
+							// rowInc = rowInc + 4;
 							clickOnTimeCalendar = driver.findElement(By.xpath("//div[@id='scheduler']/table/tbody/tr[2]"
 									+ "/td[2]/div/table/tbody/tr[" + rowInc + "]/td"));
 							load.scrollView(clickOnTimeCalendar);
-							appRow1++;
+							Thread.sleep(2000);
+							clickOnTimeCalendar.click();
+							Thread.sleep(4000);
+							if (appType.isDisplayed() == true) {
+								break;
+							}
+							// appRow1++;
+
 						}
 
 						else if (divHourInteger == intialHourInteger && !(divMinInteger > intialMinInterger) == true) {
@@ -290,8 +296,8 @@ public class AppointmentPage {
 					}
 				}
 			} catch (NoSuchElementException e) {
-				load.scrollView(clickOnTimeCalendar);
-				Thread.sleep(2000);
+				Coordinates coordinateTxtBox = ((Locatable) clickOnTimeCalendar).getCoordinates();
+				coordinateTxtBox.inViewPort();
 				load.elementToBeClickable(clickOnTimeCalendar);
 				clickOnTimeCalendar.click();
 				Thread.sleep(4000);

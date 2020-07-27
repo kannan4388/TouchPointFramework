@@ -51,6 +51,11 @@ public class MeasurementStepDef extends ExtentReportListener {
 		}
 	}
 
+	@Then("^user fill data and upload image in measurement$")
+	public void user_fill_data_and_upload_image_in_measurement() throws Throwable {
+		measure.fillWithImageUpload();
+	}
+
 	@Then("^user saves the measurement page$")
 	public void user_saves_the_measurement_page() throws Throwable {
 		ExtentTest logInfo = null;// Intializing variable for extent test report log

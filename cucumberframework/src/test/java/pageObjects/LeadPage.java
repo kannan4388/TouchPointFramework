@@ -121,7 +121,7 @@ public class LeadPage {
 		// driver.switchTo().defaultContent();
 		if (popUp.isDisplayed() == true) {
 			popUp.click();
-			Thread.sleep(2000);
+			Thread.sleep(4000);
 			drpDownSource.click();
 			Thread.sleep(2500);
 			// String sourceTxt="BBCS - Website";

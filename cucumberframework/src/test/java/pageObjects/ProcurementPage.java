@@ -30,7 +30,7 @@ public class ProcurementPage {
 	@FindBy(xpath = "//option[@label='Last 180 days (rolling)']")
 	WebElement select180Days;
 
-	@FindBy(xpath = "//tr[@role='row']/td")
+	@FindBy(xpath = "//tr[@class='ng-scope'][1]")
 	WebElement dynamicTable;
 
 	@FindBy(xpath = "//input[@id='Check1']")
@@ -89,7 +89,7 @@ public class ProcurementPage {
 		dashboardFilter.click();
 		Thread.sleep(1000);
 		select180Days.click();
-		waitForElement.pageWait(dynamicTable);
+		waitForElement.elementToBeClickable(dynamicTable);
 	}
 
 	public void cancelMPOOrder() throws InterruptedException {

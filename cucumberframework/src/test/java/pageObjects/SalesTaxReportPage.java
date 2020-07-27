@@ -100,7 +100,8 @@ public class SalesTaxReportPage {
 
 	public void filterByZipCode() throws InvalidFormatException, IOException, InterruptedException {
 		String filterByText = waitForElement.getExcelData(filePath, fileName).get("FilterByZipCode");
+		String numWithoutDecimal = String.valueOf(filterByText).split("\\.")[0];
 		waitForElement.reportFilterByFirstName(zipCodeFilterIcon, containsDrpDwn, containsOption, containsTxtBox,
-				filePath, fileName, filterBtn, totalItems, tableRows, moveToNextPage, filterByText);
+				filePath, fileName, filterBtn, totalItems, tableRows, moveToNextPage, numWithoutDecimal);
 	}
 }
