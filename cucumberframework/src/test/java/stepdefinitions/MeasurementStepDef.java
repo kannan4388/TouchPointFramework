@@ -6,6 +6,7 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.GherkinKeyword;
 
 import Listeners.ExtentReportListener;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import pageObjects.MeasurementPage;
@@ -15,6 +16,51 @@ public class MeasurementStepDef extends ExtentReportListener {
 	private WebDriver driver;
 	MeasurementPage measure;
 
+	/* Coded by UmaVasan on 07/08/20 */
+	
+	@Then("^user removes filled rows in the measurement page$")
+	public void user_removes_filled_rows_in_the_measurement_page() throws Throwable {
+		ExtentTest logInfo = null;
+		try {
+			logInfo = test.createNode(new GherkinKeyword("Then"), " user removes filled rows in the measurement page ");
+			measure.removeAllFilledRows();
+			logInfo.pass("All rows removed successfully");// Passing pass log value to extent report
+		} catch (AssertionError | Exception e) {
+			testStepHandle("FAIL", driver, logInfo, e);// Passing fail log value to extent report
+			e.printStackTrace();
+		}
+			}
+	
+	@Then("^user adds new row in the measurement page$")
+	public void user_adds_new_row_in_the_measurement_page() throws Throwable {
+		ExtentTest logInfo = null;
+		
+		try {
+			logInfo = test.createNode(new GherkinKeyword("Then"), " user adds new row in the measurement page ");												
+			measure.addNewRow();
+			logInfo.pass("New row added successfully");// Passing pass log value to extent report
+		} catch (AssertionError | Exception e) {
+			testStepHandle("FAIL", driver, logInfo, e);// Passing fail log value to extent report
+			e.printStackTrace();
+		}
+			}
+	
+	@And("^user validates row count in the measurement page$")
+	public void user_validates_row_count_in_the_measurement_page() throws Throwable {
+		ExtentTest logInfo = null;
+		try {
+			logInfo = test.createNode(new GherkinKeyword("And"), " user validates row count in the measurement page ");												
+			measure.validateRowCount();
+			logInfo.pass("Row count of measurement page validated successfully");// Passing pass log value to extent report
+		} catch (AssertionError | Exception e) {
+			testStepHandle("FAIL", driver, logInfo, e);// Passing fail log value to extent report
+			e.printStackTrace();
+		}
+			}
+	
+	
+	/* Coded by UmaVasan on 07/08/20 */
+	
 	@Given("^user lands on Measurement page$")
 	public void user_lands_on_measurement_page() throws Throwable {
 
@@ -61,8 +107,7 @@ public class MeasurementStepDef extends ExtentReportListener {
 		ExtentTest logInfo = null;// Intializing variable for extent test report log
 		try {
 			logInfo = test.createNode(new GherkinKeyword("Then"), " user saves the measurement page ");// creating node
-																										// for extent
-																										// report
+																																																	// report
 			measure.saveMeasurement();
 			logInfo.pass("Measurement page saved successfully");// Passing pass log value to extent report
 		} catch (AssertionError | Exception e) {
