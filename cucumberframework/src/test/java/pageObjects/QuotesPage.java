@@ -72,7 +72,7 @@ public class QuotesPage {
 	@FindAll(@FindBy(xpath = "//*[@id='Prompts']/tr"))
 	List<WebElement> mandatoryProd;
 
-	@FindBy(xpath = "//button[@class='tooltip-bottom cancel_tpbut' and @data-tooltip='Return to Quote Document']")
+	@FindBy(xpath = "//button[@class='tooltip-bottom hfc_bgbut' and @data-tooltip='Return to Quote Document']")
 	WebElement waitTillProdLoad;
 
 	@FindBy(xpath = "//button[@data-tooltip='Validate & Create / Update Quote Line']")
@@ -114,8 +114,8 @@ public class QuotesPage {
 	@FindBy(xpath = "//h3[text()='Quotes']")
 	WebElement ccQuotesIcon;
 
-	@FindBy(xpath = "//input[@id='select_1']")
-	WebElement firstRowChkbox;
+	@FindBy(xpath = "//button[@data-tooltip='Cancel' and @class='tooltip-bottom hfc_bgbut ng-scope']")
+	WebElement closeQuotePageIcon;
 
 	@FindBy(xpath = "//button[@data-tooltip='Delete Quote Lines']")
 	WebElement tableDeleteIcon;
@@ -137,8 +137,9 @@ public class QuotesPage {
 			wait.pageWait(quoteNameTxtBox);
 			Thread.sleep(2000);
 			saveQuote.click();
-			Thread.sleep(4000);
+			// Thread.sleep(4000);
 			wait.pageWait(waitForConfigure);
+			editQuote();
 			wait.scrollUptoBottom();
 			Thread.sleep(1000);
 			wait.pageWait(waitforSpinner);
@@ -159,21 +160,26 @@ public class QuotesPage {
 			Thread.sleep(2000);
 			try {
 				wait.scrollUptoBottom();
-				firstRowChkbox.click();
-				tableDeleteIcon.click();
+				// wait.ExecutorClick(firstRowChkBox);
+				closeQuotePageIcon.click();
 				Thread.sleep(500);
 				driver.switchTo().alert().accept();
+				// wait.elementToBeClickable(quoteNameTxtBox);
+				wait.elementToBeClickable(editQuoteIcon);
+				editQuoteIcon.click();
+				// Thread.sleep(500);
+				// driver.switchTo().alert().accept();
 				wait.elementToBeClickable(quoteNameTxtBox);
 			} catch (Exception e) {
 
 			}
-			saveQuote.click();
-			Thread.sleep(4000);
-			wait.pageWait(waitForConfigure);
+			// saveQuote.click();
+			// Thread.sleep(4000);
+			// wait.pageWait(waitForConfigure);
 			wait.scrollUptoBottom();
-			Thread.sleep(1000);
-			wait.pageWait(addProductIcon);
-			Thread.holdsLock(1000);
+			// Thread.sleep(1000);
+			// wait.pageWait(addProductIcon);
+			// Thread.holdsLock(1000);
 		}
 		if (user.equalsIgnoreCase("cctestus")) {
 			ccQuotesIcon.click();
@@ -188,13 +194,7 @@ public class QuotesPage {
 			}
 			wait.pageWait(quoteNameTxtBox);
 			Thread.sleep(2000);
-			saveQuote.click();
-			Thread.sleep(4000);
-			wait.pageWait(waitForConfigure);
 			wait.scrollUptoBottom();
-			Thread.sleep(1000);
-			wait.pageWait(addProductIcon);
-			Thread.holdsLock(1000);
 		}
 	}
 

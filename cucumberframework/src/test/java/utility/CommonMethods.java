@@ -295,12 +295,17 @@ public class CommonMethods {
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,50)");
 		Thread.sleep(500);
 		// Adjust your page view by making changes right over here
-		// (hoverItem.getY()-400)
+		// (hoverItem.getY()-50)
 	}
 
 	public void refreshPage() throws InterruptedException {
 		driver.navigate().refresh();
 		Thread.sleep(5000);
+	}
+
+	public void ExecutorClick(WebElement click) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].click();", click);
 	}
 
 	public void doubleClick(WebElement ele) {

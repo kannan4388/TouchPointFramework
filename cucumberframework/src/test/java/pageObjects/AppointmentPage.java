@@ -173,7 +173,7 @@ public class AppointmentPage {
 				"11:00 PM", "00:00 AM", "01:00 AM", "02:00 AM", "03:00 AM", "04:00 AM", "05:00 AM", "06:00 AM",
 				"07:00 AM" };
 		// for(appRow+=4+appRow;appRow<=96;appRow++) {
-		int divcount = 1;
+		int divcount = 2;
 		int rowInc = 1;
 		int appRow1 = 0;
 		Thread.sleep(3000);
@@ -231,6 +231,9 @@ public class AppointmentPage {
 					if (rowInc == 1 && !finalStart.equalsIgnoreCase("08:00 AM")) {
 						closeBtn.click();
 						load.elementToBeClickable(clickOnTimeCalendar);
+						load.scrollTopOfPage();
+						Coordinates coordinate = ((Locatable) clickOnTimeCalendar).getCoordinates();
+						coordinate.inViewPort();
 						clickOnTimeCalendar.click();
 						Thread.sleep(4000);
 						if (appType.isDisplayed() == true) {
