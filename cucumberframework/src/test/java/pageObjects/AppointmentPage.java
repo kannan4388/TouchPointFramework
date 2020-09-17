@@ -16,6 +16,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.internal.Coordinates;
 import org.openqa.selenium.internal.Locatable;
 import org.openqa.selenium.support.FindAll;
@@ -112,7 +113,7 @@ public class AppointmentPage {
 	@FindBy(xpath = "//li[@class='k-state-default k-view-week k-state-selected']")
 	WebElement viewWeeklyAppointment;
 
-	@FindBy(xpath = "//div[@id='scheduler']/table/tbody/tr[2]/td[2]/div/div[2]/div[1]")
+	@FindBy(xpath = "//*[@id='scheduler']/table/tbody/tr[2]/td[2]/div/table/tbody/tr[1]/td")
 	WebElement weeklyAppointmentPageWait;
 
 	@FindBy(xpath = "//li[@class='k-state-default k-header k-nav-next']")
@@ -151,6 +152,9 @@ public class AppointmentPage {
 	@FindBy(xpath = "//button[@class='close popup_close' and @data-dismiss='modal'][1]")
 	WebElement closeBtn;
 
+	@FindBy(xpath = "//div[@class='modal-footer ng-scope']/button[@class='btn btn-primary tery_sm1' and text()='Cancel']")
+	WebElement taskCancelBtn;
+
 	public AppointmentPage() {
 		this.driver = LoginPage.getDriver();
 		PageFactory.initElements(driver, this);
@@ -173,7 +177,7 @@ public class AppointmentPage {
 				"11:00 PM", "00:00 AM", "01:00 AM", "02:00 AM", "03:00 AM", "04:00 AM", "05:00 AM", "06:00 AM",
 				"07:00 AM" };
 		// for(appRow+=4+appRow;appRow<=96;appRow++) {
-		int divcount = 2;
+		int divcount = 1;
 		int rowInc = 1;
 		int appRow1 = 0;
 		Thread.sleep(3000);
@@ -223,7 +227,7 @@ public class AppointmentPage {
 					int intialMinInterger = Integer.valueOf(intialMinSplit[1]);
 					Date divtimingFinal = divtiming.parse(finalStart);
 					Date intial = divtiming.parse(intialTime[appRow1]);
-
+					Actions actions = new Actions(driver);
 					long d = divtimingFinal.getTime() - intial.getTime();
 					if (d < 0) {
 						divcount++;
@@ -234,7 +238,8 @@ public class AppointmentPage {
 						load.scrollTopOfPage();
 						Coordinates coordinate = ((Locatable) clickOnTimeCalendar).getCoordinates();
 						coordinate.inViewPort();
-						clickOnTimeCalendar.click();
+						actions.doubleClick(clickOnTimeCalendar).build().perform();
+						// clickOnTimeCalendar.click();
 						Thread.sleep(4000);
 						if (appType.isDisplayed() == true) {
 							break;
@@ -248,8 +253,10 @@ public class AppointmentPage {
 							clickOnTimeCalendar = driver.findElement(By.xpath("//div[@id='scheduler']/table/tbody/tr[2]"
 									+ "/td[2]/div/table/tbody/tr[" + rowInc + "]/td"));
 							load.scrollView(clickOnTimeCalendar);
+							Coordinates coordinate = ((Locatable) clickOnTimeCalendar).getCoordinates();
+							coordinate.inViewPort();
 							Thread.sleep(2000);
-							clickOnTimeCalendar.click();
+							actions.doubleClick(clickOnTimeCalendar).build().perform();
 							Thread.sleep(4000);
 							if (appType.isDisplayed() == true) {
 								break;
@@ -273,7 +280,7 @@ public class AppointmentPage {
 							Thread.sleep(600);
 							Coordinates coordinate = ((Locatable) clickOnTimeCalendar).getCoordinates();
 							coordinate.inViewPort();
-							clickOnTimeCalendar.click();
+							actions.doubleClick(clickOnTimeCalendar).build().perform();
 							Thread.sleep(4000);
 							if (appType.isDisplayed() == true) {
 								break;
@@ -302,7 +309,8 @@ public class AppointmentPage {
 				Coordinates coordinateTxtBox = ((Locatable) clickOnTimeCalendar).getCoordinates();
 				coordinateTxtBox.inViewPort();
 				load.elementToBeClickable(clickOnTimeCalendar);
-				clickOnTimeCalendar.click();
+				Actions actions = new Actions(driver);
+				actions.doubleClick(clickOnTimeCalendar).build().perform();
 				Thread.sleep(4000);
 				if (appType.isDisplayed() == true) {
 					break;
@@ -446,6 +454,8 @@ public class AppointmentPage {
 
 		}
 		load.pageWait(pageLoad);
+		driver.navigate().refresh();
+		load.pageWait(pageLoad);
 	}
 
 	public void saveAndReturnToAppointment() throws InterruptedException {
@@ -504,7 +514,7 @@ public class AppointmentPage {
 		load.elementToBeClickable(pageWaitForEditApp);
 		Thread.sleep(8000);
 		int sizeOfAppointmentDiv = divAppointment.size();
-		System.out.println(sizeOfAppointmentDiv);
+		// System.out.println(sizeOfAppointmentDiv);
 		for (int divAppCount = 2; divAppCount <= sizeOfAppointmentDiv; divAppCount++) {
 			WebElement div = driver.findElement(
 					By.xpath("//div[@id='scheduler']/table/tbody/tr[2]/td[2]/div/div[" + divAppCount + "]/div[1]"));
@@ -611,7 +621,13 @@ public class AppointmentPage {
 	public void fillTaskFields() throws InterruptedException {
 		opp.click();
 		Thread.sleep(2000);
+		opp.sendKeys(Keys.DOWN);
+		Thread.sleep(1000);
+		opp.sendKeys(Keys.ENTER);
+		Thread.sleep(1000);
 		appSave.click();
+		load.elementToBeClickable(taskCancelBtn);
+		taskCancelBtn.click();
 		load.elementToBeClickable(addTaskIcon);
 	}
 }

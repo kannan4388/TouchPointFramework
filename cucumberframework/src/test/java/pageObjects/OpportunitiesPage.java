@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -79,9 +80,9 @@ public class OpportunitiesPage {
 		String oppName = pageLoad.getExcelData(filePath, fileName).get("OpportunityName");
 		String mergeName = pageLoad.dateFormat(date);
 		String oppFinal = oppName + mergeName;
-		// oppNameTxtBox.sendKeys(oppFinal);
+		oppNameTxtBox.sendKeys(oppFinal);
 		Thread.sleep(500);
-		// oppNameTxtBox.sendKeys(Keys.TAB);
+		oppNameTxtBox.sendKeys(Keys.TAB);
 		Actions mouse = new Actions(driver);
 		mouse.moveToElement(oppNameTxtBox).build().perform();
 		Thread.sleep(1000);

@@ -61,6 +61,9 @@ public class SalesTaxReportPage {
 	@FindBy(xpath = "//button[@class='k-button k-primary']")
 	WebElement filterBtn;
 
+	@FindBy(xpath = "//tr[1]/td[1]")
+	WebElement firstRow;
+
 	public SalesTaxReportPage() {
 		driver = LoginPage.getDriver();
 		PageFactory.initElements(driver, this);
@@ -82,6 +85,11 @@ public class SalesTaxReportPage {
 				dateRange.click();
 				Thread.sleep(1000);
 				loadDataBtn.click();
+				try {
+					waitForElement.elementToBeClickable(firstRow);
+				} catch (Exception e) {
+
+				}
 				waitForElement.pageWait(gridFooter);
 				Thread.sleep(4000);
 				break;

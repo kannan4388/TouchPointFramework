@@ -70,6 +70,9 @@ public class SalesTaxSummaryReportPage {
 	@FindBy(xpath = "//button[@class='k-button k-primary']")
 	WebElement filterBtn;
 
+	@FindBy(xpath = "//tr[1]/td[1]")
+	WebElement firstRow;
+
 	public SalesTaxSummaryReportPage() {
 		driver = LoginPage.getDriver();
 		PageFactory.initElements(driver, this);
@@ -105,6 +108,11 @@ public class SalesTaxSummaryReportPage {
 			}
 		}
 		loadDataBtn.click();
+		try {
+			cmSalesTaxSum.elementToBeClickable(firstRow);
+		} catch (Exception e) {
+
+		}
 		cmSalesTaxSum.pageWait(gridFooter);
 		// String gridFooterTxt=gridFooter.getText()
 		Thread.sleep(4000);

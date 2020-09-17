@@ -1,6 +1,5 @@
-@web
-Feature: HFC Smoke Testing
-
+Feature: Smoke Test
+	
 Scenario: End to End testing:Starts from create lead and ends with create MPO Order
 	Given Open Chrome browser and url
 	Given user enters username and password
@@ -33,4 +32,21 @@ Scenario: End to End testing:Starts from create lead and ends with create MPO Or
 	Given lands on create Sales Order page
 	Then user convert Sales Order into Mpo Order
 	Given user save the MPO order page
+	And close the browser at the end
+	
+Scenario: Procurment Dashboard data load for 180 days,,Individual cancel order and again convert into open order.
+	Given Open Chrome browser and url
+	Given user enters username and password
+	Then user clicks on login button
+	Then user lands on Procurment dashboard
+	And Individual cancel Vendor PO
+	And convert cancel mpo order into open order
+
+Scenario: Procurment Dashboard:Load data for 180 days,Whole cancel order and again convert into open order.
+	Given Open Chrome browser and url
+	Given user enters username and password
+	Then user clicks on login button
+	Then user lands on Procurment dashboard
+	And Cancel the MPO order
+	And convert cancel mpo order into open order
 	And close the browser at the end

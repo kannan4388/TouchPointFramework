@@ -151,7 +151,7 @@ public class LeadPage {
 	/* Method for saving Lead page */
 	public void save() throws InterruptedException {
 		saveLead.click();
-		Thread.sleep(4500);
+		Thread.sleep(5000);
 		try {
 			// driver.switchTo().defaultContent();
 			// popUp.click();
@@ -159,7 +159,7 @@ public class LeadPage {
 			Alert alert = driver.switchTo().alert();
 			waitForPageLoad.waitForAlert(driver);
 			// alert.accept();
-			Thread.sleep(1000);
+			Thread.sleep(3000);
 			alert.accept();
 		} catch (Exception e) {
 
