@@ -4,7 +4,6 @@ import java.awt.AWTException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.text.DecimalFormat;
 import java.util.List;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -120,27 +119,6 @@ public class QuotesPage {
 
 	@FindBy(xpath = "//button[@data-tooltip='Delete Quote Lines']")
 	WebElement tableDeleteIcon;
-
-	@FindBy(xpath = "//span[@aria-owns='quote_discount_listbox']")
-	WebElement discountDrpDown;
-
-	@FindAll(@FindBy(xpath = "//ul[@aria-hidden='false']/li[@class='k-item']"))
-	List<WebElement> discountElements;
-
-	@FindBy(xpath = "//select[@name='Quote_dis_currency']/option[@selected]")
-	WebElement discountType;
-
-	@FindBy(xpath = "//tr[1]/td[@class='rightquote_table']/span[@class='Grid_Textalign']/label[@class='ldet_label ng-binding']")
-	WebElement productSubTotal;
-
-	@FindBy(xpath = "//tr[2]/td[@class='rightquote_table']/span[@class='Grid_Textalign']/label[@class='ldet_label ng-binding']")
-	WebElement totalDiscAppiled;
-
-	@FindBy(xpath = "//tr[3]/td[2]/span/label")
-	WebElement addtionalCharges;
-
-	@FindBy(xpath = "//tr[4]/td[2]/span/label")
-	WebElement tax;
 
 	public QuotesPage() {
 		this.driver = LoginPage.getDriver();
@@ -470,67 +448,5 @@ public class QuotesPage {
 		saveQuote.click();
 		wait.elementToBeClickable(createSalesOrderIcon);
 		Thread.sleep(2000);
-	}
-
-	public void discountSetUp() throws InterruptedException {
-		discountDrpDown.click();
-		Thread.sleep(1000);
-		String actualDiscount = "Milage";
-		for (WebElement getDiscount : discountElements) {
-			String textOfDiscount = getDiscount.getText();
-			if (textOfDiscount.equalsIgnoreCase(actualDiscount)) {
-				getDiscount.click();
-				Thread.sleep(1000);
-				WebElement discountPrice = driver
-						.findElement(By.xpath("//input[@class='k-formatted-value form-control quote-qty k-input']"));
-				String priceDis = discountPrice.getAttribute("aria-valuenow");
-				// System.out.println(priceDis);
-				String typeOfDisc = discountType.getAttribute("value");
-
-				/* Product Sub Total Calculation */
-				String prodSubTotal = productSubTotal.getText();
-				String[] removeDollarSym = prodSubTotal.split("\\$");
-				Float flProdSubTotal = Float.valueOf(removeDollarSym[1].trim());
-				DecimalFormat dfProdSubTotal = new DecimalFormat("0.00");
-				dfProdSubTotal.setMaximumFractionDigits(2);
-				Float exactProdSubTotal = Float.valueOf(dfProdSubTotal.format(flProdSubTotal));
-				/* End of Product Sub Total Calculation */
-
-				/* Total Discount Applied calculation */
-				String totalDiscount = totalDiscAppiled.getText();
-				String[] arrayDiscount = totalDiscount.split("\\$");
-				String removedDollar = arrayDiscount[1].trim();
-				Float flTotalDiscApplied = Float.valueOf(removedDollar.trim());
-				DecimalFormat dfTotalTotalDiscApplied = new DecimalFormat("0.00");
-				dfTotalTotalDiscApplied.setMaximumFractionDigits(2);
-				Float exacTotalDicAppiled = Float.valueOf(dfTotalTotalDiscApplied.format(flTotalDiscApplied));
-				/* End of Total Discount Applied */
-
-				/* Additional Charges Calculation */
-				String addtionalCharge = addtionalCharges.getText();
-				String[] removeDollarInCharges = addtionalCharge.split("\\$");
-				Float flAddtionalCharge = Float.valueOf(removeDollarInCharges[1].trim());
-				DecimalFormat dfAddtionalCharge = new DecimalFormat("0.00");
-				dfTotalTotalDiscApplied.setMaximumFractionDigits(2);
-				Float exactAdditionalCharges = Float.valueOf(dfAddtionalCharge.format(flAddtionalCharge));
-				/* End of Total Discount Applied */
-
-				/* Tax Calculation */
-				String taxCol = tax.getText();
-				String[] removeDollarInTax = taxCol.split("\\$");
-				Float flTax = Float.valueOf(removeDollarInTax[1].trim());
-				DecimalFormat dfTax = new DecimalFormat("0.00");
-				dfTax.setMaximumFractionDigits(2);
-				Float exactTax = Float.valueOf(dfTax.format(flTax));
-				/* End of Tax Calculation */
-
-				Float expectedTotal = 0.00f;
-				if (typeOfDisc.equalsIgnoreCase("%")) {
-					// String
-					expectedTotal = exactProdSubTotal - exacTotalDicAppiled + exactAdditionalCharges + exactTax;
-				}
-				System.out.println(expectedTotal);
-			}
-		}
 	}
 }

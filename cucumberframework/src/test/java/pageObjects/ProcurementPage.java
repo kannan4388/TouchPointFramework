@@ -142,7 +142,6 @@ public class ProcurementPage {
 	public void cancelVendorPOOrder() throws InterruptedException {
 		openMpoChkbox.click();
 		waitForElement.elementToBeClickable(dynamicTable);
-		Thread.sleep(3000);
 		int customerInfoRowIncrement = 1;
 		for (WebElement tableRow : noOfTableRow) {
 			WebElement customerInfoRow = driver

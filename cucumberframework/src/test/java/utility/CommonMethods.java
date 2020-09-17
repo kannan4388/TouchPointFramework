@@ -48,13 +48,6 @@ public class CommonMethods {
 		this.driver = LoginPage.getDriver();
 	}
 
-	public void reportLoadDataWait(WebElement loadDataWait) throws InterruptedException {
-		boolean checkIcon = loadDataWait.isDisplayed();
-		while (checkIcon == false) {
-			Thread.sleep(2000);
-		}
-	}
-
 	public void pageWait(WebElement pageLoad) throws InterruptedException {
 		// Implicit page load wait based on visibility of web element
 		WebDriverWait wait = new WebDriverWait(driver, 90);

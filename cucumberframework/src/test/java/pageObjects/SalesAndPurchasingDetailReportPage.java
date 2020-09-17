@@ -74,12 +74,6 @@ public class SalesAndPurchasingDetailReportPage {
 	@FindBy(xpath = "//button[@class='k-button k-primary']")
 	WebElement filterBtn;
 
-	@FindBy(xpath = "//*[@id='gridSalesAndPurchaseSearch']/div[4]/div/div[1]")
-	WebElement loadIcon;
-
-	@FindBy(xpath = "//tr[1]/td[1]")
-	WebElement firstRow;
-
 	public SalesAndPurchasingDetailReportPage() {
 		this.driver = LoginPage.getDriver();
 		PageFactory.initElements(driver, this);
@@ -99,13 +93,7 @@ public class SalesAndPurchasingDetailReportPage {
 				dateRangeTxt.click();
 				Thread.sleep(1000);
 				loadDataBtn.click();
-				try {
-					waitForElement.elementToBeClickable(firstRow);
-				} catch (Exception e) {
-
-				}
 				waitForElement.elementToBeClickable(gridFooterItems);
-				Thread.sleep(5000);
 				break;
 			}
 		}

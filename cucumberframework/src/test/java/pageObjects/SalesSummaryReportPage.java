@@ -82,9 +82,6 @@ public class SalesSummaryReportPage {
 	@FindBy(xpath = "//button[@class='k-button k-primary']")
 	WebElement filterBtn;
 
-	@FindBy(xpath = "//tr[1]/td[1]")
-	WebElement firstRow;
-
 	public SalesSummaryReportPage() {
 		driver = LoginPage.getDriver();
 		PageFactory.initElements(driver, this);
@@ -111,11 +108,6 @@ public class SalesSummaryReportPage {
 			}
 		}
 		loadDataBtn.click();
-		try {
-			waitElement.elementToBeClickable(firstRow);
-		} catch (Exception e) {
-
-		}
 		waitElement.pageWait(gridFooter);
 		Thread.sleep(3000);
 	}
