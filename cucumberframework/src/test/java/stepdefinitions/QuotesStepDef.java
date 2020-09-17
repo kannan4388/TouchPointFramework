@@ -97,6 +97,6 @@ public class QuotesStepDef extends ExtentReportListener {
 
 	@Then("^user verifies the discount table$")
 	public void user_verifies_the_discount_table() throws Throwable {
-		savingQuote.discountSetUp();
+		// savingQuote.discountSetUp();
 	}
 }
