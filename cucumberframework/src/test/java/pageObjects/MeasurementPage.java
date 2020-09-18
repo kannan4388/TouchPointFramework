@@ -18,34 +18,53 @@ import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class MeasurementPage {
+import utility.CommonMethods;
+
+public class MeasurementPage extends CommonMethods{
 
 	public static String filePath = System.getProperty("user.dir") + "\\InputExcelData\\";
 	public static String fileName = "Measurement.xlsx";
+	public static Sheet sh=CommonMethods.sh;
 	private int gridSize;
+	private int measurementRow=1;
 	private String user = LoginPage.un;
 	private WebDriver driver;
 	utility.CommonMethods drpDownData = new utility.CommonMethods();
-	utility.CommonMethods elementWait = new utility.CommonMethods();
-
-	/* Coded by UmaVasan on 07/08/20 */
-
+	utility.CommonMethods elementWait=new utility.CommonMethods();
+	utility.CommonMethods commonMethods=new utility.CommonMethods();	
+	/*Coded by UmaVasan*/
+	@FindBy(xpath = "(//i[@class='far fa-caret-square-down fa_icon'])[1]")
+	WebElement copyLineEnableIcon;
+	
+	@FindBy(xpath = "//input[@id='linenumber']")
+	WebElement requiredRow;
+	
+	@FindBy(xpath = "//input[@id='linecopy']")
+	WebElement requiredTime;
+	
+	@FindBy(xpath = "//li[@data-tooltip='Copy']/button[contains(@ng-click,'Copymultipletime')]/i[@class='far fa-check-circle fa_icon']")
+	WebElement copyClick;
+	
 	@FindBy(xpath = "//div[@class='k-grid-content k-auto-scrollable']/table/tbody/tr[1]/td/ul/li/div/button[contains(@class,'btn btn-default dropdown-toggle')]")
 	WebElement clickToDelete;
-
+	
 	@FindBy(xpath = "//input[@class='k-button btn cancel_but ng-scope' and @ng-if='Permission.AddMeasurements']")
 	WebElement addRowButtonTluser;
+	
+	
+	WebElement deleteRowWait;
 
 	@FindBy(xpath = "//div[@class='k-grid-content k-auto-scrollable']/table/tbody/tr[1]/td/ul/li/div/ul/li/a[contains(text(),'Delete')]")
 	WebElement clickOnDelete;
-
-	@FindBy(xpath = "//div[@class='col-3 col-sm-3 col-md-3 total-count-wrapper']/span[@class='ng-binding']")
+	
+	@FindBy(xpath = "//div[@class='col-4 col-sm-4']/span[@class='ng-binding']")
+	//@FindBy(xpath = "//div[@class='col-3 col-sm-3 col-md-3 total-count-wrapper']/span[@class='ng-binding']")
 	WebElement gridRowCount;
-
+		
 	@FindAll(@FindBy(xpath = "//div[@class='k-grid-content k-auto-scrollable']/table[@role='grid']/tbody/tr[@role='row' and not(contains(@style,'display: none'))]"))
 	List<WebElement> measurementPageRowGrid;
-
-	/* created by UmaVasan on 07/08/20 */
+			
+	/*created by UmaVasan on 07/08/20 */
 
 	@FindBy(xpath = "//li[@rel='tab7' and @ng-show='BrandId!=3']")
 	WebElement clickMeasure;
@@ -154,7 +173,7 @@ public class MeasurementPage {
 
 	@FindBy(xpath = "//ul[@id='FranctionalValueDepth_listbox']/li[text()='3/16']")
 	WebElement tlDepthFraction;
-
+	
 	@FindBy(xpath = "//ul[@class='dropdown-menu pull-right show']/li[2]")
 	WebElement tlEditIcon;
 
@@ -163,277 +182,322 @@ public class MeasurementPage {
 		PageFactory.initElements(driver, this);
 	}
 
-	/* Coded by UmaVasan on 07/08/20 */
-
+	/*Coded by UmaVasan*/
+	
 	public void removeAllFilledRows() throws InterruptedException {
 		if (user.equalsIgnoreCase("bbtestus")) {
-			editIconClick.click();
+		elementWait.pageWait(editIconClick);	
+		Thread.sleep(500);
+		editIconClick.click();
+		
+		gridSize = measurementPageRowGrid.size();
+		System.out.println("Total filled rows in the measurement Page:"+gridSize);
+		for (int g =1; g <=gridSize ; g++) {
 			elementWait.pageWait(clickToDelete);
-			gridSize = measurementPageRowGrid.size();
-			System.out.println("Total filled rows in the measurement Page:" + gridSize);
-			for (int g = 1; g <= gridSize; g++) {
-				clickToDelete.click();
-				Thread.sleep(1000);
-				clickOnDelete.click();
-				Thread.sleep(600);
-			}
-			System.out.println("All filled rows deleted successfully");
+			Thread.sleep(1000);
+			clickToDelete.click();
+			elementWait.pageWait(clickOnDelete);
+			Thread.sleep(1000);
+			clickOnDelete.click();
+			Thread.sleep(500);
 		}
+		System.out.println("All filled rows deleted successfully");
+	}
 		if (user.equalsIgnoreCase("tltestus")) {
+			
+//			elementWait.pageWait(editIconClick);	
+//			Thread.sleep(500);
+//			editIconClick.click();
+			
 			gridSize = measurementPageRowGrid.size();
-			System.out.println("Total filled rows in the measurement Page:" + gridSize);
-			for (int g = 1; g <= gridSize; g++) {
+			System.out.println("Total filled rows in the measurement Page:"+gridSize);
+			for (int g =1; g <=gridSize ; g++) {
+				elementWait.pageWait(clickToDelete);
+				Thread.sleep(1000);
 				clickToDelete.click();
+				elementWait.pageWait(tlAddRowIcon);
 				Thread.sleep(1000);
 				clickOnDelete.click();
-				Thread.sleep(600);
+				elementWait.pageWait(tlAddRowIcon);
+				Thread.sleep(500);
+				
 			}
 			System.out.println("All filled rows deleted successfully");
+			//elementWait.pageWait(gridRowCount);
 
 		}
 	}
-
-	public void validateRowCount() throws InterruptedException, NumberFormatException {
+	
+	public void validateRowCount() throws InterruptedException,NumberFormatException {
+		Thread.sleep(500);
+		String gridrowcount = gridRowCount.getText();
+		elementWait.pageWait(gridRowCount);
+		String rowCountValue = gridrowcount.substring(13);
+		int rowValue = new Integer(rowCountValue).intValue();
+		
 		if (user.equalsIgnoreCase("bbtestus")) {
-			gridSize = measurementPageRowGrid.size();
-//		String gridrowcount = gridRowCount.getText();
-//		String rowCountValue = gridrowcount.substring(12);
-//		int rowValue = Integer.parseInt(rowCountValue);
-			if (gridSize == 1) {
-				System.out.println("one row is filled");
-			}
-		}
+		gridSize = measurementPageRowGrid.size();
+		if (gridSize==rowValue) {
+			System.out.println(gridSize  +  " filled row/rows validated successfully");
+					}
+		
+		
 		if (user.equalsIgnoreCase("tltestus")) {
 			gridSize = measurementPageRowGrid.size();
-			if (gridSize == 1) {
-				System.out.println("one row is filled");
-			}
+			if (gridSize==rowValue) {
+				System.out.println( gridSize +  " filled row/rows validated successfully");
+						}
+		}}
 		}
-	}
+	
+	
+//	@DataProvider
+//	public Object[][] getMeasurementPageData() throws IOException {
+//		
+//		Object data[][]=TestDataUtil.fetchExcelData(filePath, fileName, sheetName);
+//		return data;
+//	}
+	//@Test(dataProvider="MeasurementDataProvider")
+	
+	
+//	public void addNewRow(String Room,String  WindowLocation,String MountType ,String Width1,String Height1,String ImageName,String System,
+//			String SystemDescription,String Type,String Description, String Height2,String Width2,String Depth) throws InterruptedException,InvalidFormatException, IOException {
+//		 
+//		//DataSet++;
+		 
+		//Room	WindowLocation	MountType	Width2	Height2  ImageName [8 to 12]
 
-	public void addNewRow() throws InterruptedException, InvalidFormatException, IOException {
-		System.out.println("user is adding a new row");
-		int measurementRow = 1;
-		// Read excel file to fetch input data
+		//System	SystemDescription	Type	Description	Width1	Height1	Depth [0 to 6]
+
+	//	System.out.println("user is adding a new row");
+		
+		public void addNewRow()throws InterruptedException,InvalidFormatException, IOException {
+	  int measurementRow = 1;
+//	  String sheetName="Sheet1";
+//	  Sheet sh=commonMethods.fetchExcelSheet(sheetName, sheetName, sheetName);
+		// utility.CommonMethods.fetchExcelData(filePath, fileName, sheetName);
+//	//Read excel file to fetch input data
 		File file = new File(filePath + fileName);
 		FileInputStream fis = new FileInputStream(file);
 		Workbook wb = null;
-		// Choose excel file type by its extension
+	//Choose excel file type by its extension
 		String fileExtension = fileName.substring(fileName.indexOf("."));
 		if (fileExtension.equals(".xlsx")) {
 			wb = new XSSFWorkbook(fis);
-		} else if (fileExtension.equals(".xls")) {
+		}
+		else if (fileExtension.equals(".xls")) {
 			wb = new HSSFWorkbook(fis);
 		}
-		// Fetch data from first sheet of workbook
+	//Fetch data from first sheet of workbook
 		Sheet sh = wb.getSheetAt(0);
-		// Get total no of rows in a sheet
-		// int rowCount = sh.getLastRowNum();
-
-		// validate user by login user name
+	//Get total no of rows in a sheet
+		int rowCount = sh.getLastRowNum();
+		
+	// validate user by login user name
 		if (user.equalsIgnoreCase("bbtestus")) {
-			editIconClick.click();
+			//editIconClick.click();
 			drpDownData.pageWait(addNewMeasurementLine);
-			// Add new row in a measurement Page
+	// Add new row in a measurement Page
 			addNewMeasurementLine.click();
 			Thread.sleep(2000);
 			WebElement roomDrpDown = driver.findElement(By.xpath("//input[@id='roomLocation0']"));
 			drpDownData.elementToBeClickable(roomDrpDown);
 			Thread.sleep(2000);
 			int rowLocation = 0;
-			int rowNo = 1;
-			// Get first row in a work sheet
-			Row row = sh.getRow(1);
-
-			// Get input data as a string
-			String roomRow = row.getCell(7).getStringCellValue().trim();
-			String windowRow = row.getCell(8).getStringCellValue().trim();
-			String mountRow = row.getCell(9).getStringCellValue().trim();
-			int widthRow = (int) row.getCell(10).getNumericCellValue();
-			int heightRow = (int) row.getCell(11).getNumericCellValue();
-			// Room drop down selection
-			roomDrpDown = driver.findElement(
-					By.xpath("//div[@id='gridEditMeasurements']/div[3]/table/tbody/tr[" + rowNo + "]/td[2]/div/span"));
-			roomDrpDown.click();
-			Thread.sleep(600);
-			int roomSize = roomDrpDowmLi.size();
-			for (int r = 1; r < roomSize; r++) {
-				WebElement roomDrp = driver.findElement(By.xpath(
-						"//ul[@id='roomLocation" + rowLocation + "_listbox' and @aria-hidden='false']/li[" + r + "]"));
-				String roomTxt = roomDrp.getText().trim();
-				if (roomTxt.equalsIgnoreCase(roomRow)) {
-					drpDownData.scrollDown(roomDrp);
-					Thread.sleep(1000);
-					roomDrp.click();
-					Thread.sleep(600);
-					break;
+			int rowNo=1;
+	//Get first row in a work sheet		
+				Row row = sh.getRow(1);
+				
+			// Get input data as a string 
+//			String roomRow = Room;
+//			String windowRow = WindowLocation;
+//			String mountRow = MountType;
+//			String widthRow = Width1;
+//			String heightRow = Height1;
+//	// Get input data as a string 
+				String roomRow = row.getCell(7).getStringCellValue().trim();
+				String windowRow = row.getCell(8).getStringCellValue().trim();
+				String mountRow = row.getCell(9).getStringCellValue().trim();
+				int widthRow = (int) row.getCell(10).getNumericCellValue();
+				int heightRow = (int) row.getCell(11).getNumericCellValue();
+	//Room drop down selection 
+				roomDrpDown = driver.findElement(By.xpath("//div[@id='gridEditMeasurements']/div[3]/table/tbody/tr[" + rowNo + "]/td[2]/div/span"));
+				roomDrpDown.click();
+				Thread.sleep(600);
+				int roomSize = roomDrpDowmLi.size();
+				for (int r = 1; r < roomSize; r++) {
+					WebElement roomDrp = driver.findElement(By.xpath("//ul[@id='roomLocation" + rowLocation
+							+ "_listbox' and @aria-hidden='false']/li[" + r + "]"));
+					String roomTxt = roomDrp.getText().trim();
+					if (roomTxt.equalsIgnoreCase(roomRow)) {
+						drpDownData.scrollDown(roomDrp);
+						Thread.sleep(1000);
+						roomDrp.click();
+						Thread.sleep(600);
+						break;
+					}
 				}
-			}
-			// drpDownData.scrollDown(roomDrp);
-			Thread.sleep(600);
-			// Window Location drop down selection
-			WinDrpDown = driver.findElement(
-					By.xpath("//div[@id='gridEditMeasurements']/div[3]/table/tbody/tr[" + rowNo + "]/td[3]/div/span"));
-			WinDrpDown.click();
-			Thread.sleep(600);
-			int windowSize = windowLi.size();
+				// drpDownData.scrollDown(roomDrp);
+				Thread.sleep(600);
+	// Window Location drop down selection 
+				WinDrpDown = driver.findElement(
+						By.xpath("//div[@id='gridEditMeasurements']/div[3]/table/tbody/tr[" + rowNo + "]/td[3]/div/span"));
+				WinDrpDown.click();
+				Thread.sleep(600);
+				int windowSize = windowLi.size();
 			for (int j = 1; j <= windowSize; j++) {
-				String windowText = driver.findElement(By.xpath(
-						"//ul[@id='windowLocation" + rowLocation + "_listbox' and @aria-hidden='false']/li[" + j + "]"))
-						.getText().trim();
-				if (windowRow.equalsIgnoreCase(windowText)) {
+					String windowText = driver.findElement(By.xpath("//ul[@id='windowLocation" + rowLocation
+							+ "_listbox' and @aria-hidden='false']/li[" + j + "]")).getText().trim();
+					if (windowRow.equalsIgnoreCase(windowText)) {
 
-					WebElement winDrp = driver.findElement(By.xpath("//ul[@id='windowLocation" + rowLocation
-							+ "_listbox' and @aria-hidden='false']/li[" + j + "]"));
-					drpDownData.scrollDown(winDrp);
-					Thread.sleep(1000);
-					winDrp.click();
-					Thread.sleep(600);
-					break;
+						WebElement winDrp = driver.findElement(By.xpath("//ul[@id='windowLocation" + rowLocation
+								+ "_listbox' and @aria-hidden='false']/li[" + j + "]"));
+						drpDownData.scrollDown(winDrp);
+						Thread.sleep(1000);
+						winDrp.click();
+						Thread.sleep(600);
+						break;
+					}
 				}
-			}
-			// Mount Type drop down selection
-			mountTypeDrpDown = driver.findElement(
-					By.xpath("//div[@id='gridEditMeasurements']/div[3]/table/tbody/tr[" + rowNo + "]/td[5]/div/span"));
-			mountTypeDrpDown.click();
-			List<WebElement> mountSize1 = driver
-					.findElements(By.xpath("(//ul[@id='mount" + rowLocation + "_listbox']/li)"));
-
-			int sizeOfMount = mountSize1.size();
+	// Mount Type drop down selection 
+				mountTypeDrpDown = driver.findElement(
+						By.xpath("//div[@id='gridEditMeasurements']/div[3]/table/tbody/tr[" + rowNo + "]/td[5]/div/span"));
+				mountTypeDrpDown.click();
+				List<WebElement> mountSize1 = driver.findElements(By.xpath("(//ul[@id='mount" + rowLocation + "_listbox']/li)"));
+				
+				int sizeOfMount = mountSize1.size();
 			for (int k = 1; k <= sizeOfMount; k++) {
-				String mountText = driver
-						.findElement(By.xpath(
-								"//ul[@id='mount" + rowLocation + "_listbox' and @aria-hidden='false']/li[" + k + "]"))
-						.getText().trim();
-				if (mountRow.equalsIgnoreCase(mountText)) {
-					driver.findElement(By.xpath(
+					String mountText = driver.findElement(By.xpath(
 							"//ul[@id='mount" + rowLocation + "_listbox' and @aria-hidden='false']/li[" + k + "]"))
-							.click();
-					Thread.sleep(600);
-					break;
+							.getText().trim();
+					if (mountRow.equalsIgnoreCase(mountText)) {
+						driver.findElement(By.xpath("//ul[@id='mount" + rowLocation + "_listbox' and @aria-hidden='false']/li[" + k + "]")).click();
+						Thread.sleep(600);
+						break;
+					}
 				}
-			}
-			// * Width text box value
-			width = driver.findElement(By.xpath("//input[@id='width" + rowLocation + "']"));
-			width.click();
-			width.clear();
-			Thread.sleep(500);
-			width.sendKeys(String.valueOf(widthRow));
-			Thread.sleep(500);
-			/* Width Range drop down selection */
-			widthDrpDown = driver.findElement(
-					By.xpath("//div[@id='gridEditMeasurements']/div[3]/table/tbody/tr/td[6]/div/div/span"));
-			Thread.sleep(1000);
-			widthDrpDown.click();
-			Thread.sleep(2000);
-			widthRange = driver.findElement(By.xpath(
-					"(//ul[@id='widthFraction" + rowLocation + "_listbox' and @data-role='staticlist']/li[5])[2]"));
-			widthRange.click();
-			Thread.sleep(1000);
-			/* Height text box value */
-			height = driver.findElement(By.xpath("//input[@id='height" + rowLocation + "']"));
-			height.click();
-			height.clear();
-			Thread.sleep(500);
-			height.sendKeys(String.valueOf(heightRow));
-			Thread.sleep(500);
-			/* Height Range drop down selection */
-			heightRangeDrpDown = driver.findElement(By.xpath(
-					"//div[@id='gridEditMeasurements']/div[3]/table/tbody/tr[" + rowNo + "]/td[7]/div/div/span"));
-			heightRangeDrpDown.click();
-			Thread.sleep(1000);
-			heightRange = driver
-					.findElement(By.xpath("(//ul[@id='heightFraction" + rowLocation + "_listbox']/li[3])[2]"));
-			heightRange.click();
-			Thread.sleep(1500);
-		}
-
+				//* Width text box value 
+				width = driver.findElement(By.xpath("//input[@id='width" + rowLocation + "']"));
+				width.click();
+				width.clear();
+				Thread.sleep(500);
+				width.sendKeys(String.valueOf(widthRow));
+				Thread.sleep(500);
+				/* Width Range drop down selection */
+				widthDrpDown = driver.findElement(By.xpath(
+						"//div[@id='gridEditMeasurements']/div[3]/table/tbody/tr/td[6]/div/div/span"));
+				Thread.sleep(1000);
+				widthDrpDown.click();
+				Thread.sleep(2000);
+				widthRange = driver.findElement(By.xpath("(//ul[@id='widthFraction" + rowLocation + "_listbox' and @data-role='staticlist']/li[5])[2]"));
+				widthRange.click();
+				Thread.sleep(1000);
+				/* Height text box value */
+				height = driver.findElement(By.xpath("//input[@id='height" + rowLocation + "']"));
+				height.click();
+				height.clear();
+				Thread.sleep(500);
+				height.sendKeys(String.valueOf(heightRow));
+				Thread.sleep(500);
+				/* Height Range drop down selection */
+				heightRangeDrpDown = driver.findElement(By.xpath(
+						"//div[@id='gridEditMeasurements']/div[3]/table/tbody/tr[" + rowNo + "]/td[7]/div/div/span"));
+				heightRangeDrpDown.click();
+				Thread.sleep(1000);
+				heightRange = driver
+						.findElement(By.xpath("(//ul[@id='heightFraction" + rowLocation + "_listbox']/li[3])[2]"));
+				heightRange.click();
+				Thread.sleep(1500);
+							}
+	
 		if (user.equalsIgnoreCase("tltestus")) {
 			tlAddRowIcon.click();
 			drpDownData.pageWait(systemDrpDwn);
 			Row row = sh.getRow(measurementRow);
-			// Getting a excel data in string variable
-			String system = row.getCell(0).getStringCellValue().trim();
-			String systemDescription = row.getCell(1).getStringCellValue().trim();
-			String type = row.getCell(2).getStringCellValue().trim();
-			String description = row.getCell(3).getStringCellValue().trim();
-			int width = (int) row.getCell(4).getNumericCellValue();
-			int height = (int) row.getCell(5).getNumericCellValue();
-			int depth = (int) row.getCell(6).getNumericCellValue();
-			Thread.sleep(1000);
-			systemDrpDwn.click();
-			Thread.sleep(1500);
-			for (WebElement liSystem : systemDrpDwnLi) {
-				String systemTxt = liSystem.getText();
-				// String system = "Garage";
-				if (system.equalsIgnoreCase(systemTxt)) {
-					liSystem.click();
+		// Getting a excel data in string variable
+				String system = row.getCell(0).getStringCellValue().trim();
+				String systemDescription = row.getCell(1).getStringCellValue().trim();
+				String type = row.getCell(2).getStringCellValue().trim();
+				String description = row.getCell(3).getStringCellValue().trim();
+				int width = (int) row.getCell(4).getNumericCellValue();
+				int height = (int) row.getCell(5).getNumericCellValue();
+				int depth = (int) row.getCell(6).getNumericCellValue();
+				Thread.sleep(1000);
+				systemDrpDwn.click();
+				Thread.sleep(1500);
+				for (WebElement liSystem : systemDrpDwnLi) {
+					String systemTxt = liSystem.getText();
+					// String system = "Garage";
+					if (system.equalsIgnoreCase(systemTxt)) {
+						liSystem.click();
+						Thread.sleep(1000);
+						break;
+					}
+				}
+				systemDesTxtBox.clear();
+				Thread.sleep(500);
+				systemDesTxtBox.sendKeys(systemDescription);
+				Thread.sleep(500);
+				typeDrpDwn.click();
+				Thread.sleep(1000);
+				for (WebElement liType : typeDrpDwnLi) {
+					String typeTxt = liType.getText();
+					// String actualType = "Bikes";
+					if (typeTxt.equalsIgnoreCase(type)) {
+						liType.click();
+						Thread.sleep(2000);
+						break;
+					}
+				}
+				storageDescTxtBox.clear();
+				Thread.sleep(1000);
+				boolean visibilityStorageDescTxtBox = storageDescTxtBox.isEnabled();
+				if (visibilityStorageDescTxtBox == true) {
+					storageDescTxtBox.sendKeys(description);
 					Thread.sleep(1000);
-					break;
 				}
-			}
-			systemDesTxtBox.clear();
-			Thread.sleep(500);
-			systemDesTxtBox.sendKeys(systemDescription);
-			Thread.sleep(500);
-			typeDrpDwn.click();
-			Thread.sleep(1000);
-			for (WebElement liType : typeDrpDwnLi) {
-				String typeTxt = liType.getText();
-				// String actualType = "Bikes";
-				if (typeTxt.equalsIgnoreCase(type)) {
-					liType.click();
-					Thread.sleep(2000);
-					break;
+				boolean visibilityTlWidthTxtBox = tlWidthTxtBox.isEnabled();
+				if (visibilityTlWidthTxtBox == true) {
+					tlWidthTxtBox.clear();
+					Thread.sleep(500);
+					tlWidthTxtBox.sendKeys(String.valueOf(width));
+					Thread.sleep(500);
+					widthDrpDwn.click();
+					Thread.sleep(1010);
+					tlWidthFraction.click();
+					Thread.sleep(1000);
 				}
-			}
-			storageDescTxtBox.clear();
-			Thread.sleep(1000);
-			boolean visibilityStorageDescTxtBox = storageDescTxtBox.isEnabled();
-			if (visibilityStorageDescTxtBox == true) {
-				storageDescTxtBox.sendKeys(description);
-				Thread.sleep(1000);
-			}
-			boolean visibilityTlWidthTxtBox = tlWidthTxtBox.isEnabled();
-			if (visibilityTlWidthTxtBox == true) {
-				tlWidthTxtBox.clear();
-				Thread.sleep(500);
-				tlWidthTxtBox.sendKeys(String.valueOf(width));
-				Thread.sleep(500);
-				widthDrpDwn.click();
-				Thread.sleep(1000);
-				tlWidthFraction.click();
-				Thread.sleep(1000);
-			}
-			boolean visibilityTlHeight = tlHeight.isEnabled();
-			if (visibilityTlHeight == true) {
-				tlHeight.clear();
-				Thread.sleep(1000);
-				tlHeight.sendKeys(String.valueOf(height));
-				Thread.sleep(1000);
-				tlHeightDrpDwn.click();
-				Thread.sleep(1000);
-				tlHeightFraction.click();
-				Thread.sleep(1000);
-			}
-			boolean visibilityTlDepth = tlDepth.isEnabled();
-			if (visibilityTlDepth == true) {
-				tlDepth.clear();
-				Thread.sleep(1000);
-				tlDepth.sendKeys(String.valueOf(depth));
-				Thread.sleep(1000);
-				tlDepthDrpDwn.click();
-				Thread.sleep(1000);
-				tlDepthFraction.click();
-				Thread.sleep(1000);
+				boolean visibilityTlHeight = tlHeight.isEnabled();
+				if (visibilityTlHeight == true) {
+					tlHeight.clear();
+					Thread.sleep(1000);
+					tlHeight.sendKeys(String.valueOf(height));
+					Thread.sleep(1000);
+					tlHeightDrpDwn.click();
+					Thread.sleep(1000);
+					tlHeightFraction.click();
+					Thread.sleep(1000);
+				}
+				boolean visibilityTlDepth = tlDepth.isEnabled();
+				if (visibilityTlDepth == true) {
+					tlDepth.clear();
+					Thread.sleep(1000);
+					tlDepth.sendKeys(String.valueOf(depth));
+					Thread.sleep(1000);
+					tlDepthDrpDwn.click();
+					Thread.sleep(1000);
+					tlDepthFraction.click();
+					Thread.sleep(500);
+				}
+
 			}
 
 		}
+	
 
-	}
-
-	/* Created by UmaVasan on 07/08/20 */
-
+	/*Created by UmaVasan on 07/08/20 */
+	
+	
 	public void openMeasure() throws InterruptedException {
 		// driver.navigate().refresh();
 		// drpDownData = new utilities.CommonMethods();
@@ -451,9 +515,15 @@ public class MeasurementPage {
 		}
 	}
 
-	public void fillData() throws InterruptedException, InvalidFormatException, IOException {
-		String user = LoginPage.un;
+	public void fillData()  throws InterruptedException, InvalidFormatException, IOException {
+			
 		int measurementRow = 1;
+//		 String sheetName="Sheet1";
+//		 commonMethods.fetchExcelSheet(filePath, fileName, sheetName);
+//		 Sheet sh=CommonMethods.sh;
+//		 //Sheet sh=commonMethods.fetchExcelSheet();
+//		 //utility.CommonMethods.fetchExcelData(filePath, fileName, sheetName);
+//		 Thread.sleep(1000);
 		File file = new File(filePath + fileName);
 		// Create an object of FileInputStream class to read excel file
 		FileInputStream fis = new FileInputStream(file);
@@ -472,7 +542,8 @@ public class MeasurementPage {
 		// Read sheet inside the workbook by its name
 		Sheet sh = wb.getSheetAt(0);
 		// Find number of rows in excel file
-		int rowCount = sh.getLastRowNum();
+		int rowCount =sh.getLastRowNum();
+		System.out.println(rowCount);
 		// Create a loop all around the rows in excel sheet
 		if (user.equalsIgnoreCase("bbtestus")) {
 			editIconClick.click();
@@ -512,7 +583,7 @@ public class MeasurementPage {
 						break;
 					}
 				}
-
+		
 				// drpDownData.scrollDown(roomDrp);
 				Thread.sleep(600);
 				/* Window Location drop down selection */
@@ -607,7 +678,7 @@ public class MeasurementPage {
 			}
 		}
 		if (user.equalsIgnoreCase("tltestus")) {
-			// int rowLocation = 0;
+			 int rowLocation = 0;
 			tlAddRowIcon.click();
 			drpDownData.pageWait(systemDrpDwn);
 			for (measurementRow = 1; measurementRow <= rowCount; measurementRow++) {
@@ -686,9 +757,10 @@ public class MeasurementPage {
 					tlDepthDrpDwn.click();
 					Thread.sleep(1000);
 					tlDepthFraction.click();
+					//elementWait.pageWait(tlDepthFraction);
 					Thread.sleep(1000);
 				}
-				if (measurementRow <= 3) {
+				if (measurementRow < 4) {
 					WebElement editIcon = driver.findElement(
 							By.xpath("//tr[" + measurementRow + "]/td/ul[@ng-if='Permission.EditMeasurements']/"
 									+ "li[@class='dropdown note1 ad_user']"));
@@ -697,7 +769,7 @@ public class MeasurementPage {
 					tlEditIcon.click();
 					Thread.sleep(2000);
 				}
-				// rowLocation++;
+				 rowLocation++;
 			}
 
 		}
@@ -706,6 +778,9 @@ public class MeasurementPage {
 	public void fillWithImageUpload() throws InterruptedException, IOException {
 		String user = LoginPage.un;
 		int measurementRow = 1;
+//		String sheetName="Sheet2";
+//	 	//utility.CommonMethods.fetchExcelData(filePath, fileName, sheetName);
+//		Sheet sh=commonMethods.fetchExcelSheet(filePath, fileName, sheetName);
 		File file = new File(filePath + fileName);
 		// Create an object of FileInputStream class to read excel file
 		FileInputStream fis = new FileInputStream(file);
@@ -901,141 +976,145 @@ public class MeasurementPage {
 		int newRowDelete = 0;
 		if (user.equalsIgnoreCase("tltestus")) {
 			// int rowLocation = 0;
-			tlAddRowIcon.click();
-			drpDownData.pageWait(systemDrpDwn);
-			for (measurementRow = 1; measurementRow <= rowCount; measurementRow++) {
-				Row row = sh.getRow(measurementRow);
-				// Create a loop to print cell values in a row
-				// Getting a excel data in string variable
-				String system = row.getCell(0).getStringCellValue().trim();
-				String systemDescription = row.getCell(1).getStringCellValue().trim();
-				String type = row.getCell(2).getStringCellValue().trim();
-				String description = row.getCell(3).getStringCellValue().trim();
-				int width = (int) row.getCell(4).getNumericCellValue();
-				int height = (int) row.getCell(5).getNumericCellValue();
-				int depth = (int) row.getCell(6).getNumericCellValue();
-				String imageFileName = row.getCell(12).getStringCellValue().trim();
-				Thread.sleep(1000);
-				systemDrpDwn.click();
-				Thread.sleep(1500);
-				for (WebElement liSystem : systemDrpDwnLi) {
-					String systemTxt = liSystem.getText();
-					// String system = "Garage";
-					if (system.equalsIgnoreCase(systemTxt)) {
-						liSystem.click();
-						Thread.sleep(1000);
-						break;
-					}
-				}
-				systemDesTxtBox.clear();
-				Thread.sleep(500);
-				systemDesTxtBox.sendKeys(systemDescription);
-				Thread.sleep(500);
-				typeDrpDwn.click();
-				Thread.sleep(1000);
-				for (WebElement liType : typeDrpDwnLi) {
-					String typeTxt = liType.getText();
-					// String actualType = "Bikes";
-					if (typeTxt.equalsIgnoreCase(type)) {
-						liType.click();
-						Thread.sleep(2000);
-						break;
-					}
-				}
-				storageDescTxtBox.clear();
-				Thread.sleep(1000);
-				boolean visibilityStorageDescTxtBox = storageDescTxtBox.isEnabled();
-				if (visibilityStorageDescTxtBox == true) {
-					storageDescTxtBox.sendKeys(description);
-					Thread.sleep(1000);
-				}
-				boolean visibilityTlWidthTxtBox = tlWidthTxtBox.isEnabled();
-				if (visibilityTlWidthTxtBox == true) {
-					tlWidthTxtBox.clear();
-					Thread.sleep(500);
-					tlWidthTxtBox.sendKeys(String.valueOf(width));
-					Thread.sleep(500);
-					widthDrpDwn.click();
-					Thread.sleep(1000);
-					tlWidthFraction.click();
-					Thread.sleep(1000);
-				}
-				boolean visibilityTlHeight = tlHeight.isEnabled();
-				if (visibilityTlHeight == true) {
-					tlHeight.clear();
-					Thread.sleep(1000);
-					tlHeight.sendKeys(String.valueOf(height));
-					Thread.sleep(1000);
-					tlHeightDrpDwn.click();
-					Thread.sleep(1000);
-					tlHeightFraction.click();
-					Thread.sleep(1000);
-				}
-				boolean visibilityTlDepth = tlDepth.isEnabled();
-				if (visibilityTlDepth == true) {
-					tlDepth.clear();
-					Thread.sleep(1000);
-					tlDepth.sendKeys(String.valueOf(depth));
-					Thread.sleep(1000);
-					tlDepthDrpDwn.click();
-					Thread.sleep(1000);
-					tlDepthFraction.click();
-					Thread.sleep(1000);
-				}
-				/* Upload image */
-				try {
-					if (measurementRow >= 2) {
-						driver.findElement(By.xpath("//tr[" + measurementRow + "]/td[11]/div/i[@class='fas fa-times']"))
-								.click();
-						Thread.sleep(500);
-					}
-				} catch (Exception e) {
+						tlAddRowIcon.click();
+						drpDownData.pageWait(systemDrpDwn);
+						for (measurementRow = 1; measurementRow <= rowCount; measurementRow++) {
+							Row row = sh.getRow(measurementRow);
+							// Create a loop to print cell values in a row
+							// Getting a excel data in string variable
+							String system = row.getCell(0).getStringCellValue().trim();
+							String systemDescription = row.getCell(1).getStringCellValue().trim();
+							String type = row.getCell(2).getStringCellValue().trim();
+							String description = row.getCell(3).getStringCellValue().trim();
+							int width = (int) row.getCell(4).getNumericCellValue();
+							int height = (int) row.getCell(5).getNumericCellValue();
+							int depth = (int) row.getCell(6).getNumericCellValue();
+							String imageFileName = row.getCell(12).getStringCellValue().trim();
+							Thread.sleep(1000);
+							systemDrpDwn.click();
+							Thread.sleep(1500);
+							for (WebElement liSystem : systemDrpDwnLi) {
+								String systemTxt = liSystem.getText();
+								// String system = "Garage";
+								if (system.equalsIgnoreCase(systemTxt)) {
+									liSystem.click();
+									Thread.sleep(1000);
+									break;
+								}
+							}
+							systemDesTxtBox.clear();
+							Thread.sleep(500);
+							systemDesTxtBox.sendKeys(systemDescription);
+							Thread.sleep(500);
+							typeDrpDwn.click();
+							Thread.sleep(1000);
+							for (WebElement liType : typeDrpDwnLi) {
+								String typeTxt = liType.getText();
+								// String actualType = "Bikes";
+								if (typeTxt.equalsIgnoreCase(type)) {
+									liType.click();
+									Thread.sleep(2000);
+									break;
+								}
+							}
+							storageDescTxtBox.clear();
+							Thread.sleep(1000);
+							boolean visibilityStorageDescTxtBox = storageDescTxtBox.isEnabled();
+							if (visibilityStorageDescTxtBox == true) {
+								storageDescTxtBox.sendKeys(description);
+								Thread.sleep(1000);
+							}
+							boolean visibilityTlWidthTxtBox = tlWidthTxtBox.isEnabled();
+							if (visibilityTlWidthTxtBox == true) {
+								tlWidthTxtBox.clear();
+								Thread.sleep(500);
+								tlWidthTxtBox.sendKeys(String.valueOf(width));
+								Thread.sleep(500);
+								widthDrpDwn.click();
+								Thread.sleep(1000);
+								tlWidthFraction.click();
+								Thread.sleep(1000);
+							}
+							boolean visibilityTlHeight = tlHeight.isEnabled();
+							if (visibilityTlHeight == true) {
+								tlHeight.clear();
+								Thread.sleep(1000);
+								tlHeight.sendKeys(String.valueOf(height));
+								Thread.sleep(1000);
+								tlHeightDrpDwn.click();
+								Thread.sleep(1000);
+								tlHeightFraction.click();
+								Thread.sleep(1000);
+							}
+							boolean visibilityTlDepth = tlDepth.isEnabled();
+							if (visibilityTlDepth == true) {
+								tlDepth.clear();
+								Thread.sleep(1000);
+								tlDepth.sendKeys(String.valueOf(depth));
+								Thread.sleep(1000);
+								tlDepthDrpDwn.click();
+								Thread.sleep(1000);
+								tlDepthFraction.click();
+								Thread.sleep(1000);
+							}
+							// Upload image 
+							try {
+								if (measurementRow >= 2) {
+									driver.findElement(By.xpath("//tr[" + measurementRow + "]/td[11]/div/i[@class='fas fa-times']"))
+											.click();
+									Thread.sleep(500);
+								}
+							} catch (Exception e) {
 
+							}
+							WebElement cameraIcon = driver.findElement(By.xpath(
+									"//tr[" + measurementRow + "]/td[11]/ul/li/div/button[@class='plus_but dropdown-toggle']"));
+							cameraIcon.click();
+							Thread.sleep(500);
+							WebElement uploadPhoto = driver
+									.findElement(By.xpath("//tr[" + measurementRow + "]/td[11]/ul/li/div/ul/li/div/input"));
+							// Actions actUploadPhoto = new Actions(driver);
+							// actUploadPhoto.moveToElement(uploadPhoto).click().perform();
+							uploadPhoto.sendKeys(System.getProperty("user.dir") + "\\Images\\" + imageFileName + "");
+							if (measurementRow <= 3) {
+								driver.findElement(By.xpath("//*[@id='gridEditMeasurements']/div[3]/table/tbody/tr["
+										+ measurementRow + "]/td[13]/ul/li/div/button")).click();
+								Thread.sleep(2000);
+								driver.findElement(By.xpath("//*[@id='gridEditMeasurements']/div[3]/table/tbody/tr["
+										+ measurementRow + "]/td[13]/ul/li/div/ul/li[2]")).click();
+								Thread.sleep(3000);
+							}
+							WebElement imageUploadCloseIcon = driver.findElement(By.xpath("//i[@class='fas fa-times']"));
+							drpDownData.elementToBeClickable(imageUploadCloseIcon);
+							if (measurementRow <= 3) {
+								//icon click 
+								// beforeCloneClick.click();
+								newRowDelete = measurementRow + 1;
+								//deleteRowWait.click();
+								deleteRowWait=driver.findElement(By.xpath("//*[@id='gridEditMeasurements']/div[3]/table/tbody/tr[" + newRowDelete + "]/td[13]"));
+								drpDownData.elementToBeClickable(deleteRowWait);
+								Thread.sleep(1000);
+								driver.findElement(By.xpath("//*[@id='gridEditMeasurements']/div[3]/table/tbody/tr[" + newRowDelete + "]/td[13]/ul/li/div/button")).click();
+								//drpDownData.pageWait(pageLoad);
+								Thread.sleep(1000);
+								// cloneClick.click();
+								driver.findElement(By.xpath("//*[@id='gridEditMeasurements']/div[3]/table/tbody/tr[" + newRowDelete
+										+ "]/td[13]/ul/li/div/ul/li[3]")).click();
+								drpDownData.pageWait(saveMeasure);
+								Thread.sleep(2000);
+								driver.findElement(By.xpath("//*[@id='gridEditMeasurements']/div[3]/table/tbody/tr["
+										+ measurementRow + "]/td[13]/ul/li/div/button")).click();
+								Thread.sleep(1000);
+								// cloneClick.click();
+								driver.findElement(By.xpath("//*[@id='gridEditMeasurements']/div[3]/table/tbody/tr["
+										+ measurementRow + "]/td[13]/ul/li/div/ul/li[2]")).click();
+								drpDownData.pageWait(saveMeasure);
+								Thread.sleep(2000);
+							}
+							rowLocation++;
+						}
+					}
 				}
-				WebElement cameraIcon = driver.findElement(By.xpath(
-						"//tr[" + measurementRow + "]/td[11]/ul/li/div/button[@class='plus_but dropdown-toggle']"));
-				cameraIcon.click();
-				Thread.sleep(500);
-				WebElement uploadPhoto = driver
-						.findElement(By.xpath("//tr[" + measurementRow + "]/td[11]/ul/li/div/ul/li/div/input"));
-				// Actions actUploadPhoto = new Actions(driver);
-				// actUploadPhoto.moveToElement(uploadPhoto).click().perform();
-				uploadPhoto.sendKeys(System.getProperty("user.dir") + "\\Images\\" + imageFileName + "");
-				if (measurementRow <= 3) {
-					driver.findElement(By.xpath("//*[@id='gridEditMeasurements']/div[3]/table/tbody/tr["
-							+ measurementRow + "]/td[13]/ul/li/div/button")).click();
-					Thread.sleep(300);
-					driver.findElement(By.xpath("//*[@id='gridEditMeasurements']/div[3]/table/tbody/tr["
-							+ measurementRow + "]/td[13]/ul/li/div/ul/li[2]")).click();
-					Thread.sleep(300);
-				}
-				WebElement imageUploadCloseIcon = driver.findElement(By.xpath("//i[@class='fas fa-times']"));
-				drpDownData.elementToBeClickable(imageUploadCloseIcon);
-				if (measurementRow <= 3) {
-					/* ... icon click */
-					// beforeCloneClick.click();
-					newRowDelete = measurementRow + 1;
-					driver.findElement(By.xpath("//*[@id='gridEditMeasurements']/div[3]/table/tbody/tr[" + newRowDelete
-							+ "]/td[13]/ul/li/div/button")).click();
-					Thread.sleep(1000);
-					// cloneClick.click();
-					driver.findElement(By.xpath("//*[@id='gridEditMeasurements']/div[3]/table/tbody/tr[" + newRowDelete
-							+ "]/td[13]/ul/li/div/ul/li[3]")).click();
-					drpDownData.pageWait(saveMeasure);
-					Thread.sleep(2000);
-					driver.findElement(By.xpath("//*[@id='gridEditMeasurements']/div[3]/table/tbody/tr["
-							+ measurementRow + "]/td[13]/ul/li/div/button")).click();
-					Thread.sleep(1000);
-					// cloneClick.click();
-					driver.findElement(By.xpath("//*[@id='gridEditMeasurements']/div[3]/table/tbody/tr["
-							+ measurementRow + "]/td[13]/ul/li/div/ul/li[2]")).click();
-					drpDownData.pageWait(saveMeasure);
-					Thread.sleep(2000);
-				}
-				rowLocation++;
-			}
-		}
-	}
 
 	public void saveMeasurement() throws InterruptedException {
 		String user = LoginPage.un;
@@ -1043,15 +1122,428 @@ public class MeasurementPage {
 			saveMeasure.click();
 			Thread.sleep(2000);
 			// drpDownData = new utility.CommonMethods();
-			drpDownData.pageWait(editIconClick);
-			Thread.sleep(3000);
+			//drpDownData.pageWait(editIconClick);
+			//Thread.sleep(5000);
 		}
 		if (user.equalsIgnoreCase("tltestus")) {
 			saveMeasure.click();
 			Thread.sleep(2000);
 			drpDownData.pageWait(tlAddRowIcon);
-			Thread.sleep(3000);
+			Thread.sleep(5000);
 		}
+	}
+	
+	public void copyLine() throws InterruptedException, IOException {
+		if(user.equalsIgnoreCase("bbtestus")) {
+			
+//				String sheetName="Sheet1";
+//				commonMethods.fetchExcelSheet(filePath, fileName, sheetName);
+				 //utility.CommonMethods.fetchExcelData(filePath, fileName, sheetName);
+				//		//Read excel file to fetch input data
+				File file = new File(filePath + fileName);
+				FileInputStream fis = new FileInputStream(file);
+				Workbook wb = null;
+			//Choose excel file type by its extension
+				String fileExtension = fileName.substring(fileName.indexOf("."));
+				if (fileExtension.equals(".xlsx")) {
+					wb = new XSSFWorkbook(fis);
+				}
+				else if (fileExtension.equals(".xls")) {
+					wb = new HSSFWorkbook(fis);
+				}
+			//Fetch data from first sheet of workbook
+				//Workbook wb=null;
+				Sheet sh1 = wb.getSheet("Sheet1");
+				Sheet sh2 = wb.getSheet("Sheet2");
+			//get total row count of sheet
+				//int rowCountOfSheet1=sh1.getLastRowNum();
+				int rowCount=sh2.getLastRowNum();
+			//select first row of sheet	
+				Row row = sh1.getRow(1);
+				//Row sheetRow = sh2.getRow(1);
+				gridSize = measurementPageRowGrid.size();
+				//System.out.println(gridSize);
+				int copyTime = (int) row.getCell(13).getNumericCellValue();
+				//int copyRowNo = (int) row.getCell(14).getNumericCellValue();
+
+		copyLineEnableIcon.click();
+		Thread.sleep(1000);
+		requiredRow.sendKeys(String.valueOf(gridSize));
+		requiredTime.sendKeys(String.valueOf(copyTime));
+		Thread.sleep(1000);
+		copyClick.click();
+		drpDownData.elementToBeClickable(copyClick);
+		int gridSize1 = measurementPageRowGrid.size();
+		Thread.sleep(500);
+		int rowLocation=gridSize+1;
+		for(int i=rowLocation;i<=gridSize1;i++) {
+		int rowLocation1=gridSize-1;
+		Row sheetRow = sh2.getRow(i);
+		int widthRow = (int) sheetRow.getCell(10).getNumericCellValue();
+		int heightRow = (int) sheetRow.getCell(11).getNumericCellValue();
+	/* Width text box value */
+		width = driver.findElement(By.xpath("//input[@id='width" + gridSize + "']"));
+		elementWait.scrollAction(width);
+		width.click();
+		//width.clear();
+		Thread.sleep(500);
+		width.sendKeys(String.valueOf(widthRow));
+		Thread.sleep(500);
+		/* Width Range drop down selection */
+		widthDrpDown = driver.findElement(By.xpath(
+				"//div[@id='gridEditMeasurements']/div[3]/table/tbody/tr[" + rowLocation + "]/td[6]/div/div/span"));
+		elementWait.scrollAction(widthDrpDown);
+		widthDrpDown.click();
+		Thread.sleep(1000);
+		widthRange = driver.findElement(By.xpath("//ul[@id='widthFraction" + gridSize + "_listbox']/li[5]"));
+		elementWait.scrollAction(widthRange);
+		widthRange.click();
+		Thread.sleep(600);
+		/* Height text box value */
+		height = driver.findElement(By.xpath("//input[@id='height" + gridSize + "']"));
+		elementWait.scrollAction(height);
+		height.click();
+		//height.clear();
+		Thread.sleep(500);
+		height.sendKeys(String.valueOf(heightRow));
+		Thread.sleep(500);
+		/* Height Range drop down selection */
+		heightRangeDrpDown = driver.findElement(By.xpath(
+				"//div[@id='gridEditMeasurements']/div[3]/table/tbody/tr[" + rowLocation + "]/td[7]/div/div/span"));
+		elementWait.scrollAction(heightRangeDrpDown);
+		heightRangeDrpDown.click();
+		Thread.sleep(1000);
+		heightRange = driver
+				.findElement(By.xpath("//ul[@id='heightFraction" + gridSize + "_listbox']/li[3]"));
+		elementWait.scrollAction(heightRange);
+		heightRange.click();
+		Thread.sleep(1500);
+		gridSize++;
+		rowLocation++;
+		}
+		//elementWait.pageWait(saveMeasure);
+	}
+}
+	public void fillRowDataWithImageUpload() throws InterruptedException, IOException {
+		//String user = LoginPage.un;
+		
+		File file = new File(filePath + fileName);
+		// Create an object of FileInputStream class to read excel file
+		FileInputStream fis = new FileInputStream(file);
+		Workbook wb = null;
+		// Find the file extension by splitting file name in substring and getting only
+		// extension name
+		String fileExtension = fileName.substring(fileName.indexOf("."));
+		if (fileExtension.equals(".xlsx")) {
+			// If it is xlsx file then create object of XSSFWorkbook class
+			wb = new XSSFWorkbook(fis);
+			// Sheet sh=wb.getSheet(0);
+		} else if (fileExtension.equals(".xls")) {
+			// If it is xls file then create object of HSSFWorkbook class
+			wb = new HSSFWorkbook(fis);
+		}
+		// Read sheet inside the workbook by its name
+		Sheet sh = wb.getSheet("Sheet2");
+		// Find number of rows in excel file
+		int rowCount = sh.getLastRowNum();
+		int rowCount1=rowCount-1;
+		//System.out.println(rowCount1);
+		// Create a loop all around the rows in excel sheet
+		int rowLocation = 0;
+		if (user.equalsIgnoreCase("bbtestus")) {
+			editIconClick.click();
+			drpDownData.pageWait(addNewMeasurementLine);
+			// Create an object of File class to open xlsx file
+			addNewMeasurementLine.click();
+			Thread.sleep(2000);
+			WebElement roomDrpDown = driver.findElement(By.xpath("//input[@id='roomLocation0']"));
+			drpDownData.elementToBeClickable(roomDrpDown);
+			Thread.sleep(2000);
+			for (int i = 1; i <=rowCount1; i++) {
+				Row row = sh.getRow(i);
+				// Create a loop to print cell values in a row
+				// Getting a excel data in string variable
+				String roomRow = row.getCell(7).getStringCellValue().trim();
+				String windowRow = row.getCell(8).getStringCellValue().trim();
+				String mountRow = row.getCell(9).getStringCellValue().trim();
+				int widthRow = (int) row.getCell(10).getNumericCellValue();
+				int heightRow = (int) row.getCell(11).getNumericCellValue();
+				String imageFileName = row.getCell(12).getStringCellValue().trim();
+				// System.out.println(roomRow);
+				/* Room drop down selection */
+				roomDrpDown = driver.findElement(
+						By.xpath("//div[@id='gridEditMeasurements']/div[3]/table/tbody/tr[" + i + "]/td[2]/div/span"));
+				roomDrpDown.click();
+				Thread.sleep(600);
+				int roomSize = roomDrpDowmLi.size();
+				for (int r = 1; r < roomSize; r++) {
+					WebElement roomDrp = driver.findElement(By.xpath("//ul[@id='roomLocation" + rowLocation
+							+ "_listbox' and @aria-hidden='false']/li[" + r + "]"));
+					String roomTxt = roomDrp.getText().trim();
+					if (roomTxt.equalsIgnoreCase(roomRow)) {
+						drpDownData.scrollDown(roomDrp);
+						Thread.sleep(1000);
+						roomDrp.click();
+						Thread.sleep(600);
+						break;
+					}
+				}
+				// drpDownData.scrollDown(roomDrp);
+				Thread.sleep(600);
+				/* Window Location drop down selection */
+				WinDrpDown = driver.findElement(
+						By.xpath("//div[@id='gridEditMeasurements']/div[3]/table/tbody/tr[" + i + "]/td[3]/div/span"));
+				WinDrpDown.click();
+				Thread.sleep(600);
+				int windowSize = windowLi.size();
+				// System.out.println(windowSize);
+				for (int j = 1; j <= windowSize; j++) {
+					String windowText = driver.findElement(By.xpath("//ul[@id='windowLocation" + rowLocation
+							+ "_listbox' and @aria-hidden='false']/li[" + j + "]")).getText().trim();
+					if (windowRow.equalsIgnoreCase(windowText)) {
+
+						WebElement winDrp = driver.findElement(By.xpath("//ul[@id='windowLocation" + rowLocation
+								+ "_listbox' and @aria-hidden='false']/li[" + j + "]"));
+						drpDownData.scrollDown(winDrp);
+						Thread.sleep(1000);
+						winDrp.click();
+						Thread.sleep(600);
+						break;
+					}
+				}
+				/* Mount Type drop down selection */
+				mountTypeDrpDown = driver.findElement(
+						By.xpath("//div[@id='gridEditMeasurements']/div[3]/table/tbody/tr[" + i + "]/td[5]/div/span"));
+				mountTypeDrpDown.click();
+				// int mountSize = mountType.size();
+				// int mountSize = 10;
+				List<WebElement> mountSize1 = driver
+						.findElements(By.xpath("(//ul[@id='mount" + rowLocation + "_listbox']/li)"));
+				int sizeOfMount = mountSize1.size();
+				// System.out.println(sizeOfMount);
+				for (int k = 1; k <= sizeOfMount; k++) {
+					String mountText = driver.findElement(By.xpath(
+							"//ul[@id='mount" + rowLocation + "_listbox' and @aria-hidden='false']/li[" + k + "]"))
+							.getText().trim();
+					// System.out.println(mountText);
+					if (mountRow.equalsIgnoreCase(mountText)) {
+						driver.findElement(By.xpath(
+								"//ul[@id='mount" + rowLocation + "_listbox' and @aria-hidden='false']/li[" + k + "]"))
+								.click();
+						Thread.sleep(600);
+						break;
+					}
+				}
+				/* Width text box value */
+				width = driver.findElement(By.xpath("//input[@id='width" + rowLocation + "']"));
+				width.click();
+				width.clear();
+				Thread.sleep(500);
+				width.sendKeys(String.valueOf(widthRow));
+				Thread.sleep(500);
+				/* Width Range drop down selection */
+				widthDrpDown = driver.findElement(By.xpath(
+						"//div[@id='gridEditMeasurements']/div[3]/table/tbody/tr[" + i + "]/td[6]/div/div/span"));
+				widthDrpDown.click();
+				Thread.sleep(1000);
+				widthRange = driver.findElement(By.xpath("//ul[@id='widthFraction" + rowLocation + "_listbox']/li[5]"));
+				widthRange.click();
+				Thread.sleep(600);
+				/* Height text box value */
+				height = driver.findElement(By.xpath("//input[@id='height" + rowLocation + "']"));
+				height.click();
+				height.clear();
+				Thread.sleep(500);
+				height.sendKeys(String.valueOf(heightRow));
+				Thread.sleep(500);
+				/* Height Range drop down selection */
+				heightRangeDrpDown = driver.findElement(By.xpath(
+						"//div[@id='gridEditMeasurements']/div[3]/table/tbody/tr[" + i + "]/td[7]/div/div/span"));
+				heightRangeDrpDown.click();
+				Thread.sleep(1000);
+				heightRange = driver
+						.findElement(By.xpath("//ul[@id='heightFraction" + rowLocation + "_listbox']/li[3]"));
+				heightRange.click();
+				Thread.sleep(1500);
+
+				/* Upload image */
+				try {
+					if (i > 1) {
+						driver.findElement(
+								By.xpath("//tr[" + i + "]/td[8]/div/i[@class='fas fa-times show_cameraicon']")).click();
+						Thread.sleep(500);
+					}
+				} catch (Exception e) {
+
+				}
+				WebElement cameraIcon = driver.findElement(
+						By.xpath("//tr[" + i + "]/td[8]/ul/li/div/button[@class='plus_but dropdown-toggle']"));
+				cameraIcon.click();
+				Thread.sleep(500);
+				WebElement uploadPhoto = driver
+						.findElement(By.xpath("//tr[" + i + "]/td[8]/ul/li/div/ul/li/div/input"));
+				// Actions actUploadPhoto = new Actions(driver);
+				// actUploadPhoto.moveToElement(uploadPhoto).click().perform();
+				uploadPhoto.sendKeys(System.getProperty("user.dir") + "\\Images\\" + imageFileName + "");
+				/* Wait for image wait*/
+				Thread.sleep(3000);
+				if (i < rowCount1) {
+					driver.findElement(By.xpath(
+							"//*[@id='gridEditMeasurements']/div[3]/table/tbody/tr[" + i + "]/td[10]/ul/li/div/button"))
+							.click();
+					Thread.sleep(300);
+					driver.findElement(By.xpath("//*[@id='gridEditMeasurements']/div[3]/table/tbody/tr[" + i
+							+ "]/td[10]/ul/li/div/ul/li[1]")).click();
+					// Thread.sleep(300);
+				WebElement imageUploadCloseIcon = driver.findElement(By.id("photoCameraIcon" + rowLocation + ""));
+				drpDownData.elementToBeClickable(imageUploadCloseIcon);
+				}
+				rowLocation++;
+			}
+			elementWait.pageWait(saveMeasure);
+		}
+	
+		
+
+
+if (user.equalsIgnoreCase("tltestus")) {
+	// int rowLocation = 0;
+	tlAddRowIcon.click();
+	drpDownData.pageWait(systemDrpDwn);
+	for (measurementRow = 1; measurementRow <= rowCount1; measurementRow++) {
+		Row row = sh.getRow(measurementRow);
+		// Create a loop to print cell values in a row
+		// Getting a excel data in string variable
+		String system = row.getCell(0).getStringCellValue().trim();
+		String systemDescription = row.getCell(1).getStringCellValue().trim();
+		String type = row.getCell(2).getStringCellValue().trim();
+		String description = row.getCell(3).getStringCellValue().trim();
+		int width = (int) row.getCell(4).getNumericCellValue();
+		int height = (int) row.getCell(5).getNumericCellValue();
+		int depth = (int) row.getCell(6).getNumericCellValue();
+		String imageFileName = row.getCell(12).getStringCellValue().trim();
+		Thread.sleep(1000);
+		//drpDownData.pageWait(systemDrpDwn);
+		systemDrpDwn.click();
+		Thread.sleep(2000);
+		for (WebElement liSystem : systemDrpDwnLi) {
+			String systemTxt = liSystem.getText();
+			// String system = "Garage";
+			if (system.equalsIgnoreCase(systemTxt)) {
+				liSystem.click();
+				Thread.sleep(1000);
+				break;
+			}
+		}
+		systemDesTxtBox.click();
+		drpDownData.pageWait(systemDesTxtBox);
+		systemDesTxtBox.clear();
+		Thread.sleep(1000);
+		systemDesTxtBox.sendKeys(systemDescription);
+		Thread.sleep(500);
+		typeDrpDwn.click();
+		Thread.sleep(1000);
+		for (WebElement liType : typeDrpDwnLi) {
+			String typeTxt = liType.getText();
+			// String actualType = "Bikes";
+			if (typeTxt.equalsIgnoreCase(type)) {
+				liType.click();
+				Thread.sleep(2000);
+				break;
+			}
+		}
+		storageDescTxtBox.click();
+		Thread.sleep(500);
+		storageDescTxtBox.clear();
+		Thread.sleep(1000);
+		boolean visibilityStorageDescTxtBox = storageDescTxtBox.isEnabled();
+		if (visibilityStorageDescTxtBox == true) {
+			drpDownData.isClickable(storageDescTxtBox);
+			storageDescTxtBox.sendKeys(description);
+			Thread.sleep(1000);
+		}
+		boolean visibilityTlWidthTxtBox = tlWidthTxtBox.isEnabled();
+		if (visibilityTlWidthTxtBox == true) {
+			tlWidthTxtBox.click();
+			drpDownData.elementToBeClickable(tlWidthTxtBox);
+			tlWidthTxtBox.clear();
+			Thread.sleep(2000);
+			tlWidthTxtBox.sendKeys(String.valueOf(width));
+			drpDownData.pageWait(widthDrpDwn);
+			widthDrpDwn.click();
+			Thread.sleep(500);
+			drpDownData.pageWait(tlWidthFraction);
+			tlWidthFraction.click();
+			Thread.sleep(1000);
+		}
+		boolean visibilityTlHeight = tlHeight.isEnabled();
+		if (visibilityTlHeight == true) {
+			tlHeight.click();
+			drpDownData.elementToBeClickable(tlHeight);
+			tlHeight.clear();
+			Thread.sleep(2000);
+			tlHeight.sendKeys(String.valueOf(height));
+			Thread.sleep(1000);
+			drpDownData.pageWait(tlHeightDrpDwn);
+			tlHeightDrpDwn.click();
+			Thread.sleep(1000);
+			drpDownData.elementToBeClickable(tlHeightFraction);
+			tlHeightFraction.click();
+			Thread.sleep(1000);
+		}
+		boolean visibilityTlDepth = tlDepth.isEnabled();
+		if (visibilityTlDepth == true) {
+			tlDepth.click();
+			drpDownData.elementToBeClickable(tlDepth);
+			tlDepth.clear();
+			Thread.sleep(2000);
+			tlDepth.sendKeys(String.valueOf(depth));
+			Thread.sleep(1000);
+			drpDownData.pageWait(tlDepthDrpDwn);
+			tlDepthDrpDwn.click();
+			Thread.sleep(1000);
+			tlDepthFraction.click();
+			Thread.sleep(1000);
+		}
+		/* Upload image */
+		try {
+			if (measurementRow > 1) {
+				driver.findElement(By.xpath("//tr[" + measurementRow + "]/td[11]/div/i[@class='fas fa-times']"))
+						.click();
+				Thread.sleep(1500);
+			}
+		} catch (Exception e) {
+
+		}
+		WebElement cameraIcon = driver.findElement(By.xpath(
+				"//tr[" + measurementRow + "]/td[11]/ul/li/div/button[@class='plus_but dropdown-toggle']"));
+		cameraIcon.click();
+		Thread.sleep(500);
+		//drpDownData.pageWait(cameraIcon);
+		WebElement uploadPhoto = driver
+				.findElement(By.xpath("//tr[" + measurementRow + "]/td[11]/ul/li/div/ul/li/div/input"));
+		// Actions actUploadPhoto = new Actions(driver);
+		// actUploadPhoto.moveToElement(uploadPhoto).click().perform();
+		//drpDownData.pageWait(uploadPhoto);
+		uploadPhoto.sendKeys(System.getProperty("user.dir") + "\\Images\\" + imageFileName + "");
+		if (measurementRow <rowCount1) {
+			driver.findElement(By.xpath("//*[@id='gridEditMeasurements']/div[3]/table/tbody/tr["
+					+ measurementRow + "]/td[13]/ul/li/div/button")).click();
+			Thread.sleep(300);
+			driver.findElement(By.xpath("//*[@id='gridEditMeasurements']/div[3]/table/tbody/tr["
+					+ measurementRow + "]/td[13]/ul/li/div/ul/li[2]")).click();
+			// Thread.sleep(300);
+		}
+		WebElement imageUploadCloseIcon = driver.findElement(By.xpath("//i[@class='fas fa-times']"));
+		drpDownData.pageWait(imageUploadCloseIcon);
+		Thread.sleep(2000);
+		
+		}
+		rowLocation++;
+	}
 	}
 
 }
+
+				
+

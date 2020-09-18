@@ -14,7 +14,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Properties;
-
+import org.openqa.selenium.interactions.internal.Coordinates;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;
@@ -36,14 +36,14 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
+import org.openqa.selenium.internal.Locatable;
 import pageObjects.LoginPage;
 
 public class CommonMethods {
 	// Hook dr=new Hook();
 	private WebDriver driver;
 	public static Properties prop;
-
+	public static Sheet sh;
 	public CommonMethods() {
 		this.driver = LoginPage.getDriver();
 	}
@@ -55,6 +55,10 @@ public class CommonMethods {
 		Thread.sleep(3000);
 	}
 
+	public void scrollAction(WebElement WebElementName) throws InterruptedException {
+		Coordinates coordinateTxtBox = ((Locatable) WebElementName).getCoordinates();
+		coordinateTxtBox.inViewPort();
+	}
 	public void elementToBeClickable(WebElement pageLoad) throws InterruptedException {
 		// Implicit page load wait based on visibility of web element
 		WebDriverWait wait = new WebDriverWait(driver, 90);
@@ -567,4 +571,26 @@ public class CommonMethods {
 			System.out.print(actualFilterTableRows);
 		}
 	}
+
+
+public  Sheet fetchExcelSheet(String filePath, String fileName, String sheetName) throws IOException
+{
+//Excel sheet file location
+	File file = new File(filePath + fileName);
+	FileInputStream fis= new FileInputStream(file);  
+ //get workbook
+    Workbook wb = null;
+// Choose excel file type by its extension
+    String fileExtension = fileName.substring(fileName.indexOf("."));
+    if (fileExtension.equals(".xlsx")) {
+		wb = new XSSFWorkbook(fis);
+	} else if (fileExtension.equals(".xls")) {
+		wb = new HSSFWorkbook(fis);
+	}
+	// get work sheet from workbook
+     sh = wb.getSheet("sheetName");
+	return sh;
 }
+
+}
+
