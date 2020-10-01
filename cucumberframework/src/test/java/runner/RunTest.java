@@ -18,7 +18,7 @@ import cucumber.api.testng.TestNGCucumberRunner;
 // @RunWith(Cucumber.class)
 
 @CucumberOptions(features = { "src//test//java//features" }, glue = { "stepdefinitions", "utility" }, plugin = {
-		"pretty", "html:target/cucumber" }, monochrome = true, tags = { "@web" })
+		"pretty", "html:target/cucumber" }, monochrome = true, tags = { "@Measurement" })
 //@Test
 public class RunTest {
 	private TestNGCucumberRunner testNGCucumberRunner;

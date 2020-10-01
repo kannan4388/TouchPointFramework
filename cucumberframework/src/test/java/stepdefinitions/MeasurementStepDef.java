@@ -50,7 +50,22 @@ public class MeasurementStepDef extends ExtentReportListener {
 //		}
 			}
 			
-	
+	@Then("^user fills data and verifies alert message when image size exceeds the limit in the measurement page$")
+	public void user_fills_data_and_verifies_alert_message_when_image_size_exceeds_the_limit_in_the_measurement_page()
+			throws Throwable {
+		ExtentTest logInfo = null;
+		
+//		try {
+//			logInfo = test.createNode(new GherkinKeyword("Then"), " user adds new row in the measurement page ");												
+			
+			measure.fillDataAndverifyImageAlertMessage();
+//			logInfo.pass("New row added successfully");// Passing pass log value to extent report
+//		} catch (AssertionError | Exception e) {
+//			testStepHandle("FAIL", driver, logInfo, e);// Passing fail log value to extent report
+//			e.printStackTrace();
+//		}
+			}
+			
 	//@DataProvider
 //	@Then("^user adds new row in the measurement page$-> {String}{String}{String} {String}{String} {String}{String}{String} "
 //			+ "{String}{String} {String}{String} {String}")
@@ -130,6 +145,7 @@ public class MeasurementStepDef extends ExtentReportListener {
 
 	@Then("^user fills the data to measurement$")
 	public void user_fills_the_data_to_measurement() throws Throwable {
+
 
 		ExtentTest logInfo = null;// Intializing variable for extent test report log
 		try {

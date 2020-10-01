@@ -78,7 +78,7 @@ Scenario: 1 This scenario is to validate Measurement_Page by removing already ad
 	Then user saves the measurement page
 	And close the browser at the end
 	
-	Scenario: 4 This scenario is to copy rows in Measurement_Page using copy_Line feature available by which user can copy desire row
+Scenario: 4 This scenario is to copy rows in Measurement_Page using copy_Line feature available by which user can copy desire row
 
 	Given Open Chrome browser and url
 	Given user enters username and password
@@ -104,6 +104,55 @@ Scenario: 1 This scenario is to validate Measurement_Page by removing already ad
 	Then user saves the measurement page
 	And close the browser at the end
 	
+Scenario: 5 This scenario is to validate Measurement_Page by uploading image greater than size limited and verify the alert message displayed.
 
+	Given Open Chrome browser and url         
+	Given user enters username and password
+	Then user clicks on login button
+	Given user clicks the sale icon
+	Given user lands on Lead page
+	Given user enters all mandatory fields data
+	Then user saves the lead page
+	Given user lands on qualify page
+	Then user edits the qualify page
+	Then user enters data to some fields
+	And user saves the qualify page
+	Given user lands on convert lead page
+	Given user fills data
+	Then user convert it as Lead
+	Given user opens Opportunity page
+	When user fills the data
+	Then user saves the screen
+	Given user lands on Measurement page
+	Then user fills data and verifies alert message when image size exceeds the limit in the measurement page
+	Then user saves the measurement page
+	And close the browser at the end
+	
+	Scenario: 6 This scenario is to validate Measurement_Page by comparing width,height values with their equal fraction values 
+				and validate the same with correct values from excel sheet.
+
+	Given Open Chrome browser and url         
+	Given user enters username and password
+	Then user clicks on login button
+	Given user clicks the sale icon
+	Given user lands on Lead page
+	Given user enters all mandatory fields data
+	Then user saves the lead page
+	Given user lands on qualify page
+	Then user edits the qualify page
+	Then user enters data to some fields
+	And user saves the qualify page
+	Given user lands on convert lead page
+	Given user fills data
+	Then user convert it as Lead
+	Given user opens Opportunity page
+	When user fills the data
+	Then user saves the screen
+	Given user lands on Measurement page
+	Then user fills data and verifies alert message when image size exceeds the limit in the measurement page
+	Then user saves the measurement page
+	And close the browser at the end
+	
+	
 
 	

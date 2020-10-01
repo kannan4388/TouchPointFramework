@@ -54,7 +54,19 @@ public class CommonMethods {
 		wait.until(ExpectedConditions.visibilityOf(pageLoad));
 		Thread.sleep(3000);
 	}
-
+	public boolean isAlertPresent() 
+	{ 
+	    try 
+	    { 
+	        driver.switchTo().alert(); 
+	        return true; 
+	    }   // try 
+	    catch (NoAlertPresentException Ex) 
+	    { 
+	        return false; 
+	    }   // catch 
+	}  
+	
 	public void scrollAction(WebElement WebElementName) throws InterruptedException {
 		Coordinates coordinateTxtBox = ((Locatable) WebElementName).getCoordinates();
 		coordinateTxtBox.inViewPort();
@@ -573,8 +585,9 @@ public class CommonMethods {
 	}
 
 
-public  Sheet fetchExcelSheet(String filePath, String fileName, String sheetName) throws IOException
+public static Sheet fetchExcelSheet(String filePath, String fileName, String sheetName) throws IOException,FileNotFoundException
 {
+	
 //Excel sheet file location
 	File file = new File(filePath + fileName);
 	FileInputStream fis= new FileInputStream(file);  
