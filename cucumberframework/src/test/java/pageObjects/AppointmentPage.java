@@ -16,6 +16,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.internal.Coordinates;
 import org.openqa.selenium.internal.Locatable;
 import org.openqa.selenium.support.FindAll;
@@ -234,7 +235,8 @@ public class AppointmentPage {
 						load.scrollTopOfPage();
 						Coordinates coordinate = ((Locatable) clickOnTimeCalendar).getCoordinates();
 						coordinate.inViewPort();
-						clickOnTimeCalendar.click();
+						Actions actions = new Actions(driver);
+						actions.doubleClick(clickOnTimeCalendar).build().perform();
 						Thread.sleep(4000);
 						if (appType.isDisplayed() == true) {
 							break;
@@ -249,7 +251,8 @@ public class AppointmentPage {
 									+ "/td[2]/div/table/tbody/tr[" + rowInc + "]/td"));
 							load.scrollView(clickOnTimeCalendar);
 							Thread.sleep(2000);
-							clickOnTimeCalendar.click();
+							Actions actions = new Actions(driver);
+							actions.doubleClick(clickOnTimeCalendar).build().perform();
 							Thread.sleep(4000);
 							if (appType.isDisplayed() == true) {
 								break;
@@ -273,7 +276,8 @@ public class AppointmentPage {
 							Thread.sleep(600);
 							Coordinates coordinate = ((Locatable) clickOnTimeCalendar).getCoordinates();
 							coordinate.inViewPort();
-							clickOnTimeCalendar.click();
+							Actions actions = new Actions(driver);
+							actions.doubleClick(clickOnTimeCalendar).build().perform();
 							Thread.sleep(4000);
 							if (appType.isDisplayed() == true) {
 								break;
@@ -302,7 +306,8 @@ public class AppointmentPage {
 				Coordinates coordinateTxtBox = ((Locatable) clickOnTimeCalendar).getCoordinates();
 				coordinateTxtBox.inViewPort();
 				load.elementToBeClickable(clickOnTimeCalendar);
-				clickOnTimeCalendar.click();
+				Actions actions = new Actions(driver);
+				actions.doubleClick(clickOnTimeCalendar).build().perform();
 				Thread.sleep(4000);
 				if (appType.isDisplayed() == true) {
 					break;

@@ -33,6 +33,8 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.interactions.internal.Coordinates;
+import org.openqa.selenium.internal.Locatable;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -44,6 +46,7 @@ public class CommonMethods {
 	private WebDriver driver;
 	public static Properties prop;
 	public static Sheet sh;
+
 	public CommonMethods() {
 		this.driver = LoginPage.getDriver();
 	}
@@ -71,6 +74,7 @@ public class CommonMethods {
 		Coordinates coordinateTxtBox = ((Locatable) WebElementName).getCoordinates();
 		coordinateTxtBox.inViewPort();
 	}
+
 	public void elementToBeClickable(WebElement pageLoad) throws InterruptedException {
 		// Implicit page load wait based on visibility of web element
 		WebDriverWait wait = new WebDriverWait(driver, 90);

@@ -14,9 +14,9 @@ Scenario: Verify discount table calculation in quote
 	Given user lands on convert lead page
 	Given user fills data
 	Then user convert it as Lead
-	Given open Add Appointment page
-	When user fill data in Appointment page
-	Then user saves the Appointment
+	# Given open Add Appointment page
+	# When user fill data in Appointment page
+	# Then user saves the Appointment
 	Given user opens Opportunity page
 	When user fills the data
 	Then user saves the screen

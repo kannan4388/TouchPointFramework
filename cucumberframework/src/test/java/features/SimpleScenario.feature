@@ -1,3 +1,4 @@
+@web
 Feature: Smoke Test
 	
 Scenario: End to End testing:Starts from create lead and ends with create MPO Order

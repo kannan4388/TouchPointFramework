@@ -4,6 +4,7 @@ import java.awt.AWTException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.List;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -21,11 +22,14 @@ import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import junit.framework.Assert;
+
 public class QuotesPage {
 	private static String filePath = System.getProperty("user.dir") + "\\InputExcelData\\";
 	private static String fileName = "Quotes.xlsx";
 	public static String user = LoginPage.un;
 	private WebDriver driver;
+	private static DecimalFormat df = new DecimalFormat("0.00");
 	utility.CommonMethods wait = new utility.CommonMethods();;
 
 	@FindBy(xpath = "//li[@class='activelead1']")
@@ -119,6 +123,66 @@ public class QuotesPage {
 
 	@FindBy(xpath = "//button[@data-tooltip='Delete Quote Lines']")
 	WebElement tableDeleteIcon;
+
+	@FindBy(xpath = "//span[@aria-owns='quote_discount_listbox']")
+	WebElement quoteDiscountDrpDwn;
+
+	@FindAll(@FindBy(xpath = "//ul[@id='quote_discount_listbox' and @aria-hidden='false' ]/li"))
+	List<WebElement> quoteDiscountDrpDwnLi;
+
+	@FindBy(xpath = "//tr[1]/td[2]/span/label")
+	WebElement prodSubTotal;
+
+	@FindBy(xpath = "//tr[2]/td[2]/span/label")
+	WebElement totalDiscApplied;
+
+	@FindBy(xpath = "//tr[3]/td[2]/span/label")
+	WebElement additionalCharges;
+
+	@FindBy(xpath = "//tr[4]/td[2]/span/label")
+	WebElement tax;
+
+	@FindBy(xpath = "//tr[5]/td[2]/span/label")
+	WebElement total;
+
+	@FindBy(xpath = "//select[@name='Quote_dis_currency']/option[@selected]")
+	WebElement discountType;
+
+	@FindBy(xpath = "//input[@class='k-formatted-value form-control quote-qty k-input']")
+	WebElement discountValue;
+
+	@FindBy(xpath = "//label[@class='tooltip-bottom font-weight-normal text-center quotetooltip_icon']/a")
+	WebElement discountByProductIcon;
+
+	@FindBy(xpath = "//div[@id='GridGroupDiscount']/div[@class='k-grid-content k-auto-scrollable']/table/tbody/tr")
+	WebElement discountByProdCatgy;
+
+	@FindAll(@FindBy(xpath = "//div[@id='GridGroupDiscount']/div[@class='k-grid-content k-auto-scrollable']/table/tbody/tr"))
+	List<WebElement> discountByProdCatgyTable;
+
+	@FindBy(xpath = "//div[@id='GridGroupDiscount']/div[@class='k-grid-content k-auto-scrollable']/table/tbody/tr[1]/td[1]/span")
+	WebElement productCategory;
+
+	@FindBy(xpath = "//div[@id='GridGroupDiscount']/div[@class='k-grid-content k-auto-scrollable']/table/tbody/tr[1]/td[2]")
+	WebElement discountPercentage;
+
+	@FindBy(xpath = "//*[@id='GridGroupDiscount']/div[2]/table/tbody/tr[1]/td[2]/span/span/input[2]")
+	WebElement discountTxtBox;
+
+	@FindBy(xpath = "//div[@id='GridGroupDiscount']/div[@class='k-grid-content k-auto-scrollable']/table/tbody/tr[1]/td[3]/span")
+	WebElement noOfLines;
+
+	@FindBy(xpath = "//button[@ng-show='QuoteinEditMode']")
+	WebElement discProdCatSaveBtn;
+
+	@FindAll(@FindBy(xpath = "//tr[@class='k-master-row ng-scope']"))
+	List<WebElement> quoteLines;
+
+	@FindBy(xpath = "//tr[@class='k-master-row k-grid-edit-row']/td[4]")
+	WebElement suggestedResale;
+
+	@FindBy(xpath = "//tr[@class='k-master-row k-grid-edit-row']/td[5]/span/span/input")
+	WebElement unitPrice;
 
 	public QuotesPage() {
 		this.driver = LoginPage.getDriver();
@@ -448,5 +512,122 @@ public class QuotesPage {
 		saveQuote.click();
 		wait.elementToBeClickable(createSalesOrderIcon);
 		Thread.sleep(2000);
+	}
+
+	public void discountSetUp() throws InterruptedException {
+		/* Created by kannan on 22-09-2020 */
+		quoteDiscountDrpDwn.click();
+		Thread.sleep(1500);
+		for (WebElement discountName : quoteDiscountDrpDwnLi) {
+			if (discountName.getText().contains("Milage")) {
+				discountName.click();
+				Thread.sleep(800);
+				break;
+			}
+		}
+		saveQuote.click();
+		wait.elementToBeClickable(editQuoteIcon);
+		Thread.sleep(2000);
+		editQuote();
+		// Product sub total field data
+		String productSubTotal = prodSubTotal.getText();
+		String[] arrProdSubTot = productSubTotal.split("\\$");
+		String strProdSubTotal = arrProdSubTot[1].trim();
+		Float finalProdSubTotal = Float.valueOf(strProdSubTotal);
+		// Total Discount Appiled field data
+		String totalDiscountApplied = totalDiscApplied.getText();
+		String[] arrTotDiscApp = totalDiscountApplied.split("\\$");
+		String[] arrTotDiscApp2 = arrTotDiscApp[1].split("\\)");
+		String strTotalDiscApp = arrTotDiscApp2[0].trim();
+		Float finalTotalDiscApp = Float.valueOf(strTotalDiscApp);
+		// Additional Charges field data
+		String addCharges = additionalCharges.getText();
+		String[] arrAddCharge = addCharges.split("\\$");
+		String strAddCharge = arrAddCharge[1].trim();
+		Float finalAddCharges = Float.valueOf(strAddCharge);
+		// Tax field data
+		String taxDisc = tax.getText();
+		String[] arrTax = taxDisc.split("\\$");
+		String strTax = arrTax[1].trim();
+		Float finalTax = Float.valueOf(strTax);
+		// Total Quote field data
+		String totalQuote = total.getText();
+		String[] arrTotal = totalQuote.split("\\$");
+		String strTotal = arrTotal[1].trim();
+		Float total = Float.valueOf(strTotal);
+		Float actualTotal = finalProdSubTotal - finalTotalDiscApp + finalAddCharges + finalTax;
+		// Discount amount calculation
+		String discType = discountType.getText();
+		String strDiscountValue = discountValue.getAttribute("title");
+		Float discountNum = Float.valueOf(strDiscountValue);
+		Float discountAmount;
+		if (discType.equals("%")) {
+			discountAmount = (finalProdSubTotal * discountNum) / 100;
+			Assert.assertEquals(discountAmount, finalTotalDiscApp);
+			if (actualTotal.equals(total)) {
+				System.out.println("Total calculation works fine");
+			} else {
+				System.out.println("Incorrect Total value");
+			}
+		} else if (discType.equals("$")) {
+			discountAmount = discountNum;
+			Assert.assertEquals(discountAmount, finalTotalDiscApp);
+			if (actualTotal.equals(total)) {
+				System.out.println("Total calculation works fine");
+			} else {
+				System.out.println("Incorrect Total value");
+			}
+		}
+
+	}
+
+	/* created by kannan on 23/09/2020 */
+	public void groupDiscount() throws InterruptedException {
+
+		// Discount by Product Category screen
+		wait.scrollUptoBottom();
+		discountByProductIcon.click();
+		wait.elementToBeClickable(discountByProdCatgy);
+		Double discountPercent = 10.00;
+		int sizeOfProductCategory = discountByProdCatgyTable.size();
+		if (sizeOfProductCategory >= 1) {
+			String strProdCategory = productCategory.getText();
+			discountPercentage.click();
+			Thread.sleep(500);
+			discountTxtBox.sendKeys("10");
+			Thread.sleep(500);
+			String strNoOfLines = noOfLines.getText().trim();
+			int noOfLinesPresent = Integer.valueOf(strNoOfLines);
+			discProdCatSaveBtn.click();
+			wait.elementToBeClickable(waitforSpinner);
+			// End of Product Category screen
+			// Quote Lines
+			for (WebElement quoteItem : quoteLines) {
+				int rowCount = 1;
+				String itemColText = driver.findElement(By.xpath("//tr[" + rowCount + "]/td[18]/span")).getText();
+				if (itemColText.equalsIgnoreCase(strProdCategory)) {
+					WebElement rowClick = driver
+							.findElement(By.xpath("//tr[" + rowCount + "]/td[25]/ul/li/div/button"));
+					rowClick.click();
+					Thread.sleep(1000);
+					WebElement editIcon = driver
+							.findElement(By.xpath("//tr[" + rowCount + "]/td[25]/ul/li/div/ul/li[2]"));
+					editIcon.click();
+					Thread.sleep(2000);
+					String strSuggestedResale = suggestedResale.getText();
+					String[] arrStrSuggestedResale = strSuggestedResale.split("\\$");
+					String suggestedResale = arrStrSuggestedResale[1].trim();
+					Float fltSuggestedResale = Float.valueOf(suggestedResale);
+					String strUnitPrice = unitPrice.getAttribute("title");
+					Float fltUnitPrice = Float.valueOf(strUnitPrice);
+					Float discPercent = discountPercent.floatValue();
+					Float discountAmount = (fltSuggestedResale * discPercent) / 100;
+					Float expectedUnitPrice = fltSuggestedResale - discountAmount;
+					Assert.assertEquals(expectedUnitPrice, fltUnitPrice);
+					System.out.println("Expected unit price and Actual Price are same");
+				}
+			}
+			// End of Quote lines discount calculation
+		}
 	}
 }
