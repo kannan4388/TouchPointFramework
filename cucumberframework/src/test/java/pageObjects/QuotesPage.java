@@ -585,49 +585,52 @@ public class QuotesPage {
 	public void groupDiscount() throws InterruptedException {
 
 		// Discount by Product Category screen
-		wait.scrollUptoBottom();
-		discountByProductIcon.click();
-		wait.elementToBeClickable(discountByProdCatgy);
-		Double discountPercent = 10.00;
-		int sizeOfProductCategory = discountByProdCatgyTable.size();
-		if (sizeOfProductCategory >= 1) {
-			String strProdCategory = productCategory.getText();
-			discountPercentage.click();
-			Thread.sleep(500);
-			discountTxtBox.sendKeys("10");
-			Thread.sleep(500);
-			String strNoOfLines = noOfLines.getText().trim();
-			int noOfLinesPresent = Integer.valueOf(strNoOfLines);
-			discProdCatSaveBtn.click();
-			wait.elementToBeClickable(waitforSpinner);
-			// End of Product Category screen
-			// Quote Lines
-			for (WebElement quoteItem : quoteLines) {
-				int rowCount = 1;
-				String itemColText = driver.findElement(By.xpath("//tr[" + rowCount + "]/td[18]/span")).getText();
-				if (itemColText.equalsIgnoreCase(strProdCategory)) {
-					WebElement rowClick = driver
-							.findElement(By.xpath("//tr[" + rowCount + "]/td[25]/ul/li/div/button"));
-					rowClick.click();
-					Thread.sleep(1000);
-					WebElement editIcon = driver
-							.findElement(By.xpath("//tr[" + rowCount + "]/td[25]/ul/li/div/ul/li[2]"));
-					editIcon.click();
-					Thread.sleep(2000);
-					String strSuggestedResale = suggestedResale.getText();
-					String[] arrStrSuggestedResale = strSuggestedResale.split("\\$");
-					String suggestedResale = arrStrSuggestedResale[1].trim();
-					Float fltSuggestedResale = Float.valueOf(suggestedResale);
-					String strUnitPrice = unitPrice.getAttribute("title");
-					Float fltUnitPrice = Float.valueOf(strUnitPrice);
-					Float discPercent = discountPercent.floatValue();
-					Float discountAmount = (fltSuggestedResale * discPercent) / 100;
-					Float expectedUnitPrice = fltSuggestedResale - discountAmount;
-					Assert.assertEquals(expectedUnitPrice, fltUnitPrice);
-					System.out.println("Expected unit price and Actual Price are same");
+		if (user.equalsIgnoreCase("bbtestus")) {
+			wait.scrollUptoBottom();
+			discountByProductIcon.click();
+			wait.elementToBeClickable(discountByProdCatgy);
+			Double discountPercent = 10.00;
+			int sizeOfProductCategory = discountByProdCatgyTable.size();
+			if (sizeOfProductCategory >= 1) {
+				String strProdCategory = productCategory.getText();
+				discountPercentage.click();
+				Thread.sleep(500);
+				discountTxtBox.sendKeys("10");
+				Thread.sleep(500);
+				String strNoOfLines = noOfLines.getText().trim();
+				int noOfLinesPresent = Integer.valueOf(strNoOfLines);
+				discProdCatSaveBtn.click();
+				wait.elementToBeClickable(waitforSpinner);
+				// End of Product Category screen
+				// Quote Lines
+				for (WebElement quoteItem : quoteLines) {
+					int rowCount = 1;
+					String itemColText = driver.findElement(By.xpath("//tr[" + rowCount + "]/td[18]/span")).getText();
+					if (itemColText.equalsIgnoreCase(strProdCategory)) {
+						WebElement rowClick = driver
+								.findElement(By.xpath("//tr[" + rowCount + "]/td[25]/ul/li/div/button"));
+						rowClick.click();
+						Thread.sleep(1000);
+						WebElement editIcon = driver
+								.findElement(By.xpath("//tr[" + rowCount + "]/td[25]/ul/li/div/ul/li[2]"));
+						editIcon.click();
+						Thread.sleep(2000);
+						String strSuggestedResale = suggestedResale.getText();
+						String[] arrStrSuggestedResale = strSuggestedResale.split("\\$");
+						String suggestedResale = arrStrSuggestedResale[1].trim();
+						Float fltSuggestedResale = Float.valueOf(suggestedResale);
+						String strUnitPrice = unitPrice.getAttribute("title");
+						Float fltUnitPrice = Float.valueOf(strUnitPrice);
+						Float discPercent = discountPercent.floatValue();
+						Float discountAmount = (fltSuggestedResale * discPercent) / 100;
+						Float expectedUnitPrice = fltSuggestedResale - discountAmount;
+						Assert.assertEquals(expectedUnitPrice, fltUnitPrice);
+						System.out.println("Expected unit price and Actual Price are same");
+					}
 				}
+				// End of Quote lines discount calculation
+
 			}
-			// End of Quote lines discount calculation
 		}
 	}
 }

@@ -1,3 +1,4 @@
+@web
 Feature: Quote
 Scenario: Verify discount table calculation in quote
 	Given Open Chrome browser and url

@@ -1,4 +1,3 @@
-@web
 Feature: Appointment module
 	
 Scenario: 1.Create Appointment for All Day event and Confirm the appointment in Home page

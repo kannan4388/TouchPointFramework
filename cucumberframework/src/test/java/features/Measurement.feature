@@ -1,4 +1,4 @@
-@Measurement
+@web
 Feature: This Feature contains Scenarios for HFC Measurement Integration
 
 Scenario: 1 This scenario is to validate Measurement_Page by removing already added rows,again add one row and validate added row.
