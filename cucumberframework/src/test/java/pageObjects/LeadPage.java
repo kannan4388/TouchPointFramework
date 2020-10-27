@@ -117,11 +117,11 @@ public class LeadPage {
 		email.sendKeys(emailAddress);
 		Thread.sleep(500);
 		zipCode.click();
-		Thread.sleep(6000);
+		waitForPageLoad.waitForAlert(driver);
 		// driver.switchTo().defaultContent();
 		if (popUp.isDisplayed() == true) {
 			popUp.click();
-			Thread.sleep(4000);
+			waitForPageLoad.waitForAlert(driver);
 			drpDownSource.click();
 			Thread.sleep(2500);
 			// String sourceTxt="BBCS - Website";

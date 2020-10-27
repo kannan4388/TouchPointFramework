@@ -3,16 +3,20 @@ package pageObjects;
 import java.awt.AWTException;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.List;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -23,6 +27,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import junit.framework.Assert;
+import utility.CommonMethods;
 
 public class QuotesPage {
 	private static String filePath = System.getProperty("user.dir") + "\\InputExcelData\\";
@@ -109,11 +114,20 @@ public class QuotesPage {
 	@FindBy(xpath = "//tr[1]/td[1]/label")
 	WebElement firstAddProduct;
 
+	@FindBy(xpath = "//*[@id='ProductGrid']/div[3]/div[1]/table/tbody/tr[1]/td[1]/label")
+	WebElement firstAddCCProduct;
+
 	@FindBy(xpath = "//tr[2]/td[1]/label")
 	WebElement secondAddProduct;
 
+	@FindBy(xpath = "//*[@id='ProductGrid']/div[3]/div[1]/table/tbody/tr[2]/td[1]/label")
+	WebElement secondAddCCProduct;
+
 	@FindBy(xpath = "//button[@ng-click='SaveMyProductConfiguration()']")
 	WebElement saveAddProduct;
+
+	@FindBy(xpath = "//i[@class='far fa-check-circle']")
+	WebElement saveCCAddProd;
 
 	@FindBy(xpath = "//h3[text()='Quotes']")
 	WebElement ccQuotesIcon;
@@ -183,6 +197,12 @@ public class QuotesPage {
 
 	@FindBy(xpath = "//tr[@class='k-master-row k-grid-edit-row']/td[5]/span/span/input")
 	WebElement unitPrice;
+
+	@FindAll(@FindBy(xpath = "//div[@class='k-grid k-widget k-display-block k-editable']/div[@class='k-grid-content k-auto-scrollable']/table/tbody/tr"))
+	List<WebElement> totalLines;
+
+	@FindAll(@FindBy(xpath = "//div[@class='k-grid-content k-auto-scrollable']/table[@role='treegrid']/tbody/tr"))
+	List<WebElement> ccTotalQuoteLines;
 
 	public QuotesPage() {
 		this.driver = LoginPage.getDriver();
@@ -288,6 +308,11 @@ public class QuotesPage {
 
 			for (int m = 1; m <= rowCount; m++) {
 				Row row = sh.getRow(m);
+				Cell c = row.getCell(0);
+				if (c == null || c.getCellType() == CellType.BLANK) {
+					// This cell is empty
+					break;
+				}
 				String vendorName = row.getCell(0).getStringCellValue().toUpperCase().trim();
 				// System.out.println(vendorName);
 				String productCategory = row.getCell(1).getStringCellValue().toUpperCase().trim();
@@ -457,7 +482,7 @@ public class QuotesPage {
 				Thread.sleep(2000);
 			}
 		}
-		if (user.equalsIgnoreCase("tltestus") || user.equalsIgnoreCase("cctestus")) {
+		if (user.equalsIgnoreCase("tltestus")) {
 			addProductIcon.click();
 			wait.pageWait(clearAllFilterBtn);
 			Thread.sleep(2000);
@@ -472,6 +497,27 @@ public class QuotesPage {
 				Thread.sleep(500);
 			}
 			saveAddProduct.click();
+			wait.pageWait(saveQuote);
+			Thread.sleep(2000);
+			saveQuote.click();
+			wait.pageWait(editQuoteIcon);
+			Thread.sleep(2000);
+		}
+		if (user.equalsIgnoreCase("cctestus")) {
+			addProductIcon.click();
+			wait.pageWait(saveCCAddProd);
+			Thread.sleep(2000);
+			boolean visibleFirstAddProduct = firstAddCCProduct.isEnabled();
+			boolean visibleSecondAddProduct = secondAddCCProduct.isEnabled();
+			if (visibleFirstAddProduct == true) {
+				firstAddCCProduct.click();
+				Thread.sleep(500);
+			}
+			if (visibleSecondAddProduct == true) {
+				secondAddCCProduct.click();
+				Thread.sleep(500);
+			}
+			saveCCAddProd.click();
 			wait.pageWait(saveQuote);
 			Thread.sleep(2000);
 			saveQuote.click();
@@ -629,6 +675,162 @@ public class QuotesPage {
 					}
 				}
 				// End of Quote lines discount calculation
+
+			}
+		}
+	}
+
+	public void lineDiscount() throws InterruptedException, FileNotFoundException, IOException {
+		String sheetName = "Sheet1";
+		CommonMethods.fetchExcelSheet(filePath, fileName, sheetName);
+		Sheet sh = utility.CommonMethods.sh;
+		if (user.equalsIgnoreCase("tltestus") || user.equalsIgnoreCase("bbtestus")) {
+			wait.scrollUptoBottom();
+			int totalNumOfQuoteLine = totalLines.size();
+			if (totalNumOfQuoteLine >= 1) {
+				for (int quoteLines = 1; quoteLines <= totalNumOfQuoteLine; quoteLines++) {
+					// editQuote();
+					// wait.scrollUptoBottom();
+					Row row = sh.getRow(quoteLines);
+					int discountRow = (int) row.getCell(5).getNumericCellValue();
+					WebElement rowClick = driver
+							.findElement(By.xpath("//tr[" + quoteLines + "]/td[17]/ul/li/div/button"));
+					rowClick.click();
+					Thread.sleep(1000);
+					WebElement editIcon = driver
+							.findElement(By.xpath("//tr[" + quoteLines + "]/td[17]/ul/li/div/ul/li[2]"));
+					editIcon.click();
+					Thread.sleep(2000);
+
+					// Suggessted Resale field get text
+					WebElement suggestedResale = driver.findElement(By.xpath("//tr[" + quoteLines + "]/td[13]/span"));
+					String strSuggestedResale = suggestedResale.getText();
+					String[] arrStrSuggestedResale = strSuggestedResale.split("\\$");
+					String suggestResale = arrStrSuggestedResale[1].trim();
+					Float fltSuggestedResale = Float.valueOf(suggestResale);
+
+					// Discount Price field get text
+					WebElement discount = driver.findElement(
+							By.xpath("//div[@id='QuotelinesGrid']/div[3]/table/tbody/tr/td[15]/span/span/input[2]"));
+					Float fltDiscount = Float.valueOf(discountRow);
+					Thread.sleep(2000);
+
+					/* Entering discount field value */
+					JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+					// set the text
+					jsExecutor.executeScript(
+							"document.getElementById('qlDiscount').value=" + fltDiscount.toString() + "");
+					// get the text
+					String text = (String) jsExecutor
+							.executeScript("return document.getElementById('qlDiscount').value");
+					// System.out.println(text);
+
+					/* End of Entering discount field value */
+					Thread.sleep(1000);
+					WebElement dummyClick = driver
+							.findElement(By.xpath("//td[15]/span/span/input[@class='k-formatted-value k-input']"));
+					Actions action = new Actions(driver);
+					action.moveToElement(dummyClick).click().build().perform();
+					Thread.sleep(500);
+					saveQuote.click();
+					wait.elementToBeClickable(editQuoteIcon);
+
+					// Unit Price field get text
+					WebElement unit = driver.findElement(By.xpath("//tr[" + quoteLines + "]/td[14]/span"));
+					String strUnitPrice = unit.getText();
+					String[] arrUnitPrice = strUnitPrice.split("\\$");
+					String unitPrice = arrUnitPrice[1].trim();
+					Float fltUnitPrice = Float.valueOf(unitPrice);
+					// Actual unit price value
+					Float discountAmount = (fltSuggestedResale * fltDiscount) / 100;
+					Float expectedUnitPrice = fltSuggestedResale - discountAmount;
+					Assert.assertEquals(expectedUnitPrice, fltUnitPrice);
+					System.out.println(
+							"Quote Line number:" + quoteLines + " Expected unit price and Actual Price are same");
+
+					if (driver.findElements(By.xpath("//button[@data-tooltip='Edit Quote']")).size() != 0) {
+						editQuote();
+						wait.scrollUptoBottom();
+					}
+
+				}
+
+			}
+		}
+		// CC concept does not have line level discount
+		if (user.equalsIgnoreCase("cctestus")) {
+			int totalNumOfQuoteLine = ccTotalQuoteLines.size();
+			if (totalNumOfQuoteLine >= 1) {
+				for (int quoteLines = 1; quoteLines <= totalNumOfQuoteLine; quoteLines++) {
+					// editQuote();
+					// wait.scrollUptoBottom();
+					Row row = sh.getRow(quoteLines);
+					int discountRow = (int) row.getCell(5).getNumericCellValue();
+					WebElement rowClick = driver.findElement(By
+							.xpath("//div[@class='k-grid-content k-auto-scrollable']/table[@role='treegrid']/tbody/tr["
+									+ quoteLines + "]/td[21]/ul/li/div/button"));
+					rowClick.click();
+					Thread.sleep(1000);
+					WebElement editIcon = driver.findElement(By
+							.xpath("//div[@class='k-grid-content k-auto-scrollable']/table[@role='treegrid']/tbody/tr["
+									+ quoteLines + "]/td[21]/ul/li/div/ul/li[1]"));
+					editIcon.click();
+					Thread.sleep(2000);
+
+					// Suggessted Resale field get text
+					WebElement suggestedResale = driver.findElement(By
+							.xpath("//div[@class='k-grid-content k-auto-scrollable']/table[@role='treegrid']/tbody/tr["
+									+ quoteLines + "]/td[14]/span"));
+					String strSuggestedResale = suggestedResale.getText();
+					String[] arrStrSuggestedResale = strSuggestedResale.split("\\$");
+					String suggestResale = arrStrSuggestedResale[1].trim();
+					Float fltSuggestedResale = Float.valueOf(suggestResale);
+
+					// Discount Price field get text
+					WebElement discount = driver.findElement(
+							By.xpath("//div[@id='QuotelinesGrid']/div[3]/table/tbody/tr/td[15]/span/span/input[2]"));
+					Float fltDiscount = Float.valueOf(discountRow);
+					Thread.sleep(2000);
+
+					/* Entering discount field value */
+					JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+					// set the text
+					jsExecutor.executeScript(
+							"document.getElementById('qlDiscount').value=" + fltDiscount.toString() + "");
+					// get the text
+					String text = (String) jsExecutor
+							.executeScript("return document.getElementById('qlDiscount').value");
+					// System.out.println(text);
+
+					/* End of Entering discount field value */
+					Thread.sleep(1000);
+					WebElement dummyClick = driver
+							.findElement(By.xpath("//td[15]/span/span/input[@class='k-formatted-value k-input']"));
+					Actions action = new Actions(driver);
+					action.moveToElement(dummyClick).click().build().perform();
+					Thread.sleep(500);
+					saveQuote.click();
+					wait.elementToBeClickable(editQuoteIcon);
+
+					// Unit Price field get text
+					WebElement unit = driver.findElement(By.xpath("//tr[" + quoteLines + "]/td[14]/span"));
+					String strUnitPrice = unit.getText();
+					String[] arrUnitPrice = strUnitPrice.split("\\$");
+					String unitPrice = arrUnitPrice[1].trim();
+					Float fltUnitPrice = Float.valueOf(unitPrice);
+					// Actual unit price value
+					Float discountAmount = (fltSuggestedResale * fltDiscount) / 100;
+					Float expectedUnitPrice = fltSuggestedResale - discountAmount;
+					Assert.assertEquals(expectedUnitPrice, fltUnitPrice);
+					System.out.println(
+							"Quote Line number:" + quoteLines + " Expected unit price and Actual Price are same");
+
+					if (driver.findElements(By.xpath("//button[@data-tooltip='Edit Quote']")).size() != 0) {
+						editQuote();
+						wait.scrollUptoBottom();
+					}
+
+				}
 
 			}
 		}

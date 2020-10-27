@@ -1,4 +1,3 @@
-@web
 Feature: This Feature contains Scenarios for HFC Measurement Integration
 
 Scenario: 1 This scenario is to validate Measurement_Page by removing already added rows,again add one row and validate added row.
@@ -29,7 +28,7 @@ Scenario: 1 This scenario is to validate Measurement_Page by removing already ad
 	And user validates row count in the measurement page
 	And close the browser at the end
 				
-	Scenario: 2 This scenario is to add rows in more than one page in Measurement_Page with image and validate the same.
+Scenario: 2 This scenario is to add rows in more than one page in Measurement_Page with image and validate the same.
 	
 	Given Open Chrome browser and url
 	Given user enters username and password
@@ -54,7 +53,7 @@ Scenario: 1 This scenario is to validate Measurement_Page by removing already ad
 	And user validates row count in the measurement page
 	And close the browser at the end
 	
-	Scenario: 3 Measurement upload image which covers negative flow
+Scenario: 3 Measurement upload image which covers negative flow
 	
 	Given Open Chrome browser and url
 	Given user enters username and password
@@ -128,7 +127,7 @@ Scenario: 5 This scenario is to validate Measurement_Page by uploading image gre
 	Then user saves the measurement page
 	And close the browser at the end
 	
-	Scenario: 6 This scenario is to validate Measurement_Page by comparing width,height values with their equal fraction values 
+Scenario: 6 This scenario is to validate Measurement_Page by comparing width,height values with their equal fraction values 
 				and validate the same with correct values from excel sheet.
 
 	Given Open Chrome browser and url         

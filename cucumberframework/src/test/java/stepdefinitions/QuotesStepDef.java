@@ -97,12 +97,33 @@ public class QuotesStepDef extends ExtentReportListener {
 
 	@Then("^user verifies the discount table$")
 	public void user_verifies_the_discount_table() throws Throwable {
-		savingQuote.discountSetUp();
+		ExtentTest logInfo = null;// Intializing variable for extent test report log
+		try {
+			logInfo = test.createNode(new GherkinKeyword("Then"), "user update the quote page");
+			savingQuote.discountSetUp();
+			logInfo.pass("Discount table calculation works fine...");// Passing pass log value to extent report
+		} catch (AssertionError | Exception e) {
+			testStepHandle("FAIL", driver, logInfo, e);// Passing fail log value to extent report
+			e.printStackTrace();
+		}
 	}
 
 	@Then("^user verifies the group level discount$")
 	public void user_verifies_the_group_level_discount() throws Throwable {
-		savingQuote.groupDiscount();
+		ExtentTest logInfo = null;
+		try {
+			logInfo = test.createNode(new GherkinKeyword("Then"), "user update the quote page");
+			savingQuote.groupDiscount();
+			logInfo.pass("Group Discount works fine...");// Passing pass log value to extent report
+		} catch (AssertionError | Exception e) {
+			testStepHandle("FAIL", driver, logInfo, e);// Passing fail log value to extent report
+			e.printStackTrace();
+		}
+	}
+
+	@Then("^user verifies the Line level discount$")
+	public void user_verifies_the_line_level_discount() throws Throwable {
+		savingQuote.lineDiscount();
 	}
 
 }

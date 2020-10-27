@@ -1,4 +1,3 @@
-@web
 Feature: Report module
 
 Scenario: Verify Sales Summary report works fine:Load data,Download excel file,Sorting,Pagination and Filter by First Name

@@ -522,6 +522,7 @@ public class MeasurementPage extends CommonMethods {
 						break;
 					}
 				}
+				Thread.sleep(2000);
 				storageDescTxtBox.click();
 				Thread.sleep(500);
 				storageDescTxtBox.clear();
@@ -631,13 +632,19 @@ public class MeasurementPage extends CommonMethods {
 					// copy element click
 					driver.findElement(By.xpath("//*[@id='gridEditMeasurements']/div[3]/table/tbody/tr["
 							+ measurementRow + "]/td[13]/ul/li/div/ul/li[2]")).click();
-					// Thread.sleep(1500);
+					Thread.sleep(1500);
 				}
-				WebElement dynamicRowWait = driver.findElement(By.xpath("//tr[" + measurementRow + "]/td"));
-				drpDownData.pageWait(dynamicRowWait);
-				WebElement imageUploadCloseIcon = driver.findElement(By.xpath("//i[@class='fas fa-times']"));
-				if (imageUploadCloseIcon.isDisplayed() == true) {
+				int dynamicRow = measurementRow + 1;
+				// WebElement dynamicRowWait = driver.findElement(
+				// By.xpath("//*[@id='gridEditMeasurements']/div[3]/table/tbody/tr[" +
+				// dynamicRow + "]"));
+				drpDownData.pageWait(tlWidthTxtBox);
+				// boolean imageCloseIconVisbility = imageUploadCloseIcon.isEnabled();
+				if (driver.findElements(By.xpath("//i[@class='fas fa-times']")).size() != 0) {
+					WebElement imageUploadCloseIcon = driver.findElement(By.xpath("//i[@class='fas fa-times']"));
 					drpDownData.pageWait(imageUploadCloseIcon);
+					Thread.sleep(1000);
+					imageUploadCloseIcon = driver.findElement(By.xpath("//i[@class='fas fa-times']"));
 					imageUploadCloseIcon.click();
 					Thread.sleep(500);
 				}
@@ -947,7 +954,7 @@ public class MeasurementPage extends CommonMethods {
 		// Find number of rows in excel file
 		Sheet sh = utility.CommonMethods.sh;
 		int rowCount = sh.getLastRowNum();
-		System.out.println(rowCount);
+		// System.out.println(rowCount);
 		// Create a loop all around the rows in excel sheet
 		if (user.equalsIgnoreCase("bbtestus")) {
 			editIconClick.click();
